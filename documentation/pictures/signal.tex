@@ -1,0 +1,47 @@
+% \begin{center}
+\begin{circuitikz}[american, voltage shift=0.5, line width=0.5]
+    % Variables
+    \def\D{\N*\T}        
+    \def\wavelength{1}
+    \def\d{0.5*\wavelength}
+
+    
+    \begin{axis}[
+        at={(0,0)},
+        view={0}{90},
+        hide axis,
+        colormap={custom}{color=(white) color=(Gray)},
+        trig format plots=rad,
+        x=1cm,
+        y=1cm,
+        z=0cm,
+    ]
+    
+    \clip[] (-0.5,-4) rectangle (13.1,4);
+    \addplot3[
+        data cs=polar,
+        samples=25,
+        domain=0:2*pi,
+        domain y=0:15,
+        samples y=100,
+        surf,shader=interp,
+    ] {sin(2*pi*y + 0.5*pi)};
+
+
+
+    \coordinate (O) at (0,0);
+    % \draw [help lines, dashed] (-5,-3) grid (5,3); % desenha grid
+    % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0) 
+
+    \draw[thick]
+        (0,0) node[dinantenna]{}
+    ;
+        
+
+
+
+    \end{axis}
+        
+
+\end{circuitikz}
+% \end{center}

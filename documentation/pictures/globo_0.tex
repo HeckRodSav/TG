@@ -1,0 +1,97 @@
+% https://latex.org/forum/viewtopic.php?t=25316
+\begin{tikzpicture}[scale=1,tdplot_main_coords,every node/.style={font = {\footnotesize\bfseries}}]
+
+
+\def\rvec{3.5}
+
+\def\thetavecA{45}
+\def\phivecA{75}
+
+\def\thetavecB{30}
+\def\phivecB{15}
+
+\pgfmathsetmacro{\ax}{\rvec*sin(\thetavecA)*cos(\phivecA)}
+\pgfmathsetmacro{\ay}{\rvec*sin(\thetavecA)*sin(\phivecA)}
+\pgfmathsetmacro{\az}{\rvec*cos(\thetavecA)}
+
+\pgfmathsetmacro{\bx}{\rvec*sin(\thetavecB)*cos(\phivecB)}
+\pgfmathsetmacro{\by}{\rvec*sin(\thetavecB)*sin(\phivecB)}
+\pgfmathsetmacro{\bz}{\rvec*cos(\thetavecB)}
+
+
+\shadedraw[tdplot_screen_coords, ball color = white, opacity=0.25] (0,0) circle (\rvec);
+
+
+
+%-----------------------
+\coordinate (O) at (0,0,0);
+
+
+\tdplotsetcoord{A}{\rvec}{\thetavecA}{\phivecA}
+
+\tdplotsetcoord{B}{\rvec}{\thetavecB}{\phivecB}
+
+%draw the main coordinate system axes
+\draw[thick,-latex] (O) -- (1.35*\rvec,0,0) node[anchor=north east]{$x$};
+\draw[thick,-latex] (O) -- (0,1.35*\rvec,0) node[anchor=north west]{$y$};
+\draw[thick,-latex] (O) -- (0,0,1.35*\rvec) node[anchor=south]{$z$};
+
+\draw[thick,-latex,opacity=0] (O) -- (-1.35*\rvec,0,0) node[anchor=south west]{$x$};
+\draw[thick,-latex,opacity=0] (O) -- (0,-1.35*\rvec,0) node[anchor=south east]{$y$};
+\draw[thick,-latex,opacity=0] (O) -- (0,0,-1.35*\rvec) node[anchor=north]{$z$};
+
+
+\draw[-latex,very thick,color=Green] (O) -- (A) node[anchor=south west] {$A$};
+\draw[-latex,very thick,color=Blue] (O) -- (B) node[anchor=south east] {$B$};
+
+
+\draw[dashed, opacity=0.3] (\rvec,0,0) arc (0:360:\rvec);
+\draw[thin] (\rvec,0,0) arc (0:135:\rvec);
+\draw[thin] (\rvec,0,0) arc (0:-45:\rvec);
+
+\draw[dashed, color=Green] (O) -- (Axy) -- (A);
+\draw[dashed, color=Blue] (O) -- (Bxy) -- (B);
+
+\draw[dotted, color=Green] (Ax) -- (Axy);
+\draw[dotted, color=Green] (Ay) -- (Axy);
+
+\draw[dotted, color=Blue] (Bx) -- (Bxy);
+\draw[dotted, color=Blue] (By) -- (Bxy);
+
+\pause
+
+
+\tdplotdrawarc[color=Green]{(O)}{0.75*\rvec}{0}{\phivecA}{anchor=north}{$\theta_A$}
+
+\tdplotdrawarc[color=Blue]{(O)}{0.5*\rvec}{0}{\phivecB}{anchor=north east}{$\theta_B$}
+
+\pause
+
+
+\tdplotsetthetaplanecoords{\phivecA}
+\tdplotdrawarc[color=Green,tdplot_rotated_coords]{(O)}{0.75*\rvec}{90}{\thetavecA}{anchor=west}{$\phi_A$}
+
+\tdplotsetthetaplanecoords{\phivecB}
+\tdplotdrawarc[color=Blue,tdplot_rotated_coords]{(O)}{0.5*\rvec}{90}{\thetavecB}{anchor=east}{$\phi_B$}
+
+
+
+
+
+
+
+% \tdplotsetthetaplanecoords{\phivecB}
+% \draw[dashed, Blue, opacity=0.3, tdplot_rotated_coords] (\rvec,0,0) arc (180:-40:-\rvec);
+% \draw[thin, Blue, opacity=0.5, tdplot_rotated_coords] (\rvec,0,0) arc (0:140:\rvec);
+% \draw[thin, Blue, opacity=0.5, tdplot_rotated_coords] (\rvec,0,0) arc (360:320:\rvec);
+% % \draw[very thick, color=Blue, tdplot_rotated_coords] (\rvec,0,0) arc (0:\thetavecB:\rvec);
+
+% \tdplotsetthetaplanecoords{\phivecA}
+% \draw[dashed, Green, opacity=0.3, tdplot_rotated_coords] (\rvec,0,0) arc (180:-40:-\rvec);
+% \draw[thin, Green, opacity=0.5, tdplot_rotated_coords] (\rvec,0,0) arc (0:140:\rvec);
+% \draw[thin, Green, opacity=0.5, tdplot_rotated_coords] (\rvec,0,0) arc (360:320:\rvec);
+% \draw[very thick, color=Green, tdplot_rotated_coords] (\rvec,0,0) arc (0:\thetavecA:\rvec);
+
+
+
+\end{tikzpicture}

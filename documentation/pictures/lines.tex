@@ -1,0 +1,40 @@
+    \begin{circuitikz}[american, voltage shift=0.5, line width=0.5]
+
+        \def\wavelength{1}
+        \def\d{0.5*\wavelength}
+
+        \coordinate (O) at (0,0);
+        \coordinate (antenna) at (0,0);
+        % \draw [help lines, dashed] (-5,-3) grid (5,3); % desenha grid
+        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0) 
+
+        \draw[thick]
+            (antenna) node[dinantenna]{}
+        ;
+        
+        \clip[] (-0.5,-4) rectangle (13.1,4);
+        \draw [gray, thin]
+        \foreach \x in {1,2,...,13} {
+            (antenna) circle (\x*\wavelength)
+        }
+        ;
+
+        % \foreach \x in {0,60,...,300} {
+        %     \draw[thick] (\x:1 cm) -- (\x + 60:1 cm);
+            
+        %     \draw (\x + 30:1.732 cm) node[Gray, circ]{};
+        %     \draw[Gray, dashed] (\x:1 cm) -- ++(\x: 0.9cm);
+        %     \draw[Gray, dotted]
+        %     %     % (\x:1 cm) arc (\x+240:\x+180:1cm)
+        %         (\x:1 cm) arc [start angle=\x+120, delta angle=110, radius=1cm]
+        %         (\x:1 cm) arc [start angle=\x+120, delta angle=-50, radius=1cm]
+        %     ;
+        % }
+    
+        % \draw (0,0) node [circ] {} node [below left,font={\scriptsize\bfseries}] {BS};
+        % \draw[thick, densely dotted] (0,0) circle (1cm);
+        
+        % \draw[-latex] (0,0) -- (0:1cm) node[midway, below] {$R_c$};
+        % \draw[-latex] (0,0) -- (90:0.866cm) node[midway, left] {$R$};
+            
+    \end{circuitikz}

@@ -1,0 +1,102 @@
+\begin{tikzpicture}[scale=1,tdplot_main_coords,every node/.style={font = {\footnotesize\bfseries}}]
+% https://latex.org/forum/viewtopic.php?t=25316
+
+\def\rvec{3.5}
+
+\def\phivecA{30}
+\def\thetavecA{75}
+
+\def\phivecB{45}
+\def\thetavecB{15}
+
+\def\auxOpacity{0.75}
+
+\pgfmathsetmacro{\ax}{\rvec*sin(\phivecA)*cos(\thetavecA)}
+\pgfmathsetmacro{\ay}{\rvec*sin(\phivecA)*sin(\thetavecA)}
+\pgfmathsetmacro{\az}{\rvec*cos(\phivecA)}
+
+\pgfmathsetmacro{\bx}{\rvec*sin(\phivecB)*cos(\thetavecB)}
+\pgfmathsetmacro{\by}{\rvec*sin(\phivecB)*sin(\thetavecB)}
+\pgfmathsetmacro{\bz}{\rvec*cos(\phivecB)}
+
+
+\shadedraw[tdplot_screen_coords, ball color = white, opacity=0.25] (0,0) circle (\rvec);
+
+%-----------------------
+\coordinate (O) at (0,0,0);
+
+\tdplotsetcoord{A}{\rvec}{\phivecA}{\thetavecA}
+
+\tdplotsetcoord{B}{\rvec}{\phivecB}{\thetavecB}
+
+\tdplotsetcoord{N}{\rvec}{0}{90}
+
+%draw the main coordinate system axes
+\draw[thick,-latex] (O) -- (1.35*\rvec,0,0) node[anchor=north east]{$x$};
+\draw[thick,-latex] (O) -- (0,1.35*\rvec,0) node[anchor=north west]{$y$};
+\draw[thick,-latex] (O) -- (0,0,1.35*\rvec) node[anchor=south]{$z$};
+
+\draw[thick,-latex,opacity=0] (O) -- (-1.35*\rvec,0,0) node[anchor=south west]{$x$};
+\draw[thick,-latex,opacity=0] (O) -- (0,-1.35*\rvec,0) node[anchor=south east]{$y$};
+\draw[thick,-latex,opacity=0] (O) -- (0,0,-1.35*\rvec) node[anchor=north]{$z$};
+
+
+\draw[-latex,very thick,opacity=\auxOpacity, color=cmyk_G] (O) -- (A) node[anchor=south west, opacity=1] {$\mathbf{A}$};
+\draw[-latex,very thick,opacity=\auxOpacity, color=cmyk_B] (O) -- (B) node[anchor=south east, opacity=1] {$\mathbf{B}$};
+\draw[very thick,color=Black] (N) node[anchor=west] {$\mathbf{N}$};
+
+
+\draw[dashed, opacity=0.15] (\rvec,0,0) arc (0:360:\rvec);
+\draw[thin] (\rvec,0,0) arc (0:135:\rvec);
+\draw[thin] (\rvec,0,0) arc (0:-45:\rvec);
+
+\draw[dashed, color=cmyk_G, opacity=\auxOpacity] (O) -- (Axy) -- (A);
+\draw[dashed, color=cmyk_B, opacity=\auxOpacity] (O) -- (Bxy) -- (B);
+
+\draw[dotted, color=cmyk_G, opacity=\auxOpacity] (Ax) -- (Axy);
+\draw[dotted, color=cmyk_G, opacity=\auxOpacity] (Ay) -- (Axy);
+
+\draw[dotted, color=cmyk_B, opacity=\auxOpacity] (Bx) -- (Bxy);
+\draw[dotted, color=cmyk_B, opacity=\auxOpacity] (By) -- (Bxy);
+
+% \pause
+
+
+\tdplotdrawarc[color=cmyk_G, opacity=\auxOpacity]{(O)}{0.75*\rvec}{0}{\thetavecA}{anchor=north}{$\theta_A$}
+
+\tdplotdrawarc[color=cmyk_B, opacity=\auxOpacity]{(O)}{0.5*\rvec}{0}{\thetavecB}{anchor=north east}{$\theta_B$}
+
+% \pause
+
+
+\tdplotsetthetaplanecoords{\thetavecA}
+\tdplotdrawarc[color=cmyk_G, opacity=\auxOpacity, tdplot_rotated_coords]{(O)}{0.75*\rvec}{90}{\phivecA}{anchor=west}{$\phi_A$}
+
+\tdplotsetthetaplanecoords{\thetavecB}
+\tdplotdrawarc[color=cmyk_B, opacity=\auxOpacity, tdplot_rotated_coords]{(O)}{0.5*\rvec}{90}{\phivecB}{anchor=east}{$\phi_B$}
+
+% \pause
+
+\tdplotsetthetaplanecoords{\thetavecB}
+\draw[dashed, cmyk_B, opacity=0.15, tdplot_rotated_coords] (\rvec,0,0) arc (180:-40:-\rvec);
+\draw[thin, cmyk_B, opacity=0.25, tdplot_rotated_coords] (\rvec,0,0) arc (0:140:\rvec);
+\draw[thin, cmyk_B, opacity=0.25, tdplot_rotated_coords] (\rvec,0,0) arc (360:320:\rvec);
+\draw[very thick, color=cmyk_B, tdplot_rotated_coords] (\rvec,0,0) arc (0:\phivecB:\rvec);
+
+\tdplotsetthetaplanecoords{\thetavecA}
+\draw[dashed, cmyk_G, opacity=0.15, tdplot_rotated_coords] (\rvec,0,0) arc (180:-40:-\rvec);
+\draw[thin, cmyk_G, opacity=0.25, tdplot_rotated_coords] (\rvec,0,0) arc (0:140:\rvec);
+\draw[thin, cmyk_G, opacity=0.25, tdplot_rotated_coords] (\rvec,0,0) arc (360:320:\rvec);
+\draw[very thick, color=cmyk_G, tdplot_rotated_coords] (\rvec,0,0) arc (0:\phivecA:\rvec);
+
+
+\drawArc{\ax}{\ay}{\az}{\bx}{\by}{\bz}{\rvec}{anchor=south}{$d$}
+
+\tdplotsetrotatedcoords{\phivecA}{\thetavecA}{0}
+
+\def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+    { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5) node[midway,anchor=east] {$\beta$}; }
+
+\centerarc[cmyk_R, tdplot_rotated_coords](A)(292:214:0.4)
+
+\end{tikzpicture}

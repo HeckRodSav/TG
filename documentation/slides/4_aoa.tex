@@ -1,0 +1,92 @@
+\section{Posicionamento por AoA}
+
+    \begin{frame}{Estimar defasagem}
+                \begin{columns}
+            \begin{column}{0.45\textwidth}
+                \centering \vfill
+                \input{../pictures/AoA_0}\vfill
+                \visible<5->{\input{../pictures/AoA_0_fail}}\vfill
+                \visible<6->{\input{../pictures/AoA_0_ok}}\vfill
+            \end{column}
+            \begin{column}{0.55\textwidth}
+                \begin{itemize}[<+(-1)->]
+                    \item Toma-se uma \textcolor{Green}{antena} como referência
+                    \item Posiciona-se uma segunda \textcolor{Red}{antena} a uma distância determinada
+                    \item Analisando a defasagem entre as antenas, é possível determinar o ângulo de incidência do sinal
+                    \item Se a distância for maior que $\sfrac{\lambda}{2}$, haverá conflito de defasagem
+                    \item Se for menor, há perda de resolução
+                    \item Adota-se a distância de $d = \sfrac{\lambda}{2}$
+                \end{itemize}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{\textit{Angle of Arrival}}
+        \input{../pictures/AoA_1}
+    \end{frame}
+
+    \begin{frame}{\textit{Angle of Arrival}}
+        \input{../pictures/AoA_2}
+    \end{frame}
+
+    \begin{frame}{\textit{Angle of Arrival}}
+        \input{../pictures/AoA_3}
+    \end{frame}
+
+    \begin{frame}{\textit{Angle of Arrival}}
+        \input{../pictures/AoA_4}
+    \end{frame}
+
+    \section{Matriz de antenas}
+    \begin{frame}{\textit{Angle of Arrival}}
+        \input{../pictures/AoA_5}
+    \end{frame}
+
+\subsection{Cálculo de Ângulo de chegada}
+    \begin{frame}{Definição de onda}
+        % \begin{multicols}{2}
+            \begin{equation*}
+                r = r_\omega \cdot \lambda
+            \end{equation*}
+
+            \begin{equation*}
+                x_0 = r \cdot \cos(\theta_\omega)
+            \end{equation*}
+
+            \begin{equation*}
+                y_0 = r \cdot \sin(\theta_\omega)
+            \end{equation*}
+
+            \begin{equation*}
+                k(x, y, t, \theta_\omega, r_\omega, \lambda, \omega) = \frac{2\pi}{\lambda} \cdot \sqrt{(y - y_0)^2+(x - x_0)^2} + \omega \cdot t
+            \end{equation*}
+
+            \begin{equation*}
+                w(x, y, t, \theta_\omega, r_\omega, \lambda, \omega) = \sin(k + \phi)+ \cos(k + \phi)
+            \end{equation*}
+        % \end{multicols}
+    \end{frame}
+
+    \begin{frame}{\href{https://drive.google.com/file/d/1-ep5hH8TSrnHU_m9b4AFmUJlB_hGR41m/view?usp=drive_link}{Análise de vetores complexos}}
+        % \begin{multicols}{2}
+            \begin{equation*}
+                C(x,y) = \int_0^T w(x,y,t) \cdot \cos(k(x,y,t)) \partial t
+            \end{equation*}
+
+            \begin{equation*}
+                S(x,y) = \int_0^T w(x,y,t) \cdot \sin(k(x,y,t)) \partial t
+            \end{equation*}
+
+            \begin{equation*}
+                Z(x,y) = 2\cdot(S + \imath C)
+            \end{equation*}
+
+            \begin{equation*}
+                \Delta_{x,y} = \arg(\textcolor{Green}{Z_{0,0}}\cdot Z^*_{x,y})
+            \end{equation*}
+
+            \begin{equation*}
+                \text{componente}_{x,y} = -\frac{\Delta_{x,y}}{\pi}\cdot\frac{\cancel{\lambda}}{\cancel{d \cdot 2}} = -\frac{\Delta_{x,y}}{\pi}
+            \end{equation*}
+            % \end{multicols}
+    \end{frame}

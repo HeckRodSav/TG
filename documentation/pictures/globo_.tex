@@ -1,0 +1,58 @@
+\begin{tikzpicture} % "THE GLOBE" showcase
+\def\RadiusSphere{4} % sphere radius
+\def\angEl{20} % elevation angle
+\def\angAz{-20} % azimuth angle
+
+\shade[ball color = gray!40, opacity = 0.5] (0,0) circle (\RadiusSphere);
+
+\pgfmathsetmacro\H{\RadiusSphere*cos(\angEl)} % distance to north pole
+\coordinate (O) at (0,0);
+\node[circle,draw,black,scale=0.3] at (0,0) {};
+\draw[right] node at (0,0){O};
+\coordinate[mark coordinate] (N) at (0,\H);
+\draw[left] node at (0,\H){N};
+\coordinate[mark coordinate] (S) at (0,-\H);
+\draw[left] node at (0,-\H){S};
+\draw[thick, dashed, black](N)--(S);
+
+\tikzset{
+    every path/.style={
+        color=green!50!black
+    }
+}
+\DrawLatitudeCircle[\RadiusSphere]{0}
+\tikzset{
+    every path/.style={
+        color=black
+    }
+}
+
+
+\DrawLatitudeArc[Goldenrod]{30}{-90}{90}
+
+\DrawLatitudeArc[blue]{20}{-200}{20}
+
+
+
+\LongitudePlane[angle]{\angEl}{-80};
+\DrawLongitudeArc[red]{-80}{-90}{90}
+\path[angle] (00:\RadiusSphere) coordinate (Pprime);
+\draw[right] node at (Pprime){$P'$};
+
+
+\LongitudePlane[angel]{\angEl}{-120};
+\DrawLongitudeArc[blue]{-120}{-90}{90}
+\path[angel] (00:\RadiusSphere) coordinate (Oprime);
+\draw[left] node at (Oprime){$O'$};
+
+\def\arcrad{2}
+\NewLatitudePlane[equator]{\RadiusSphere}{\angEl}{00};
+\draw[equator,-,red,dashed] (-120:\arcrad) arc (-120:-80:\arcrad);
+\path[equator] (-120:\arcrad) coordinate (m);
+\draw[left] node at (m){$m$};
+\path[equator] (-80:\arcrad) coordinate (mprime);
+\draw[right] node at (mprime){$m'$};
+
+\draw[-,dashed] (Oprime) -- (O) -- (Pprime);
+
+\end{tikzpicture}

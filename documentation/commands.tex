@@ -1,0 +1,190 @@
+\newcommand{\impecavel}{%
+{\color{slideBlue}m}%
+{\color{slideCyan}a}%
+{\color{slideTurquoise}r}%
+{\color{slideGreen}a}%
+{\color{slideYellow}v}%
+{\color{slideOrange}i}%
+{\color{slideRed}l}%
+{\color{slidePink}h}%
+{\color{slidePurple}o}%
+{\color{slideBlue}s}%
+{\color{slideCyan}o}%
+}
+
+\newcommand{\palette}{{\Huge
+    {\color{slideBlue}$\blacksquare$}
+    {\color{slideCyan}$\blacksquare$}
+    {\color{slideTurquoise}$\blacksquare$}
+    {\color{slideGreen}$\blacksquare$}
+    {\color{slideYellow}$\blacksquare$}
+    {\color{slideOrange}$\blacksquare$}
+    {\color{slideRed}$\blacksquare$}
+    {\color{slidePink}$\blacksquare$}
+    {\color{slidePurple}$\blacksquare$}
+}}
+
+\lstset{
+    language=matlab,
+    morekeywords=[1]{deg2rad},
+    morekeywords=[2]{ref_sin, ref_cos, isoctave, generate_fig, signal_r, argument_r},
+}
+
+
+% \newcommand{\x}{$\bullet$}
+
+
+
+
+
+% \newcommand\pgfmathsinandcos[3]{%
+%   \pgfmathsetmacro#1{sin(#3)}%
+%   \pgfmathsetmacro#2{cos(#3)}%
+% }
+% \newcommand\LongitudePlane[3][current plane]{%
+%   \pgfmathsinandcos\sinEl\cosEl{#2} % elevation
+%   \pgfmathsinandcos\sint\cost{#3} % azimuth
+%   \tikzset{#1/.style={cm={\cost,\sint*\sinEl,0,\cosEl,(0,0)}}}
+% }
+
+% \newcommand\LatitudePlane[3][current plane]{%
+%   \pgfmathsinandcos\sinEl\cosEl{#2} % elevation
+%   \pgfmathsinandcos\sint\cost{#3} % latitude
+%   \pgfmathsetmacro\yshift{\RadiusSphere*\cosEl*\sint}
+%   \tikzset{#1/.style={cm={\cost,0,0,\cost*\sinEl,(0,\yshift)}}} %
+% }
+% \newcommand\NewLatitudePlane[4][current plane]{%
+%   \pgfmathsinandcos\sinEl\cosEl{#3} % elevation
+%   \pgfmathsinandcos\sint\cost{#4} % latitude
+%   \pgfmathsetmacro\yshift{#2*\cosEl*\sint}
+%   \tikzset{#1/.style={cm={\cost,0,0,\cost*\sinEl,(0,\yshift)}}} %
+% }
+% \newcommand\DrawLongitudeCircle[2][1]{
+%   \LongitudePlane{\angEl}{#2}
+%   \tikzset{current plane/.prefix style={scale=#1}}
+%    % angle of "visibility"
+%   \pgfmathsetmacro\angVis{atan(sin(#2)*cos(\angEl)/sin(\angEl))} %
+%   \draw[current plane] (\angVis:1) arc (\angVis:\angVis+180:1);
+%   \draw[current plane,opacity=0.4] (\angVis-180:1) arc (\angVis-180:\angVis:1);
+% }
+% \newcommand\DrawLongitudeArc[4][black]{
+%   \LongitudePlane{\angEl}{#2}
+%   \tikzset{current plane/.prefix style={scale=1}}
+%   \pgfmathsetmacro\angVis{atan(sin(#2)*cos(\angEl)/sin(\angEl))} %
+%   \pgfmathsetmacro\angA{mod(max(\angVis,#3),360)} %
+%   \pgfmathsetmacro\angB{mod(min(\angVis+180,#4),360} %
+%   \draw[current plane,#1,opacity=0.4] (#3:\RadiusSphere) arc (#3:#4:\RadiusSphere);
+%   \draw[current plane,#1]  (\angA:\RadiusSphere) arc (\angA:\angB:\RadiusSphere);
+% }%
+% \newcommand\DrawLatitudeCircle[2][1]{
+%   \LatitudePlane{\angEl}{#2}
+%   \tikzset{current plane/.prefix style={scale=#1}}
+%   \pgfmathsetmacro\sinVis{sin(#2)/cos(#2)*sin(\angEl)/cos(\angEl)}
+%   % angle of "visibility"
+%   \pgfmathsetmacro\angVis{asin(min(1,max(\sinVis,-1)))}
+%   \draw[current plane] (\angVis:1) arc (\angVis:-\angVis-180:1);
+%   \draw[current plane,opacity=0.4] (180-\angVis:1) arc (180-\angVis:\angVis:1);
+% }
+
+% \newcommand\DrawLatitudeArc[4][black]{
+%   \LatitudePlane{\angEl}{#2}
+%   \tikzset{current plane/.prefix style={scale=1}}
+%   \pgfmathsetmacro\sinVis{sin(#2)/cos(#2)*sin(\angEl)/cos(\angEl)}
+%   % angle of "visibility"
+%   \pgfmathsetmacro\angVis{asin(min(1,max(\sinVis,-1)))}
+%   \pgfmathsetmacro\angA{max(min(\angVis,#3),-\angVis-180)} %
+%   \pgfmathsetmacro\angB{min(\angVis,#4)} %
+%   \draw[current plane,#1,opacity=0.4] (#3:\RadiusSphere) arc (#3:#4:\RadiusSphere);
+%   \draw[current plane,#1] (\angA:\RadiusSphere) arc (\angA:\angB:\RadiusSphere);
+% }
+
+% %% document-wide tikz options and styles
+
+% \tikzset{%
+%   >=latex, % option for nice arrows
+%   inner sep=0pt,%
+%   outer sep=2pt,%
+%   mark coordinate/.style={inner sep=0pt,outer sep=0pt,minimum size=3pt,
+%     fill=black,circle}%
+% }
+
+
+
+
+\usepackage{tikz-3dplot}
+
+%Angle Definitions
+%-----------------
+
+%set the plot display orientation
+%synatax: \tdplotsetdisplay{\theta_d}{\phi_d}
+% \tdplotsetmaincoords{65}{110}
+% \tdplotsetmaincoords{60}{135}
+\tdplotsetmaincoords{54.736}{135}
+% \tdplotsetmaincoords{60}{45}
+
+% there's got to be a better way to do this.
+\newcommand{\Normalize}[3]
+{
+    \pgfmathsetmacro{\normyn}{sqrt(#1*#1+#2*#2+#3*#3)}
+    \pgfmathsetmacro{\normx}{#1/\normyn}\pgfmathsetmacro{\normy}{#2/\normyn}\pgfmathsetmacro{\normz}{#3/\normyn}
+}
+
+% calculate the counterclockwise angle of a vector of length 1 in the rotated xy plane.
+\newcommand{\toAngle}[3]
+{
+    \tdplottransformrotmain{1}{0}{0}
+    \pgfmathsetmacro\xa{acos(\tdplotresx *#1 + \tdplotresy* #2 + \tdplotresz* #3)}
+    \tdplottransformrotmain{0}{1}{0}
+    \pgfmathsetmacro\ya{acos(\tdplotresx *#1 + \tdplotresy* #2 + \tdplotresz* #3)}
+    \pgfmathsetmacro\normySum{round(\xa+\ya)}
+    \pgfmathsetmacro\normyDiff{round(\xa-\ya )}
+    \ifthenelse{\lengthtest{\normySum pt = 270pt}} {
+        \pgfmathsetmacro\normyAngle{\ya+90}
+    }{
+        \ifthenelse{\lengthtest{\normyDiff pt = -90pt}} {
+            \pgfmathsetmacro\normyAngle{360-\xa }
+        }{
+            \pgfmathsetmacro\normyAngle{\xa }
+        }
+    }
+}
+
+
+
+\newcommand{\drawArc}[9]
+{
+    \Normalize{#1}{#2}{#3}
+    \pgfmathsetmacro{\pax}{\normx}\pgfmathsetmacro{\pay}{\normy}    \pgfmathsetmacro{\paz}{\normz}
+
+    \Normalize{#4}{#5}{#6}
+    \pgfmathsetmacro{\pbx}{\normx}\pgfmathsetmacro{\pby}{\normy}    \pgfmathsetmacro{\pbz}{\normz}
+
+    % take the cross product and normalize it
+    \tdplotcrossprod(\pax,\pay,\paz)(\pbx,\pby,\pbz)
+
+    % calculate the rotation that maps the z axis onto the cross product
+    \tdplotsetrotatedcoords{atan2(\tdplotresy,\tdplotresx)}{atan2(sqrt(\tdplotresx*\tdplotresx+\tdplotresy*\tdplotresy),\tdplotresz)}{0.0}
+
+    % calculate the counterclockwise angles from the rotated x axis to each vector, then order them increasing.
+    \toAngle{\pax}{\pay}{\paz}
+    \pgfmathsetmacro\xangle{\normyAngle}
+
+    \toAngle{\pbx}{\pby}{\pbz}
+    \pgfmathsetmacro\yangle{\normyAngle}
+
+    \ifthenelse{\lengthtest{\xangle pt < \yangle pt}} {
+        \pgfmathsetmacro\first{\xangle}
+        \pgfmathsetmacro\second{\yangle}
+    }{
+        \pgfmathsetmacro\first{\yangle}
+        \pgfmathsetmacro\second{\xangle}
+    }
+    % draw the arc at radius R from the first angle to the second
+
+    \tdplotdrawarc[tdplot_rotated_coords, cmyk_R, very  thick, -latex,]{(0,0,0)}{#7}{\first }{\second }{#8}{#9}
+}
+
+
+
+

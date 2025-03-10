@@ -1,0 +1,265 @@
+\chapter{Revisão Bibliográfica}
+
+\section{Fundamentação teórica}
+
+\subsection{Direcionamento por coordenadas geográficas}
+
+Coordenadas geográficas são definidas por dois valores, latitude e longitude, associadas a coordenadas esféricas referenciadas a partir do centro da terra, assumindo o raio da coordenada como o raio médio da superfície do planeta, cerca de $R_\text{Terra} = \SI{6371E3}{\metre}$ \cite{palomaguitarrara, chrisveness}.
+A latitude equivale à componente polar $\phi$ centralizada na linha do equador, enquanto a longitude equivale à componente $\theta$ centralizado do meridiano de Greenwich \cite{palomaguitarrara, henriquefleming2003}.
+
+Conhecendo as coordenadas de dois pontos distintos A e B, é possível determinar seu ângulo de \textit{bearing} $\beta$ relativo, referente ao norte, ou seja, o ângulo da direção a se seguir para chegar do ponto A ao ponto B a partir da direção do note no ponto de origem A \cite{henriquefleming2003}.
+
+Sendo \textcolor{Green}{$\mathbf{A}$} e \textcolor{Blue}{$\mathbf{B}$} duas coordenadas geográficas, \textcolor{Green}{$\phi_A$} e \textcolor{Blue}{$\phi_B$} suas respectivas latitudes,  \textcolor{Green}{$\theta_A$} e \textcolor{Blue}{$\theta_B$} suas respectivas longitudes, conforme ilustrado na \autoref{fig:globo}.
+
+\begin{figure}[htbp]
+    \centering
+    \caption{Representação geométrica de distância e ângulo em relação ao norte entre coordenadas geográficas \textcolor{Green}{$\mathbf{A}$} e \textcolor{Blue}{$\mathbf{B}$}.}
+    % \input{../pictures/globo}
+    \includegraphics{../pictures/globo.pdf}
+    \caption*{Fonte: Autor.}
+    \label{fig:globo}
+\end{figure}
+
+Calculam-se $\Delta_\phi$ e $\Delta_\theta$.
+
+    \begin{equation}
+        \Delta_\phi = \textcolor{Blue}{\phi_B} - \textcolor{Green}{\phi_A}
+    \end{equation}
+    \begin{equation}
+        \Delta_\theta = \textcolor{Blue}{\theta_B} - \textcolor{Green}{\theta_A}
+    \end{equation}
+
+Através da lei dos haversines é possível obter a distância mínima $d$ entre as coordenadas, sobre a superfície, e também o ângulo de \textit{Bearing} \textcolor{Red}{$\beta$} formado no vértice \textcolor{Green}{$\mathbf{A}$} do triângulo esférico $\mathbf{N}$\textcolor{Green}{$\mathbf{A}$}\textcolor{Blue}{$\mathbf{B}$} \cite{chrisveness}.
+Para o cálculo de distância, os ângulos devem ser tratados em radianos.
+
+\begin{equation}
+    X = \cos\left(\textcolor{Blue}{\theta_B}\right)\cdot \sin\left(\Delta_\phi\right)
+\end{equation}
+\begin{equation}
+    Y = \cos\left(\textcolor{Green}{\theta_A}\right)\cdot\sin\left(\textcolor{Blue}{\theta_B}\right) - \sin\left(\textcolor{Green}{\theta_A}\right) \cdot \cos\left(\textcolor{Green}{\theta_B}\right) \cdot \cos\left(\Delta_\phi\right)
+\end{equation}
+\begin{equation}
+    Z = \sin^2\left(\frac{\Delta_\theta}{2}\right) + \cos\left(\textcolor{Blue}{\theta_B}\right) \cdot \cos\left(\textcolor{Green}{\theta_A}\right) \cdot \sin^2\left(\frac{\Delta_\phi}{2}\right)
+\end{equation}
+\begin{equation}
+    \textcolor{Red}{\beta} = \arctan\left(\frac{X}{Y}\right) - \frac{\pi}{2}
+\end{equation}
+\begin{equation}
+    \textcolor{Red}{d} = R_\text{Terra} \cdot 2 \cdot \arctan\left(\frac{\sqrt{Z}}{\sqrt{1-Z}}\right)
+\end{equation}
+
+O ângulo \textcolor{Red}{$\beta$} calculado aqui é referente à direção cardeal Norte, assim, uma equipe de busca equipada com uma bússola simples seria capaz de seguir a direção correta.
+A \autoref{fig:bearing} apresenta a aplicação desenvolvida por \citeauthor{chrisveness}, capaz de calcular o ângulo de \textit{Bearing} entre duas coordenadas, note que, neste caso, o ângulo referido é relacionado à direção cardial Leste \cite{chrisveness}.
+
+\begin{figure}[htbp]
+    \centering
+    \caption{Cálculo do ângulo de \textit{Bearing} \textcolor{Red}{$\beta$} entre as coordenadas dos Campi Santo André e São Bernardo do Campo da UFABC.}
+    \includegraphics[width=0.7\textwidth]{../pictures/bearing.png}
+    \caption*{Fonte: \citeauthor{chrisveness} 2019 \cite{chrisveness}}
+    \label{fig:bearing}
+\end{figure}
+
+\subsection{Estimar \acs{AoA} utilizando matriz de antenas}
+
+Analisando a defasagem de sinal \ac{RF} em um conjunto de antenas, é possível estimar seu \acf{AoA}, essa técnica pode ser utilizada para determinar a direção do emissor em relação à matriz de antenas utilizada.
+Baseando-se em dados como a distância entre as antenas, o comprimento de onda $\lambda$ do sinal e a velocidade da luz no meio, usualmente tomada como $c = \SI{299792458,6 \pm 0,3}{\metre\per\second}$ no ar \cite{jennings1987continuity, bensky2016wireless, horst2021localization}.
+A \autoref{eq:wavelength} apresenta a relação do comprimento de onda $\lambda$ com a frequência $f$, com a frequência angular $\omega$ e a velocidade da luz $c$.
+
+\begin{equation}\label{eq:wavelength}
+    \lambda = \frac{c}{f} = \frac{2\pi \cdot c}{\omega}
+\end{equation}
+
+Se um emissor estiver distante o bastante, é possível considerar que sua frente de onda tem um comportamento planar, essa característica simplifica as operações envolvidas.
+A distância de Fraunhofer ($d_F$) é a mínima para essa condição, que define o início da região de \textit{far-field}, conforme apresentado na \autoref{eq:fraunhofer}, onde $D$ é a maior dimensão da antena \cite{balanis2016antenna}.
+Tomando $D = 2  \lambda$, para uma antena de dipolo, obtém-se $d_F = 8 \lambda$.
+A \autoref{fig:plana_0} ilustra o comportamento planar de uma frente de onda além de $d_F$.
+
+\begin{equation}\label{eq:fraunhofer}
+    d_F = \frac{2 \cdot D^2}{\lambda} \quad \Rightarrow \quad d_F = \frac{2 \cdot \left(2 \cdot \lambda \right)^2}{\lambda} = 8 \lambda
+\end{equation}
+
+\begin{figure}[htpb]
+    \centering
+    \caption{Característica de frente de onda a cada $\lambda$ a partir da antena.}
+    % \input{../pictures/plana_0}
+    \includegraphics{../pictures/plana_0.pdf}
+    \caption*{Fonte: Autor.}
+    \label{fig:plana_0}
+\end{figure}
+
+Tomando agora um par de antenas separadas por uma distância fixa $d$, torna-se viável fazer a análise trigonométrica entre as antenas e a frente de onda que chega, onde essa distância $d$ será a hipotenusa do triângulo.
+A \autoref{fig:AoA} apresenta a disposição das antenas em dois casos de chegada de sinal \ac{RF}.
+Para realizar a análise, é necessário conhecer uma segunda dimensão do triângulo retângulo envolvido, esta é obtida analisando a defasagem entre o sinal das antenas, conforme apresentado na \autoref{eq:defasagem}.
+
+\begin{equation}\label{eq:defasagem}
+    d \cdot \sin\left(\beta\right) = \lambda \cdot \frac{\Delta\Phi}{2 \pi} \quad \Rightarrow \quad \beta = \arcsin \left(\frac{\lambda}{d} \cdot \frac{\Delta\Phi}{2 \pi}\right)
+\end{equation}
+
+É importante ressaltar que um sistemas com um único par de antenas não é capaz de determinar completamente o \ac{AoA}, já que o valor calculado de $\beta$ é igual para casos simétricos, a relação é apresentada nas Figuras \ref{fig:AoA:1} e \ref{fig:AoA:2}.
+Existem ainda dois casos notáveis, onde o sinal chega alinhado com a linha das com as antenas ou perpendicular a ela, apresentados respectivamente nas Figuras \ref{fig:AoA:3} e \ref{fig:AoA:4}.
+
+\begin{figure}
+    \caption{\ac{AoA} com par de antenas em diversas direções equivalentes.}
+    \label{fig:AoA}
+
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$\beta=\SI{60}{\degree}$}
+        % \input{../pictures/AoA_1}
+        \includegraphics{../pictures/AoA_1.pdf}
+        \label{fig:AoA:1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$\beta=\SI{60}{\degree}$}
+        % \input{../pictures/AoA_2}
+        \includegraphics{../pictures/AoA_2.pdf}
+        \label{fig:AoA:2}
+    \end{subfigure}
+    \hfill
+
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$\beta=\SI{90}{\degree}$}
+        % \input{../pictures/AoA_3}
+        \includegraphics{../pictures/AoA_3.pdf}
+        \label{fig:AoA:3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$\beta=\SI{0}{\degree}$}
+        % \input{../pictures/AoA_4}
+        \includegraphics{../pictures/AoA_4.pdf}
+        \label{fig:AoA:4}
+    \end{subfigure}
+    \hfill
+
+    \caption*{Fonte: Autor.}
+\end{figure}
+
+A escolha da distância $d$ entre as antenas deve ser feita de forma a otimizar a otimizar a resolução da medida de defasagem, com a maior distância possível, porém é necessário evitar ambiguidades na análise, como o sinal é periódico, o valor se repetirá a cada $\lambda$, e terá valores simétricos quando $d > \sfrac{\lambda}{2}$, ilustrado na \autoref{fig:AoA_d:fail}.
+Adota-se então $d=\sfrac{\lambda}{2}$, conforme apresentado na \autoref{fig:AoA_d:ok} \cite{bensky2016wireless, horst2021localization}.
+
+\begin{figure}
+    \caption{Diferentes valores para $d$.}
+    \label{fig:AoA_d}
+
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$d > \sfrac{\lambda}{2}$}
+        % \input{../pictures/AoA_0_fail}
+        \includegraphics{../pictures/AoA_0_fail.pdf}
+        \label{fig:AoA_d:fail}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$d = \sfrac{\lambda}{2}$}
+        % \input{../pictures/AoA_0}
+        \includegraphics{../pictures/AoA_0.pdf}
+        \label{fig:AoA_d:ok}
+    \end{subfigure}
+    \hfill
+
+    \caption*{Fonte: Autor.}
+\end{figure}
+
+Para contornar a ambiguidade gerada pela simetria no sistema, é possível adicionar uma terceira antena, de forma que não esteja alinhada com as duas primeiras.
+Um exemplo é apresentado na \autoref{fig:AoA_5}.
+
+\begin{figure}[htbp]
+    \centering
+    \caption{Possível disposição de matriz de antenas.}
+    % \input{../pictures/AoA_5}
+    \includegraphics{../pictures/AoA_5.pdf}
+    \caption*{Fonte: Autor.}
+    \label{fig:AoA_5}
+\end{figure}
+
+Para obter o valor de defasagem entre antenas, é interessante representar o sinal recebido como um valor complexo.
+Uma forma de obter o valor complexo é realizando a integração de período completo no produto do sinal recebido na antena por uma senoide ou cossenoide de mesma frequência.
+Nas Equações \ref{eq:S} e \ref{eq:C}, $S$ e $C$ são respectivamente proporcionais às componentes em fase e em quadratura do sinal $w$ recebido na antena, $k$ é uma função auxiliar que garante frequência correta em todos os operandos.
+É válido notar que $w$ e $k$ são funções de várias variáveis.
+
+\begin{equation}\label{eq:S}
+    S = \int_0^T w(t) \cdot \sin(k(t)) \partial t
+\end{equation}
+
+\begin{equation}\label{eq:C}
+    C = \int_0^T w(t) \cdot \cos(k(t)) \partial t
+\end{equation}
+
+Finalmente, na \autoref{eq:Z}, $Z$ é o valor complexo associada ao sinal recebido em na antena.
+
+\begin{equation}\label{eq:Z}
+    Z_{x,y} = 2\cdot(S + \imath C)
+\end{equation}
+
+A defasagem entre um par de antenas é dado pelo ângulo do valor resultante da multiplicação do valor complexo da primeira antena pelo complexo conjugado da segunda antena, conforme apresentado na \autoref{eq:phase}.
+
+\begin{equation}\label{eq:phase}
+    \Delta\Phi_{x,y} = \arg(Z_{0,0}\cdot Z^*_{x,y})
+\end{equation}
+
+Com este valor é possível estimar valor de $\beta$ no intervalo $\SI{0}{\degree} \leq \beta \leq \SI{180}{\degree}$.
+
+Utilizando a terceira antena perpendicular ao primeiro par e alinhada com uma das antenas iniciais, conforme \autoref{fig:AoA_5}, é possível estimar o valor de $\beta$ no intervalo $\SI{0}{\degree} \leq \beta \leq \SI{360}{\degree}$.
+Cada par de antena pode indicar o valor da coordenada geométrica associada ao eixo que a caracteriza, conforme indicado na \autoref{eq:componente}.
+Essa propriedade somente é válida nessa geometria.
+
+\begin{equation}\label{eq:componente}
+    \text{componente}_{x,y} = -\frac{\Delta_{x,y}}{\pi}\cdot\frac{\cancel{\lambda}}{\cancel{d \cdot 2}} = -\frac{\Delta_{x,y}}{\pi}
+\end{equation}
+
+
+
+\section{Trabalhos relacionados}
+
+Em seu trabalho, \citeauthor{horst2021localization} \cite{horst2021localization} analisa dois algoritmos de detecção de \ac{AoA}, realizando as análises em ambientes internos e utilizando matrizes de antenas.
+O primeiro método analisado consiste em uma aproximação do ângulo, feita utilizando um software fornecido pela Texas Instruments, fabricante do hardware utilizado.
+Já o segundo método, baseia-se na construção matemática do \ac{AoA} baseado na diferença de fase instantânea do sinal entre as antenas do sistema, uma abordagem semelhante à proposta neste trabalho.
+Os resultados obtidos indicam que o método de aproximação teve melhor acurácia nos valores de ângulo.
+
+A proposta de \citeauthor{zeaiter:hal-03693641} \cite{zeaiter:hal-03693641} busca validar a performance da detecção de \ac{AoA} em ambiente fechado, realizando a análise em diferentes modulações, larguras de canal e fatores de espalhamento.
+Também propõe que, ao combinar de seu algoritmo de localização de \ac{AoA} com a função de autocorrelação, é possível analisar os dados de dois sinais recebidos simultaneamente.
+
+Outro trabalho de \citeauthor{zeaiter:hal-03932846} \cite{zeaiter:hal-03932846} consiste um uma aproximação do \ac{AoA} utilizando um método de autocorrelação em um sinal \ac{LoRa} de baixa potência.
+Seu objetivo consiste em detectar o sinal \ac{LoRa} operando em transmissão de baixa potência, caso onde a vida útil da bateria do sistema transmissor é estendida.
+O algoritmo apresentado busca picos de autocorrelação no sinal recebido, além de utilizar \ac{FFT} para denotá-los e melhorar a \ac{SNR}.
+Quando um pico é detectado, o algoritmo é capaz de encontrar o \ac{AoA}.
+
+% O trabalho de \citeauthor{aernouts2020combining} \cite{aernouts2020combining} combina o método de filtro de partículas às medidas TDoA e \ac{AoA} obtidas em ambiente urbano denso.
+% A performance é analisada de maneira comparativa à estimativa de TDoA e a um trabalho anterior baseado em combinação de matrizes.
+% Seus resultados indicam um erro médio estimado de \SI{199}{\metre} sem o \ac{AoA}.
+
+\citeauthor{bnilam20172d} \cite{bnilam20172d} propõe uma técnica que, sem qualquer informação prévia de largura de banda, consegue estimar \ac{AoA} do sinal recebido.
+O sistema proposto consiste em uma \ac{UCA} seguida de um filtro transversal, também utiliza de vetores especiais de largura de banda variável junto com um estimador de relação sinal-ruído térmico para determinar simultaneamente \ac{AoA} e largura de banda do sinal recebido.
+
+Em outro trabalho, \citeauthor{bnilam2017adaptive} \cite{bnilam2017adaptive} estudam a possibilidade de estimar \ac{AoA} para transceptores de \ac{IoT} em ambiente interno.
+Também propõe um modelo probabilístico adaptativo que opera no modelo de estimativa de \ac{AoA}, incrementando sua performance.
+Seus resultados indicam que estes métodos superam a performance de modelos probabilísticos estáticos tradicionais, tanto em acurácia de localização quanto em estabilidade no valor obtido.
+
+Neste trabalho, \citeauthor{bnilam2019low} \cite{bnilam2019low} propõe um dispositivo de baixo custo capaz de estimar o \ac{AoA}, de forma que seja viável sua utilização em dispositivos de \ac{IoT}.
+O dispositivo consiste numa conversão de vários \ac{SDR} individuais de baixo custo num único \ac{SDR} com múltiplos canais de \ac{RF}.
+Seus resultados experimentais indicam que o dispositivo é capaz de estimar valores de \ac{AoA} de forma estável e acurada.
+
+A proposta de \citeauthor{bnilam2020angle} \cite{bnilam2020angle} neste trabalho consiste em um novo algoritmo para determinação de \ac{AoA} chamado ANGLE (\textit{ANGular Location Estimation}), baseado em modelos probabilísticos para a resposta do sinal recebido.
+Sua proposta ainda sugere duas versões do método, para o caso de amostragem única e de decomposição de subespaço, como utilizado no algoritmo MUSIC (\textit{MUltiple SIgnal Classification}).
+
+\citeauthor{bnilam2020lora} \cite{bnilam2020lora} apresenta neste trabalho uma abordagem mais amigável para estimativa de \ac{AoA} em redes \ac{LoRa}.
+O sistema proposto, denominado LoRay (\ac{LoRa} array) é composto por hardware e software preparados para fazer a estimativa de \ac{AoA} em ambiente urbano, onde o sistema foi validado.
+O hardware utilizado foi descrito em um trabalho anterior \cite{bnilam2019low}.
+Este sistema apresentou resultados estáveis e acurados para estimativa de \ac{AoA} tanto nos casos \ac{LoS} e quanto nos \ac{NLoS}.
+
+% \citeauthor{steckel2018low} \cite{steckel2018low}
+
+% \citeauthor{du2018long} \cite{du2018long}
+
+Em seu trabalho, \citeauthor{niculescu2003ad} \cite{niculescu2003ad} propõe métodos para detecção de posição e orientação em cada nó de uma rede \textit{ad hoc}.
+A proposta parte de possíveis problemas relacionados a utilização de \ac{GPS} em ambiente fechado
+

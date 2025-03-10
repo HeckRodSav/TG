@@ -1,0 +1,43 @@
+\begin{center}
+\begin{tikzpicture}
+    
+    % Variables
+    \def\D{\N*\T}        
+    \def\wavelength{1}
+    \def\d{0.5*\wavelength}
+
+    
+    \coordinate (O) at (0,0);
+    % \draw [help lines, dashed] (-0.5,-0.5) grid (10.5,5); % desenha grid
+    % \draw [red, thin] (O) node[draw,cross out] {}; % marca pont(0,0) 
+    
+    % \draw (-6.8,-4) rectangle (6.8,4);
+    \clip (-0.5,-0.5) rectangle (10.5,5);
+
+    \draw
+        (-0.5,0) -- (10.5,0)
+    ;
+    
+    % Rocket
+    % \draw (0,0) node[anchor=south west, rotate=45, draw] {\faRocket};
+
+    \draw[Red, line width = 1mm, arrows = {Latex[reversed,round,angle'=30]-Latex[angle'=25]}] (0,0) --++ (90:1);
+    
+    
+    \draw[Red, line width = 1mm, arrows = {Latex[reversed,round,angle'=30]-Latex[angle'=25]}] (0.5,2) --++ (80:1);
+    
+    
+    \draw[Red, line width = 1mm, arrows = {Latex[reversed,round,angle'=30]-Latex[angle'=25]}] (5,4) --++ (-5:1);
+    
+    
+    \draw[Red, line width = 1mm, arrows = {Latex[reversed,round,angle'=30]-Latex[angle'=25]}] (9,0) --++ (00:1);
+    
+    
+    
+    % \draw[Red, line width = 1mm]
+    %     (0,1) --++ (0,0.5)
+    % ;
+        
+
+\end{tikzpicture}
+\end{center}

@@ -1,0 +1,111 @@
+
+\begin{figure}[H]
+    \centering
+    \input{../pictures/antennas}
+    \caption{Agora sim 0}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{../pictures/AoA_2_alt}
+    \caption{Agora sim}
+\end{figure}
+
+\begin{equation} % Comprimento de onda
+    \lambda = \frac{c}{f} = \frac{2\pi \cdot c}{\omega}
+\end{equation}
+
+\begin{equation} % Distância entre par de antenas
+    d = \frac{\lambda}{2}
+\end{equation}
+
+\begin{equation} % Diâmetro do circulo que circunscreve poligono de antenas
+	\rho = \frac{d}{2\cdot \sin\left(\frac{\pi}{N_\text{ant}}\right)}
+\end{equation}
+
+\begin{equation} % Índices das antenas
+	k = \left\{1, 2, \dotsc, N_\text{ant}\right\}
+\end{equation}
+
+\begin{equation} % Coordenada da antena
+	A_k =
+    \rho \cdot \exp\left(\imath\cdot k \cdot \frac{2\pi}{N_\text{ant}}\right) =
+    \left( x_{A_k},~ y_{A_k} \right) =
+    \left( \operatorname{\mathcal{Re}}\left( A_k \right), ~\operatorname{\mathcal{Im}}\left( A_k \right) \right)
+\end{equation}
+
+\begin{equation} % Período do sinal
+    T = \frac{2\pi}{\omega} = \frac{1}{f}
+\end{equation}
+
+\begin{equation} % Relação trigonometrica de defasagem e angulo do sinal
+    d \cdot \cos\left(\beta\right) = \lambda \cdot \frac{\Delta\Phi}{2 \pi}
+\end{equation}
+
+\begin{equation} % In phase
+    I_k = \int\limits_0^T \cos\left(\omega\cdot\tau\right) \cdot w\left( \tau, ~x_{A_k}, ~y_{A_k} \right) \partial \tau
+\end{equation}
+
+\begin{equation} % Out of phase
+    Q_k = \int\limits_0^T \sin\left(\omega\cdot\tau\right) \cdot w\left( \tau, ~x_{A_k}, ~y_{A_k} \right) \partial \tau
+\end{equation}
+
+\begin{equation} % Fase na antena
+    Z_k = \frac{\omega}{\pi}\cdot\left(I_k + \imath Q_k\right)
+\end{equation}
+
+\begin{equation} % Defasagem entre antenas
+    \Delta\Phi_{k} =
+    \Phi_{k} - \Phi_{k+1} =
+    \arg\left(Z_{k}\right) - \arg\left(Z_{k+1}\right) =
+    \arg\left(Z_{k} \cdot \overline{Z_{k+1}}\right)
+\end{equation}
+
+\begin{equation} % Angulo do sinal em relação ao par de antenas
+    \beta_{k} = \pm \arccos\left(\frac{\cancel{\lambda}}{\cancel{d}}\cdot\frac{\Delta\Phi_{k}}{\cancel{2}\pi}\right)
+\end{equation}
+
+\begin{equation} % Angulo do par de antenas
+	\alpha_{k} = \arg\left( A_{k} - A_{k+1} \right)
+\end{equation}
+
+\begin{equation} % Conjunto de angulos calculados
+	\theta_{\pm k} = \alpha_{k}\pm \beta_{k}
+\end{equation}
+
+\begin{equation} % Conjunto de angulos calculados
+	\Theta = \left\{\theta_{\pm k}=\alpha_{k}\pm \beta_{k} ~\middle\vert~ \forall k\right\}
+\end{equation}
+
+\begin{equation} % range_angle
+    \delta = \frac{\pi}{4\cdot N_\text{ant}}
+\end{equation}
+
+\begin{equation} % Angulos normalizados
+    \Theta_{\left\lfloor\bullet\right\rceil} = \left\{\frac{\left\lfloor\theta\cdot \delta\cdot 10 \right\rceil}{\delta\cdot 10} ~\middle\vert~ \forall \theta \in \Theta  \right\}
+\end{equation}
+
+\begin{equation} % Moda entre angulos normalizados
+    \theta_\mathcal{M_o} = \operatorname{\mathcal{M_o}}\left( \Theta_{\left\lfloor\bullet\right\rceil}  \right)
+\end{equation}
+
+\begin{equation} % Filtra no intervalo
+    \Theta_\text{F} = \left\{\theta \in \Theta  ~\middle\vert~
+    \theta_\mathcal{M_o} - \delta \leq \theta \leq \theta_\mathcal{M_o} + \delta\right\}
+\end{equation}
+
+\begin{equation} % Mediana
+    \theta_\text{AoA} = \widetilde{\Theta_\text{F}}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \input{../pictures/graph2.tex}
+    \caption{Gráfico}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{../pictures/graph2_copy.tex}
+    \caption{Gráfico}
+\end{figure}

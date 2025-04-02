@@ -1,0 +1,149 @@
+% \resizebox{!}{0.7\textheight}{%
+\begin{circuitikz}[american, voltage shift=0.5, line width=0.5,every node/.style={font = {\footnotesize\bfseries}}]
+
+    \def\wavelength{5}
+    \pgfmathsetmacro\d{0.5*\wavelength}
+
+    \def\signalAngle{75}
+    \def\antennaAngle{120}
+
+    \def\closeRange{9}
+    \def\farRange{\closeRange+13}
+
+	\def\NAntennas{3}
+	\pgfmathsetmacro\AngleAntennas{360/\NAntennas}
+	\def\ShiftAngleAntennas{-90}
+
+	\pgfmathsetmacro\RhoAntennas{\d/(2*sin(180/\NAntennas))}
+
+    % \def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+    % { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5) node[midway,anchor=east] {$\beta$}; }
+    \def\centerarc(#1)(#2:#3:#4)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+    { ($(#1)+({#4*cos(#2)},{#4*sin(#2)})$) arc (#2:#3:#4) }
+
+    \def\coordref[#1](#2){%
+
+        \coordinate(sysref) at (#2);
+
+        \draw[#1, -latex] (sysref) ++(-0.4,-0.3) -- ++(0.9,0) node[midway, below]{$x$};
+        \draw[#1, -latex] (sysref) ++(-0.3,-0.4) -- ++(0,0.9) node[midway, left]{$y$};
+        \draw[#1, -latex] \centerarc(sysref)(-90:180:0.25);
+        \draw[#1] (sysref) node{$+$}
+    }
+
+    \coordinate (bottomleft) at (-6,-0.5);
+    \coordinate (topright) at (6,6.5);
+
+
+    % \draw[Red,dashed] (bottomleft) rectangle (topright);
+    \clip (bottomleft) rectangle (topright);
+
+    \coordinate (O) at (0,0);
+    \coordinate (sourceAntenna) at (\signalAngle:\closeRange*\wavelength);
+    % \draw [help lines, dashed] (bottomleft) grid (topright); % desenha grid
+    % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
+
+    % Circulo de antenas
+	\draw[densely dotted, opacity=0.25] (O) ++(90:\RhoAntennas) circle (\RhoAntennas);
+
+    % Linhas do sinal de fundo
+    \foreach \x [evaluate={\y=int((\x+\closeRange));\z=int((\x+\closeRange));}] in {-3,...,3} {
+        \draw [black!75, very thin]
+        (sourceAntenna) ++ (\signalAngle:-\z*\wavelength)
+            % node[anchor=west, font = {\footnotesize\bfseries}]{$\y\lambda$}
+        ($(sourceAntenna) + (\signalAngle:-\z*\wavelength) + ({10*cos(\signalAngle+90)},{10*sin(\signalAngle+90)})$)
+            --
+        ($(sourceAntenna) + (\signalAngle:-\z*\wavelength) - ({10*cos(\signalAngle+90)},{10*sin(\signalAngle+90)})$)
+        % \draw [gray, thin] (sourceAntenna) circle (\z)
+        ;
+    }
+
+    % Antenas
+    \draw[thick, cmyk_R] (O) node[dinantenna] (A00) {} node [below] {$A_{k+1}$};
+    \draw[thick, cmyk_G, opacity=0.75] (O) ++(60:\d) node[dinantenna] (A0d) {} node [below] {$A_{k+2}$};
+    \draw[thick, cmyk_B] (O) ++(\antennaAngle:\d) node[dinantenna] (Ad0) {} node [above left] {$A_{k}$};
+
+    \draw[very thin, Black!50] % Desenha eixo X
+        (-0.5*\d,0) -- (2*\d,0) node[right] {$x$}
+    ;
+
+    % Ângulo alpha entre antenas
+    \draw[thin, cmyk_M]
+        (0.3,0) node [above right, inner sep=1pt] {$\alpha_k$}
+        \centerarc(O)(0:\antennaAngle:0.3)
+    ;
+
+    % Comprimento de onda
+    \draw[latex-latex]
+        (A00) ++(\signalAngle+90:\wavelength) coordinate(signalAux)
+         -- node [midway, fill=white, circle, inner sep=1pt] {$\lambda$} ++(\signalAngle:\wavelength)
+    ;
+
+    % Desenha senoide de fundo
+    \draw[Goldenrod, domain=-8:8, samples=100] plot[shift={(signalAux)}, rotate=\signalAngle]({\x},{cos(\x * pi * 2 / \wavelength r)});
+
+    % Direção do sinal
+    \draw[very thick, dashed, -latex, Goldenrod]
+        (A00) ++(1.5*\d,0) ++ (\signalAngle:-0.5*\d) -- coordinate(angleArrow) ++(\signalAngle:\d)
+    ;
+    % Angulo Theta do sinal
+    \draw[thin]
+        \centerarc(angleArrow)(0:\signalAngle:0.4) node [midway,above right,inner sep=1pt] {$\Theta$}
+    ;
+
+    % Triangulo retângulo + quadradinho
+    \draw[Black]
+
+        (A00) --++($({\signalAngle-90}:{\d*sin(\signalAngle-\antennaAngle)})$) coordinate (pontoTriangulo) -- (Ad0) -- (A00)
+
+        (pontoTriangulo)
+          ++(\signalAngle:0.125)
+        --++(\signalAngle-90:0.125)
+        --++(\signalAngle+180:0.125)
+    ;
+    % Arco do angulo beta
+    \draw[thin] \centerarc(Ad0)(180+\antennaAngle:180+\signalAngle:0.4) node[midway,anchor=north,inner sep=1pt] {$\beta_k$};
+
+    % Distânci d entre antenas
+    \draw[latex-latex]
+        ($(A00)+(0,1)$) -- ($(Ad0)+(0,1)$) node [midway, fill=white, circle, inner sep=1pt] {$d$}
+    ;
+
+    \newcommand\CircleRadius{3cm}
+    %   \draw (0,0) circle (\CircleRadius);
+    % special method of noting the position of a point
+    \coordinate (P) at (50:\CircleRadius);
+
+    \draw[decorate, decoration={brace, amplitude=5pt}, thin]
+    ($(pontoTriangulo)+({\signalAngle+90}:0.1)$)
+    -- coordinate (brace)
+    ($(Ad0)+({\signalAngle+90}:0.1)$)
+    ;
+
+    \draw (brace) ++({\signalAngle+90}:5pt)
+        node[anchor=east] {$\lambda \cdot \frac{\Delta\Phi_k}{2 \pi}$}
+    ;
+
+    \coordref[Black!25](3,3);
+
+    % \foreach \x in {0,60,...,300} {
+    %     \draw[thick] (\x:1 cm) -- (\x + 60:1 cm);
+
+    %     \draw (\x + 30:1.732 cm) node[Gray, circ]{};
+    %     \draw[Gray, dashed] (\x:1 cm) -- ++(\x: 0.9cm);
+    %     \draw[Gray, dotted]
+    %     %     % (\x:1 cm) arc (\x+240:\x+180:1cm)
+    %         (\x:1 cm) arc [start angle=\x+120, delta angle=110, radius=1cm]
+    %         (\x:1 cm) arc [start angle=\x+120, delta angle=-50, radius=1cm]
+    %     ;
+    % }
+
+    % \draw (0,0) node [circ] {} node [below left,font={\scriptsize\bfseries}] {BS};
+    % \draw[thick, densely dotted] (0,0) circle (1cm);
+
+    % \draw[-latex] (0,0) -- (0:1cm) node[midway, below] {$R_c$};
+    % \draw[-latex] (0,0) -- (90:0.866cm) node[midway, left] {$R$};
+
+\end{circuitikz}
+% }
+

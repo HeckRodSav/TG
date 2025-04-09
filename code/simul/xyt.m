@@ -1,4 +1,4 @@
-function xyt(POLYGON, NOISE, ATTENUATION, CHANGE_PHI, CHANGE_DISTANCE, CHANGE_DIRECTION, SAVE_GIF, SNR, range_step, N_antenas)
+function xyt(POLYGON, NOISE, ATTENUATION, CHANGE_PHI, CHANGE_DISTANCE, CHANGE_DIRECTION, SAVE_GIF, SAVE_DAT, SNR, range_step, N_antenas)
 
 	function ang_norm = normalize_angle(ang)
 		ang_norm = ang;
@@ -13,7 +13,7 @@ function xyt(POLYGON, NOISE, ATTENUATION, CHANGE_PHI, CHANGE_DISTANCE, CHANGE_DI
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	DEBUG = false;
-	SAVE_DAT = true;
+	% SAVE_DAT = false;
 
 	% POLYGON = true;
 

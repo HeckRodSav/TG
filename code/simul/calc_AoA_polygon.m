@@ -78,7 +78,7 @@ function return_struct = calc_AoA_polygon(
 
 
 	% Fazer "votacao" de angulo escolhido
-	range_angle_alt = pi/(4*N_antenas);
+	range_angle_alt = pi/(2*(N_antenas+1));
 
 	angle_vector_alt = [delta_A_x_B delta_B_x_A];
 	angle_vector_alt = [...
@@ -87,7 +87,9 @@ function return_struct = calc_AoA_polygon(
 		(angle_vector_alt((2*pi)<angle_vector_alt)-(2*pi)) ...
 	]; % Normalizar vetor de angulos entre 0 e 2 pi
 
-	angle_vector_round_alt = round(angle_vector_alt.*(range_angle_alt*10))./(range_angle_alt*10);
+	% angle_vector_round_alt = round(angle_vector_alt.*(range_angle_alt*100))./(range_angle_alt*100);
+	% angle_vector_round_alt = round(angle_vector_alt.*100)./(100);
+	angle_vector_round_alt = round(angle_vector_alt./range_angle_alt).*range_angle_alt;
 	% rad2deg(angle_vector_round_alt)
 	target_angle_alt = mode(angle_vector_round_alt);
 	% rad2deg(target_angle_alt)

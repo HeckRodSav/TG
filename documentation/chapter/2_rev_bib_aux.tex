@@ -1,3 +1,135 @@
+\subsection{AoA aux}
+
+
+Analisando a defasagem de sinal \ac{RF} em um conjunto de antenas, é possível estimar seu \acf{AoA}, essa técnica pode ser utilizada para determinar a direção do emissor em relação à matriz de antenas utilizada.
+Baseando-se em dados como a distância entre as antenas, o comprimento de onda $\lambda$ do sinal e a velocidade da luz no meio, usualmente tomada como $c = \SI{299792458,6 \pm 0,3}{\metre\per\second}$ no ar \cite{jennings1987continuity, bensky2016wireless, horst2021localization}.
+A \autoref{eq:wavelength} apresenta a relação do comprimento de onda $\lambda$ com a frequência $f$, a frequência angular $\omega$ e a velocidade da luz $c$.
+
+\begin{equation} \label{eq:wavelength} % Comprimento de onda
+    \lambda = \frac{c}{f} = \frac{2\pi \cdot c}{\omega}
+\end{equation}
+
+Se um emissor de sinal estiver distante o suficiente, é possível considerar que a frente de onda tem um comportamento planar, essa característica simplifica as operações envolvidas.
+A distância de Fraunhofer ($d_F$) é a mínima para essa condição, que define o início da região de \textit{far-field}, conforme apresentado na \autoref{eq:fraunhofer}, onde $D$ é a maior dimensão da antena \cite{balanis2016antenna}.
+Tomando $D = 2  \lambda$, para uma antena de dipolo, obtém-se $d_F = 8 \lambda$.
+A \autoref{fig:plana_0} ilustra o comportamento planar de uma frente de onda, com destaque na distância $d_F$.
+
+\begin{equation} \label{eq:fraunhofer}
+    d_F = \frac{2 \cdot D^2}{\lambda} \quad \Rightarrow \quad d_F = \frac{2 \cdot \left(2 \cdot \lambda \right)^2}{\lambda} = 8 \lambda
+\end{equation}
+
+\begin{figure}[htpb]
+    \centering
+    \caption{Característica de frente de onda a cada $\lambda$ a partir da antena emissora.}
+    \input{../pictures/plana_0}
+    % \includegraphics{../pictures/plana_0.pdf}
+    \caption*{Fonte: Autor.}
+    \label{fig:plana_0}
+\end{figure}
+
+
+Tomando agora um par de antenas separadas por uma distância fixa $d$, torna-se viável fazer a análise trigonométrica entre as antenas e a frente de onda que chega, onde essa distância $d$ será a hipotenusa do triângulo.
+A \autoref{fig:AoA} apresenta a disposição das antenas em quatro casos de chegada de sinal \ac{RF}.
+Para realizar a análise, é necessário conhecer uma segunda dimensão do triângulo retângulo envolvido, esta é obtida analisando a defasagem entre o sinal das antenas, conforme apresentado na \autoref{eq:defasagem}.
+
+
+\begin{equation} \label{eq:defasagem} % Relação trigonometrica de defasagem e angulo do sinal
+    d \cdot \cos\left(\pm\beta\right) = \lambda \cdot \frac{\Delta\Phi}{2 \pi}
+\end{equation}
+
+
+É importante ressaltar que um sistemas com um único par de antenas não é capaz de determinar completamente o \ac{AoA}, já que o valor calculado de $\beta$ é igual para casos simétricos, a relação é apresentada nas Figuras \ref{fig:AoA:1} e \ref{fig:AoA:2}.
+Existem ainda dois casos notáveis, onde o sinal chega alinhado com o par de antenas ou perpendicular a elas, apresentados respectivamente nas Figuras \ref{fig:AoA:3} e \ref{fig:AoA:4}.
+
+\begin{figure}
+    \caption{\ac{AoA} ($\Theta$) com par de antenas em diversas direções equivalentes, sistema com ângulo $\alpha=\SI{20}{\degree}$.}
+    \label{fig:AoA}
+
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$\Theta=\SI{60}{\degree}$, $\beta=\SI{40}{\degree}$}
+        \input{../pictures/AoA_1_new}
+        % \includegraphics{../pictures/AoA_1.pdf}
+        \label{fig:AoA:1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$\Theta=\SI{-20}{\degree}$, $\beta=\SI{40}{\degree}$}
+        \input{../pictures/AoA_2_new}
+        % \includegraphics{../pictures/AoA_2.pdf}
+        \label{fig:AoA:2}
+    \end{subfigure}
+    \hfill
+
+    \vspace{\floatsep}
+
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$\Theta=\SI{110}{\degree}$, $\beta=\SI{90}{\degree}$}
+        \input{../pictures/AoA_3_new}
+        % \includegraphics{../pictures/AoA_3.pdf}
+        \label{fig:AoA:3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$\Theta=\SI{20}{\degree}$, $\beta=\SI{0}{\degree}$}
+        \input{../pictures/AoA_4_new}
+        % \includegraphics{../pictures/AoA_4.pdf}
+        \label{fig:AoA:4}
+    \end{subfigure}
+    \hfill
+
+    \caption*{Fonte: Autor.}
+\end{figure}
+
+A escolha da distância $d$ entre as antenas deve ser feita de forma a otimizar a resolução da medida de defasagem, com a maior distância possível. Porém é necessário evitar ambiguidades na análise, como o sinal é periódico, o valor se repetirá a cada $\lambda$, e terá valores simétricos quando $d > \sfrac{\lambda}{2}$, ilustrado na \autoref{fig:AoA_d:fail}.
+Adota-se então $d=\sfrac{\lambda}{2}$, conforme apresentado na \autoref{fig:AoA_d:ok} \cite{bensky2016wireless, horst2021localization}.
+
+\begin{figure}
+    \caption{Diferentes valores para $d$.}
+    \label{fig:AoA_d}
+
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$d > \sfrac{\lambda}{2}$}
+        % \input{../pictures/AoA_0_fail}
+        \includegraphics{../pictures/AoA_0_fail.pdf}
+        \label{fig:AoA_d:fail}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \caption{$d = \sfrac{\lambda}{2}$}
+        % \input{../pictures/AoA_0}
+        \includegraphics{../pictures/AoA_0.pdf}
+        \label{fig:AoA_d:ok}
+    \end{subfigure}
+    \hfill
+
+    \caption*{Fonte: Autor.}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{figure}[H]
     \centering
@@ -11,9 +143,6 @@
     \caption{Agora sim}
 \end{figure}
 
-\begin{equation} % Comprimento de onda
-    \lambda = \frac{c}{f} = \frac{2\pi \cdot c}{\omega}
-\end{equation}
 
 \begin{equation} % Distância entre par de antenas
     d = \frac{\lambda}{2}
@@ -36,10 +165,6 @@
 
 \begin{equation} % Período do sinal
     T = \frac{2\pi}{\omega} = \frac{1}{f}
-\end{equation}
-
-\begin{equation} % Relação trigonometrica de defasagem e angulo do sinal
-    d \cdot \cos\left(\beta\right) = \lambda \cdot \frac{\Delta\Phi}{2 \pi}
 \end{equation}
 
 \begin{equation} % In phase
@@ -78,11 +203,12 @@
 \end{equation}
 
 \begin{equation} % range_angle
-    \delta = \frac{\pi}{4\cdot N_\text{ant}}
+    \delta = \frac{\pi}{2 \cdot \left( 1 + N_\text{ant} \right)}
 \end{equation}
 
 \begin{equation} % Angulos normalizados
-    \Theta_{\left\lfloor\bullet\right\rceil} = \left\{\frac{\left\lfloor\theta\cdot \delta\cdot 10 \right\rceil}{\delta\cdot 10} ~\middle\vert~ \forall \theta \in \Theta  \right\}
+    \Theta_{\left\lfloor\bullet\right\rceil} =
+    \left\{\left\lfloor\frac{\theta}{\delta}\right\rceil\cdot\delta ~\middle\vert~ \forall \theta \in \Theta  \right\}
 \end{equation}
 
 \begin{equation} % Moda entre angulos normalizados
@@ -100,12 +226,18 @@
 
 \begin{figure}[H]
     \centering
-    \input{../pictures/graph2.tex}
+    \input{../pictures/simul_POLY_3_R_50.tex}
     \caption{Gráfico}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \input{../pictures/graph2_copy.tex}
+    \input{../pictures/simul_POLY_3_R_50_SNR_1_ATT.tex}
+    \caption{Gráfico}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{../pictures/simul_POLY_3_R_50_SNR_1.tex}
     \caption{Gráfico}
 \end{figure}

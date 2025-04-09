@@ -29,11 +29,11 @@
         \draw[#1] (sysref) node{$+$}
     }
 
-    \coordinate (bottomleft) at (-6,-3.5);
-    \coordinate (topright) at (6,3.5);
+    \coordinate (bottomleft) at (-6,-3);
+    \coordinate (topright) at (6,3);
 
 
-    \draw[Red,dashed] (bottomleft) rectangle (topright);
+    % \draw[Red,dashed] (bottomleft) rectangle (topright);
     \clip (bottomleft) rectangle (topright);
 
     \coordinate (O) at (0,0);

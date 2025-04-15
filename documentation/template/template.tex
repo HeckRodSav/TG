@@ -64,6 +64,7 @@
         \raggedbottom % Corrige espaçamento de paragrafo
 
         \usepackage{microtype} % Ajusta detalhes menores nos espaçamentos da página para ficar mais agradável
+        \usepackage{soul} % Hifenização para espaçamento de letras, sublinhado e muito mais
 
     % Decorações da página
         \usepackage{fancyhdr} % Cabeçalhos e rodapés em páginas
@@ -588,7 +589,9 @@
 
 % Referência cruzada e links
 
-    \usepackage[hidelinks]{hyperref} % Links no documento
+    % \usepackage[hidelinks]{hyperref} % Links no documento
+    \usepackage{pdfcomment} % Colocar comentários flutuantes no PDF, já carrega hyperref
+    \hypersetup{hidelinks}
 
     \usepackage{nameref} % Referenciar entidades por nome
 
@@ -604,7 +607,8 @@
                 list/name={\centerline{Abreviaturas e Siglas}},
                 patch/longtable=false,
                 list/template = longtable,
-                templates/colspec={>{\bfseries}lp{.85\textwidth}}
+                templates/colspec={>{\bfseries}lp{.85\textwidth}},
+                pdfcomments/use = true,
             }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

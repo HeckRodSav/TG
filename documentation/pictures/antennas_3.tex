@@ -29,8 +29,8 @@
         \draw[#1] (sysref) node{$+$}
     }
 
-    \coordinate (bottomleft) at (-6,-3);
-    \coordinate (topright) at (6,3);
+    \coordinate (bottomleft) at (-3,-3);
+    \coordinate (topright) at (3,3);
 
 
     % \draw[Red,dashed] (bottomleft) rectangle (topright);
@@ -43,9 +43,9 @@
 
 	\draw[densely dotted] (O) circle (\RhoAntennas);
 
-    \draw[thick, cmyk_G] (O) ++(1*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A1) {} node [above right] {$A_{k+2}$};
-    \draw[thick, cmyk_B] (O) ++(2*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A2) {} node [above left] {$A_{k}$};
-    \draw[thick, cmyk_R] (O) ++(3*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A3) {} node [below] {$A_{k+1}$};
+    \draw[thick, cmyk_G] (O) ++(1*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A1) {} node [above right] {$A_{1}$};
+    \draw[thick, cmyk_B] (O) ++(2*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A2) {} node [above left] {$A_{2}$};
+    \draw[thick, cmyk_R] (O) ++(3*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A3) {};
 
 	\coordinate (A1_2) at ($(A1)!0.5!(A2)$);
 
@@ -78,7 +78,7 @@
 	\node at (O) {\tiny\textbullet};
 
 	\draw
-		(O) ++(90:0.3) node[above right, inner sep=1.5pt] {$\textstyle \frac{\pi}{N_\text{ant}}$}
+		(O) ++(90:0.3) node[left, inner sep=1.5pt] {$\textstyle \frac{\pi}{N_\text{ant}}$}
 		\centerarc(O)(1*\AngleAntennas+\ShiftAngleAntennas:90:0.3)
 	;
 
@@ -108,7 +108,7 @@
         node[anchor=south, circle, inner sep=1pt] {$\sfrac{d}{2}$}
     ;
 
-    \coordref[Black!25](3.5,0);
+    % \coordref[Black!25](3.5,0);
 
 \end{circuitikz}
 % }

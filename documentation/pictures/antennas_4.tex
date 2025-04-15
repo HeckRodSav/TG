@@ -1,0 +1,118 @@
+% \resizebox{!}{0.7\textheight}{%
+\begin{circuitikz}[american, voltage shift=0.5, line width=0.5,every node/.style={font = {\footnotesize\bfseries}}]
+
+    \def\wavelength{8}
+    \pgfmathsetmacro\d{0.5*\wavelength}
+
+    \def\signalAngle{75}
+    \def\antennaAngle{120}
+
+    \def\closeRange{9}
+    \def\farRange{\closeRange+13}
+
+	\def\NAntennas{4}
+	\pgfmathsetmacro\AngleAntennas{360/\NAntennas}
+	\pgfmathsetmacro\ShiftAngleAntennas{-90+0.5*\AngleAntennas}
+
+	\pgfmathsetmacro\RhoAntennas{\d/(2*sin(180/\NAntennas))}
+
+    \def\centerarc(#1)(#2:#3:#4)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+    { ($(#1)+({#4*cos(#2)},{#4*sin(#2)})$) arc (#2:#3:#4) }
+
+    \def\coordref[#1](#2){%
+
+        \coordinate(sysref) at (#2);
+
+        \draw[#1, -latex] (sysref) ++(-0.4,-0.3) -- ++(0.9,0) node[midway, below]{$x$};
+        \draw[#1, -latex] (sysref) ++(-0.3,-0.4) -- ++(0,0.9) node[midway, left]{$y$};
+        \draw[#1, -latex] \centerarc(sysref)(-90:180:0.25);
+        \draw[#1] (sysref) node{$+$}
+    }
+
+    \coordinate (bottomleft) at (-3.5,-3.5);
+    \coordinate (topright) at (3.5,3.5);
+
+
+    % \draw[Red,dashed] (bottomleft) rectangle (topright);
+    \clip (bottomleft) rectangle (topright);
+
+    \coordinate (O) at (0,0);
+    \coordinate (sourceAntenna) at (\signalAngle:\closeRange*\wavelength);
+    % \draw [help lines, dashed] (bottomleft) grid (topright); % desenha grid
+    % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
+
+	\draw[densely dotted] (O) circle (\RhoAntennas);
+
+    \draw[thick, cmyk_G] (O) ++(1*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A1) {} node [above right] {$A_{1}$};
+    \draw[thick, cmyk_B] (O) ++(2*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A2) {} node [above left] {$A_{2}$};
+    \draw[thick, cmyk_R] (O) ++(3*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A3) {};
+    \draw[thick, cmyk_C] (O) ++(4*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A4) {};
+    % \draw[thick, cmyk_M] (O) ++(5*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A5) {};
+
+	\coordinate (A1_2) at ($(A1)!0.5!(A2)$);
+
+	\draw[Black!25, dotted]
+		(A1) --
+		(A4) --
+		(A3) --
+		(A2)
+	;
+
+	\draw[Black!50, densely dotted]
+		(O) --
+		(A2) --
+		(A1_2)
+	;
+
+	\draw
+		(A1) --
+		(O) --
+		(A1_2) --
+		(A1)
+	;
+
+	\draw
+         (A1_2)
+           ++(0:0.125)
+         --++(-90:0.125)
+         --++(+180:0.125)
+	;
+
+	\node at (O) {\tiny\textbullet};
+
+	\draw
+		(O) ++(90:0.3) node[left, inner sep=1.5pt] {$\textstyle \frac{\pi}{N_\text{ant}}$}
+		\centerarc(O)(1*\AngleAntennas+\ShiftAngleAntennas:90:0.3)
+	;
+
+
+    % Distânci d entre antenas
+    \draw[latex-latex]
+        ($(A1)+(0,1)$) -- ($(A2)+(0,1)$) node [midway, fill=white, circle, inner sep=1pt] {$d$}
+    ;
+
+    \draw[decorate, decoration={brace, amplitude=5pt}, thin]
+    ($(A1)+({1*\AngleAntennas+\ShiftAngleAntennas-90}:0.1)$)
+    -- coordinate (brace)
+    ($(O)+({1*\AngleAntennas+\ShiftAngleAntennas-90}:0.1)$)
+    ;
+
+    \draw (brace) ++({1*\AngleAntennas+\ShiftAngleAntennas-90}:5pt)
+        node[anchor=north west, circle, fill=white, inner sep=1pt] {$\rho$}
+    ;
+
+	\draw[decorate, decoration={brace, amplitude=5pt}, thin]
+    ($(A1_2)+({90}:0.1)$)
+    -- coordinate (brace)
+    ($(A1)+({90}:0.1)$)
+    ;
+
+    \draw (brace) ++({90}:5pt)
+        node[anchor=south, circle, inner sep=1pt] {$\sfrac{d}{2}$}
+    ;
+
+    % \coordref[Black!25](3.5,0);
+
+\end{circuitikz}
+% }
+

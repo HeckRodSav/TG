@@ -1,4 +1,5 @@
 \documentclass[12pt, openany]{report}
+% \documentclass[12pt, openany, showframe]{report}
 % \documentclass[12pt,showframe, openleft]{report}
 
 % https://titospadini.medium.com/sugestões-para-um-bom-trabalho-de-graduação-em-engenharia-81fcb0ae263d
@@ -9,15 +10,23 @@
 
 % \newcommand{\chapter}[1]{#1}
 
-\input{../acronyms}
 \bibliography{../reference.bib}
+\input{../acronyms}
+\input{../symbols}
 
 \begin{document}
+    \pagestyle{clear}
     \capa
+
+    \cleardoublepage
 
     \folhaDeRosto
 
+    \cleardoublepage
+
     \folhaAgradecimentos
+
+    \cleardoublepage
 
     % \folhaDeAprovacao
     \begin{abstract}%
@@ -35,6 +44,8 @@
     % \end{otherlanguage}
 
     % \begingroup
+
+    \cleardoublepage
     \pagestyle{toc}
 
     \listoffigures
@@ -44,12 +55,21 @@
     \lstlistoflistings
 
     % \addcontentsline{toc}{chapter}{Abreviaturas e Siglas}
-    \noindent\printacronyms[display=all]
-    \clearpage
+    \noindent\printacronyms[%
+        display=all,
+        exclude={symbols, operators}
+    ]
+
+    \noindent\printacronyms[%
+        display=all,
+        name={\centerline{Símbolos e Operadores}},
+        include={symbols, operators}
+    ]
+    \cleardoublepage
 
     \tableofcontents % Sumário
     % \pagebreak
-    \clearpage
+    \cleardoublepage
 
     % \endgroup
 

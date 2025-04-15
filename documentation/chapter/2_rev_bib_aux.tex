@@ -1,54 +1,62 @@
-\subsection{AoA aux}
+\subsection{Estimar \acs{AoA} utilizando malha de antenas}
 
+Analisando a defasagem de um sinal de \ac{RF} incidindo em uma malha de antenas, é possível estimar seu \acf{AoA}, ou seja, determinar a direção do emissor do sinal em relação ao sistema.
+Este valor é calculado utilizando dados como a distância entre as antenas, o comprimento de onda \ac{lambda} do sinal e a velocidade da luz no meio, usualmente tomada como $\ac{c} = \SI{299792458,6 \pm 0,3}{\metre\per\second}$ no ar \cite{jennings1987continuity, bensky2016wireless, horst2021localization}.
+A \autoref{eq:wavelength} apresenta a relação do comprimento de onda \ac{lambda} com a frequência \ac{f}, a frequência angular \ac{omega} e a velocidade da luz \ac{c}.
 
-Analisando a defasagem de sinal \ac{RF} em um conjunto de antenas, é possível estimar seu \acf{AoA}, essa técnica pode ser utilizada para determinar a direção do emissor em relação à matriz de antenas utilizada.
-Baseando-se em dados como a distância entre as antenas, o comprimento de onda $\lambda$ do sinal e a velocidade da luz no meio, usualmente tomada como $c = \SI{299792458,6 \pm 0,3}{\metre\per\second}$ no ar \cite{jennings1987continuity, bensky2016wireless, horst2021localization}.
-A \autoref{eq:wavelength} apresenta a relação do comprimento de onda $\lambda$ com a frequência $f$, a frequência angular $\omega$ e a velocidade da luz $c$.
-
-\begin{equation} \label{eq:wavelength} % Comprimento de onda
-    \lambda = \frac{c}{f} = \frac{2\pi \cdot c}{\omega}
+% Comprimento de onda
+\begin{equation} \label{eq:wavelength}
+    \ac{lambda} = \frac{\ac{c}}{\ac{f}} = \frac{2\pi \cdot \ac{c}}{\ac{omega}}
 \end{equation}
 
-Se um emissor de sinal estiver distante o suficiente, é possível considerar que a frente de onda tem um comportamento planar, essa característica simplifica as operações envolvidas.
-A distância de Fraunhofer ($d_F$) é a mínima para essa condição, que define o início da região de \textit{far-field}, conforme apresentado na \autoref{eq:fraunhofer}, onde $D$ é a maior dimensão da antena \cite{balanis2016antenna}.
-Tomando $D = 2  \lambda$, para uma antena de dipolo, obtém-se $d_F = 8 \lambda$.
-A \autoref{fig:plana_0} ilustra o comportamento planar de uma frente de onda, com destaque na distância $d_F$.
+% {Distância mínima}
+
+Se um emissor de sinal estiver suficientemente distante, é possível considerar que a frente de onda tem um comportamento planar, essa característica simplifica as operações envolvidas.
+A distância de Fraunhofer (\ac{dFran}) é a mínima para essa condição, ela define o início da região de \textit{far-field}, conforme apresentado na \autoref{eq:fraunhofer}, onde \ac{D} é a maior dimensão da antena emissora \cite{balanis2016antenna}.
+Tomando $ \ac{D} = 2 \ac{lambda}$, para uma antena de dipolo, obtém-se $\ac{dFran} = 8 \ac{lambda} $.
+A \autoref{fig:plana_0} ilustra o comportamento planar de uma frente de onda, com destaque na distância \ac{dFran}.
 
 \begin{equation} \label{eq:fraunhofer}
-    d_F = \frac{2 \cdot D^2}{\lambda} \quad \Rightarrow \quad d_F = \frac{2 \cdot \left(2 \cdot \lambda \right)^2}{\lambda} = 8 \lambda
+    \ac{dFran} = \frac{2 \cdot \ac{D}^2}{\ac{lambda}} \quad \Rightarrow \quad \ac{dFran} = \frac{2 \cdot \left(2 \cdot \ac{lambda} \right)^2}{\ac{lambda}} = 8 \ac{lambda}
 \end{equation}
 
-\begin{figure}[htpb]
+\begin{figure}[htbp]
     \centering
-    \caption{Característica de frente de onda a cada $\lambda$ a partir da antena emissora.}
+    \caption{Característica de frente de onda a cada \ac{lambda} a partir da antena emissora, destaque para $\ac{dFran} = 8 \ac{lambda}$.}
     \input{../pictures/plana_0}
     % \includegraphics{../pictures/plana_0.pdf}
     \caption*{Fonte: Autor.}
     \label{fig:plana_0}
 \end{figure}
 
+% {Trigonometria}
 
-Tomando agora um par de antenas separadas por uma distância fixa $d$, torna-se viável fazer a análise trigonométrica entre as antenas e a frente de onda que chega, onde essa distância $d$ será a hipotenusa do triângulo.
-A \autoref{fig:AoA} apresenta a disposição das antenas em quatro casos de chegada de sinal \ac{RF}.
-Para realizar a análise, é necessário conhecer uma segunda dimensão do triângulo retângulo envolvido, esta é obtida analisando a defasagem entre o sinal das antenas, conforme apresentado na \autoref{eq:defasagem}.
+Tomando agora um par de antenas separadas por uma distância fixa \ac{d}, torna-se viável fazer a análise trigonométrica entre as antenas e a frente de onda incidente, onde essa distância \ac{d} será a hipotenusa do triângulo retângulo formado.
+Para realizar esta análise, ainda é necessário conhecer uma segunda dimensão do triângulo retângulo envolvido, esta é obtida da defasagem \ac{DeltaPhi} dos sinais indicentes nas antenas, conforme apresentado na \autoref{eq:defasagem}.
+A \autoref{fig:AoA} apresenta quatro casos de chegada do sinal de \ac{RF} em um par de antenas.
 
 
-\begin{equation} \label{eq:defasagem} % Relação trigonometrica de defasagem e angulo do sinal
-    d \cdot \cos\left(\pm\beta\right) = \lambda \cdot \frac{\Delta\Phi}{2 \pi}
+% Relacao trigonometrica de defasagem e angulo do sinal
+\begin{equation} \label{eq:defasagem}
+    \ac{d} \cdot
+    \cos\left(\ac{betak}\right) =
+    \ac{lambda} \cdot
+    \frac{\ac{DeltaPhi}}{2 \pi}
 \end{equation}
 
 
-É importante ressaltar que um sistemas com um único par de antenas não é capaz de determinar completamente o \ac{AoA}, já que o valor calculado de $\beta$ é igual para casos simétricos, a relação é apresentada nas Figuras \ref{fig:AoA:1} e \ref{fig:AoA:2}.
-Existem ainda dois casos notáveis, onde o sinal chega alinhado com o par de antenas ou perpendicular a elas, apresentados respectivamente nas Figuras \ref{fig:AoA:3} e \ref{fig:AoA:4}.
+É importante ressaltar que um sistemas com um único par de antenas não é suficiente para determinar completamente o \ac{thetaAoA}, já que o valor calculado de \ac{betak} é igual para casos simétricos em relação ao par de antenas, criando um caso de ambiguidade.
+As Figuras \ref{fig:AoA:1} e \ref{fig:AoA:2} apresentam exemplos de diferentes valores de \ac{thetaAoA} para o mesmo valor de \ac{betak}.
+Existem ainda dois casos notáveis, onde o sinal chega alinhado ao par de antenas ou perpendicular a elas, apresentados respectivamente nas Figuras \ref{fig:AoA:3} e \ref{fig:AoA:4}.
 
 \begin{figure}
-    \caption{\ac{AoA} ($\Theta$) com par de antenas em diversas direções equivalentes, sistema com ângulo $\alpha=\SI{20}{\degree}$.}
+    \caption{Diferentes valores de \ac{thetaAoA} para sinal incidente em par de antenas, sistema com ângulo $\ac{alphak}=\SI{20}{\degree}$ em relação à referência.}
     \label{fig:AoA}
 
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$\Theta=\SI{60}{\degree}$, $\beta=\SI{40}{\degree}$}
+        \caption{$ \ac{thetaAoA} = \SI{60}{\degree} $, $ \ac{betak} = \SI{40}{\degree} $}
         \input{../pictures/AoA_1_new}
         % \includegraphics{../pictures/AoA_1.pdf}
         \label{fig:AoA:1}
@@ -56,7 +64,7 @@ Existem ainda dois casos notáveis, onde o sinal chega alinhado com o par de ant
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$\Theta=\SI{-20}{\degree}$, $\beta=\SI{40}{\degree}$}
+        \caption{$ \ac{thetaAoA} = \SI{-20}{\degree} $, $ \ac{betak} = \SI{40}{\degree} $}
         \input{../pictures/AoA_2_new}
         % \includegraphics{../pictures/AoA_2.pdf}
         \label{fig:AoA:2}
@@ -68,7 +76,7 @@ Existem ainda dois casos notáveis, onde o sinal chega alinhado com o par de ant
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$\Theta=\SI{110}{\degree}$, $\beta=\SI{90}{\degree}$}
+        \caption{ $\ac{thetaAoA}=\SI{110}{\degree} $, $ \ac{betak} = \SI{90}{\degree} $}
         \input{../pictures/AoA_3_new}
         % \includegraphics{../pictures/AoA_3.pdf}
         \label{fig:AoA:3}
@@ -76,7 +84,7 @@ Existem ainda dois casos notáveis, onde o sinal chega alinhado com o par de ant
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$\Theta=\SI{20}{\degree}$, $\beta=\SI{0}{\degree}$}
+        \caption{$ \ac{thetaAoA}=\SI{20}{\degree} $, $ \ac{betak} = \SI{0}{\degree} $}
         \input{../pictures/AoA_4_new}
         % \includegraphics{../pictures/AoA_4.pdf}
         \label{fig:AoA:4}
@@ -86,27 +94,29 @@ Existem ainda dois casos notáveis, onde o sinal chega alinhado com o par de ant
     \caption*{Fonte: Autor.}
 \end{figure}
 
-A escolha da distância $d$ entre as antenas deve ser feita de forma a otimizar a resolução da medida de defasagem, com a maior distância possível. Porém é necessário evitar ambiguidades na análise, como o sinal é periódico, o valor se repetirá a cada $\lambda$, e terá valores simétricos quando $d > \sfrac{\lambda}{2}$, ilustrado na \autoref{fig:AoA_d:fail}.
-Adota-se então $d=\sfrac{\lambda}{2}$, conforme apresentado na \autoref{fig:AoA_d:ok} \cite{bensky2016wireless, horst2021localization}.
+% {Distância entre antenas}
 
-\begin{figure}
-    \caption{Diferentes valores para $d$.}
+A escolha da distância \ac{d} entre as antenas deve ser feita de forma a otimizar a resolução da medida de defasagem, com a maior distância possível. Porém é necessário evitar ambiguidades na análise, por se tratar de um sinal periódico, o valor se repetirá a cada \ac{lambda}, e terá valores simétricos quando $\ac{d} > \sfrac{\ac{lambda}}{2}$, ilustrado na \autoref{fig:AoA_d:fail}.
+Adota-se então $\ac{d}=\sfrac{\ac{lambda}}{2}$, conforme apresentado na \autoref{fig:AoA_d:ok} e \autoref{eq:distancia} \cite{bensky2016wireless, horst2021localization}.
+
+\begin{figure}[htbp]
+    \caption{Diferentes valores para \ac{d}.}
     \label{fig:AoA_d}
 
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$d > \sfrac{\lambda}{2}$}
-        % \input{../pictures/AoA_0_fail}
-        \includegraphics{../pictures/AoA_0_fail.pdf}
+        \caption{$\ac{d} > \sfrac{\ac{lambda}}{2}$}
+        \input{../pictures/AoA_0_fail}
+        % \includegraphics{../pictures/AoA_0_fail.pdf}
         \label{fig:AoA_d:fail}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$d = \sfrac{\lambda}{2}$}
-        % \input{../pictures/AoA_0}
-        \includegraphics{../pictures/AoA_0.pdf}
+        \caption{$\ac{d} = \sfrac{\ac{lambda}}{2}$}
+        \input{../pictures/AoA_0}
+        % \includegraphics{../pictures/AoA_0.pdf}
         \label{fig:AoA_d:ok}
     \end{subfigure}
     \hfill
@@ -114,115 +124,227 @@ Adota-se então $d=\sfrac{\lambda}{2}$, conforme apresentado na \autoref{fig:AoA
     \caption*{Fonte: Autor.}
 \end{figure}
 
+\begin{equation} \label{eq:distancia} % Distancia entre par de antenas
+    \ac{d} = \frac{\ac{lambda}}{2}
+\end{equation}
 
+% % {Ambiguidade simétrica}
 
+Para contornar a ambiguidade de simetria, é possível adicionar mais antenas à malha.
+O conjunto de \ac{Nant} antenas deve respeitar a distância \ac{d} entre as antenas de um par, e pode ser disposto como um polígono regular com \ac{Nant} lados de tamanho \ac{d}, onde cada antena está em um vértice.
+A \autoref{fig:antennas} apresenta exemplos dessa disposição de antenas, note que valores pares de \ac{Nant} implicam que existirão pares de antenas paralelos, que resultam em leituras redundantes.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \input{../pictures/antennas}
-    \caption{Agora sim 0}
+    \caption{Diferentes distribuições de antenas.}
+    \label{fig:antennas}
+
+    \hfill
+    \begin{subfigure}[c]{0.4\textwidth}
+        \centering
+        \caption{$ \ac{Nant} = 3 $.}
+        \input{../pictures/antennas_3}
+        \label{fig:antennas:3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[c]{0.575\textwidth}
+        \centering
+        \caption{$ \ac{Nant} = 6 $.}
+        \input{../pictures/antennas_6}
+        \label{fig:antennas:6}
+    \end{subfigure}
+    \hfill
+
+    \vspace{\floatsep}
+
+    \hfill
+    \begin{subfigure}[c]{0.45\textwidth}
+        \centering
+        \caption{$ \ac{Nant} = 4 $.}
+        \input{../pictures/antennas_4}
+        \label{fig:antennas:4}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[c]{0.5\textwidth}
+        \centering
+        \caption{$ \ac{Nant} = 5 $.}
+        \input{../pictures/antennas_5}
+        \label{fig:antennas:5}
+    \end{subfigure}
+    \hfill
+
+    \caption*{Fonte: Autor.}
 \end{figure}
 
-\begin{figure}[H]
+A \autoref{eq:raio:poligono} descreve o raio \ac{rho} do circulo que circunscreve o polígono regular de \ac{Nant} antenas.
+Este raio equivale à distância das antenas em relação ao ponto central do polígono.
+
+\begin{equation} \label{eq:raio:poligono} % Diametro do circulo que circunscreve poligono de antenas
+	\ac{rho} = \frac{\ac{d}}{2\cdot \sin\left(\frac{\pi}{\ac{Nant}}\right)}
+\end{equation}
+
+Cada antena é indentificada por um índice \ac{k}, conforme a \autoref{eq:ant:idx}, e tem sua coordenada espacial definida como um valor complexom descrito na \autoref{eq:ant:coord}.
+Estas coordenadas são definidas como números complexos para simplificar a análise do ângulo \ac{alphak} em que um par de antenas \ac{Ak} e $A_{k+1}$ se dispõe em relação à geometria do sistema, conforme a \autoref{eq:ant:angle}.
+
+\begin{equation} \label{eq:ant:idx} % Indices das antenas
+	\ac{k} = \left\{1, 2, \dotsc, \ac{Nant}\right\}
+\end{equation}
+
+% Coordenada da antena
+\begin{equation} \label{eq:ant:coord}
+	\ac{Ak} =
+    \ac{rho}
+    \cdot \exp\left(\ac{imath}\cdot \ac{k} \cdot \frac{2\pi}{\ac{Nant}}\right) =
+    \left( \operatorname{\mathcal{Re}}\left( \ac{Ak} \right), ~\operatorname{\mathcal{Im}}\left( \ac{Ak} \right) \right) =
+    \left( \ac{xk}, ~ \ac{yk} \right)
+\end{equation}
+
+% Angulo do par de antenas
+\begin{equation} \label{eq:ant:angle}
+	\ac{alphak} = \arg\left( \ac{Ak} - A_{k+1} \right)
+\end{equation}
+
+% {Calcular fase}
+
+Para calcular a fase em uma antena, é interessante representar o sinal recebido como um valor complexo.
+Uma forma de obter o complexo de fase consiste em analisar a correlação do sinal incidente \ac{w} com sinais de referência de mesma frequência que o sinal de interesse, em um período completo, \autoref{eq:periodo}.
+Os valors \ac{Ik} (em fase) e \ac{Qk} (em quadratura) são calculados respectivamente pela correlação com um cosseno, conforme \autoref{eq:in_phase}, e com um seno, conforme \autoref{eq:out_of_phase}.
+A \autoref{eq:Z} apresenta o valor complexo \ac{Zk} de fase para a antena de \ac{Ak}.
+
+
+% Periodo do sinal
+\begin{equation} \label{eq:periodo}
+    \ac{T} = \frac{2\pi}{\ac{omega}} = \frac{1}{\ac{f}}
+\end{equation}
+
+% In phase
+\begin{equation} \label{eq:in_phase}
+    \ac{Ik} =
+    \int\limits_0^{\ac{T}} \cos\left(\ac{omega} \cdot\tau\right)
+    \cdot \ac{w}\left( \tau, ~\ac{xk}, ~\ac{yk} \right) \partial \tau
+\end{equation}
+
+% Out of phase
+\begin{equation} \label{eq:out_of_phase}
+    \ac{Qk} =
+    \int\limits_0^{\ac{T}} \sin\left(\ac{omega}\cdot\tau\right)
+    \cdot \ac{w}\left( \tau, ~\ac{xk}, ~\ac{yk} \right) \partial \tau
+\end{equation}
+
+% Fase na antena
+\begin{equation} \label{eq:Z}
+    \ac{Zk} =
+    \frac{\ac{omega}}{\pi}\cdot\left(\ac{Ik} + \ac{imath} \ac{Qk}\right)
+\end{equation}
+
+% {Calcular defasagem entre antenas}
+
+O cálculo de defasagem de sinal em um par de antenas consiste na análise de diferença de fase dos valores \ac{Zk} e $Z_{k+1}$ do par de antenas \ac{Ak} e $A_{k+1}$, conforme apresentado na \autoref{eq:dephase}.
+Obtido o valor de defasagem \ac{DeltaPhi} entre o par de antenas, finalmente é possível calcular o ângulo \ac{betak} através da \autoref{eq:beta}, note que a simplificação somente é possível com valor de $\ac{d} = \sfrac{\ac{lambda}}{2}$.
+A \autoref{fig:AoA:geometria} apresenta a geometria do sistema destacando os valores de interesse na análise de um dos pares de antenas, tomando $\ac{Nant} = 3$.
+
+% Defasagem entre antenas
+\begin{equation} \label{eq:dephase}
+    \ac{DeltaPhi} =
+    \ac{Phik} - \Phi_{k+1} =
+    \arg\left(\ac{Zk}\right) - \arg\left(Z_{k+1}\right) =
+    \arg\left(\ac{Zk} \cdot \overline{Z_{k+1}}\right)
+\end{equation}
+
+% Angulo do sinal em relação ao par de antenas
+\begin{equation} \label{eq:beta}
+    \ac{betak} = \arccos\left(\frac{\cancel{\ac{lambda}}}{\cancel{d}}\cdot\frac{\ac{DeltaPhi}}{\cancel{2}\pi}\right)
+\end{equation}
+
+\begin{figure}[htbp]
     \centering
-    \input{../pictures/AoA_2_alt}
-    \caption{Agora sim}
+    \caption{Geometria geral do sistema com $\ac{Nant} = 3$.}
+    \input{../pictures/AoA_geometria}
+    \label{fig:AoA:geometria}
+    \caption*{Fonte: Autor.}
 \end{figure}
 
+Para cada par de antenas, são calculados dois valores \ac{thetak} conforme a \autoref{eq:theta:pmk}, equivalentes a dois valores possíveis para o \ac{thetaAoA}.
+A \autoref{eq:theta:conj} define o conjunto \ac{Theta} dos valores aferidos de \ac{thetak} para todos os pares de antenas do sistema, este conjunto sempre terá $2 \cdot \ac{Nant}$ elementos, dos quais, metade estão próximos do real valor de \ac{thetaAoA} e os demais são valores distintos do objetivo e entre si.
 
-\begin{equation} % Distância entre par de antenas
-    d = \frac{\lambda}{2}
+% Conjunto de angulos calculados
+\begin{equation} \label{eq:theta:pmk}
+	\ac{thetak} = \ac{alphak}\pm \ac{betak}
 \end{equation}
 
-\begin{equation} % Diâmetro do circulo que circunscreve poligono de antenas
-	\rho = \frac{d}{2\cdot \sin\left(\frac{\pi}{N_\text{ant}}\right)}
+% Conjunto de angulos calculados
+\begin{equation} \label{eq:theta:conj}
+	\ac{Theta} = \left\{\ac{thetak} ~\middle\vert~ \forall \ac{k}\right\}
 \end{equation}
 
-\begin{equation} % Índices das antenas
-	k = \left\{1, 2, \dotsc, N_\text{ant}\right\}
+% {Escolha dos possíveis angulos}
+
+Com os possíveis valores de \ac{thetaAoA} obtidos, é necessário estimar qual o valor correto.
+Para isso, é criada uma lista auxiliar \ac{ThetaQuanti}, quantizando os valores de \ac{Theta} em intervalos de tamanho \ac{delta}, descrito na \autoref{eq:delta:range}.
+A \autoref{eq:theta:quant} descreve a operação de quantização dos valores de \ac{Theta}, que, por se tratar de um cálculo auxiliar, utiliza-se o arredondamento para o inteiro mais próximo.
+A quantização implica que os valores de \ac{Theta} serão agrupados por faixas de largura \ac{delta}.
+
+% range_angle
+\begin{equation} \label{eq:delta:range}
+    \ac{delta} = \frac{\pi}{2 \cdot \left( 1 + \ac{Nant} \right)}
 \end{equation}
 
-\begin{equation} % Coordenada da antena
-	A_k =
-    \rho \cdot \exp\left(\imath\cdot k \cdot \frac{2\pi}{N_\text{ant}}\right) =
-    \left( x_{A_k},~ y_{A_k} \right) =
-    \left( \operatorname{\mathcal{Re}}\left( A_k \right), ~\operatorname{\mathcal{Im}}\left( A_k \right) \right)
+% Angulos normalizados
+\begin{equation} \label{eq:theta:quant}
+    \ac{ThetaQuanti} =
+    \left\{\left\lfloor\frac{\theta}{\ac{delta}}\right\rceil\cdot\ac{delta} ~\middle\vert~ \forall \theta \in \ac{Theta}  \right\}
 \end{equation}
 
-\begin{equation} % Período do sinal
-    T = \frac{2\pi}{\omega} = \frac{1}{f}
+Salvo casos com muito ruído, espera-se que alguns valores em \ac{ThetaQuanti} se repitam, partindo disso, calcula-se \ac{thetaMo}, a moda estatística destes valores, conforme \autoref{eq:theta:moda}.
+Este valor deverá estar próximo ao \ac{thetaAoA}, e será utilizado na filtragem dos valores aferidos em \ac{Theta}.
+
+% Moda entre angulos normalizados
+\begin{equation} \label{eq:theta:moda}
+    \ac{thetaMo} = \operatorname{\mathcal{M_o}}\left( \ac{ThetaQuanti}  \right)
 \end{equation}
 
-\begin{equation} % In phase
-    I_k = \int\limits_0^T \cos\left(\omega\cdot\tau\right) \cdot w\left( \tau, ~x_{A_k}, ~y_{A_k} \right) \partial \tau
+O conjunto \ac{ThetaFiltro} contém itens de \ac{Theta} que estejam ao redor do valor \ac{thetaMo} calculado, num intervalo de \ac{delta} para mais ou para menos, conforme \autoref{eq:theta:filtro}.
+
+
+% Filtra no intervalo
+\begin{equation} \label{eq:theta:filtro}
+    \ac{ThetaFiltro} = \left\{\theta \in \ac{Theta}  ~\middle\vert~
+    \ac{thetaMo} - \ac{delta} \leq \theta \leq \ac{thetaMo} + \ac{delta}\right\}
 \end{equation}
 
-\begin{equation} % Out of phase
-    Q_k = \int\limits_0^T \sin\left(\omega\cdot\tau\right) \cdot w\left( \tau, ~x_{A_k}, ~y_{A_k} \right) \partial \tau
+Finalmente obtém-se o valor de \ac{thetaAoA} pela mediana dos valores em \ac{ThetaFiltro}, conforme \autoref{eq:theta:mediana}.
+
+% Mediana
+\begin{equation} \label{eq:theta:mediana}
+    \ac{thetaAoA} = \widetilde{\ac{ThetaFiltro}}
 \end{equation}
 
-\begin{equation} % Fase na antena
-    Z_k = \frac{\omega}{\pi}\cdot\left(I_k + \imath Q_k\right)
-\end{equation}
+\pagebreak
 
-\begin{equation} % Defasagem entre antenas
-    \Delta\Phi_{k} =
-    \Phi_{k} - \Phi_{k+1} =
-    \arg\left(Z_{k}\right) - \arg\left(Z_{k+1}\right) =
-    \arg\left(Z_{k} \cdot \overline{Z_{k+1}}\right)
-\end{equation}
 
-\begin{equation} % Angulo do sinal em relação ao par de antenas
-    \beta_{k} = \pm \arccos\left(\frac{\cancel{\lambda}}{\cancel{d}}\cdot\frac{\Delta\Phi_{k}}{\cancel{2}\pi}\right)
-\end{equation}
 
-\begin{equation} % Angulo do par de antenas
-	\alpha_{k} = \arg\left( A_{k} - A_{k+1} \right)
-\end{equation}
 
-\begin{equation} % Conjunto de angulos calculados
-	\theta_{\pm k} = \alpha_{k}\pm \beta_{k}
-\end{equation}
 
-\begin{equation} % Conjunto de angulos calculados
-	\Theta = \left\{\theta_{\pm k}=\alpha_{k}\pm \beta_{k} ~\middle\vert~ \forall k\right\}
-\end{equation}
 
-\begin{equation} % range_angle
-    \delta = \frac{\pi}{2 \cdot \left( 1 + N_\text{ant} \right)}
-\end{equation}
 
-\begin{equation} % Angulos normalizados
-    \Theta_{\left\lfloor\bullet\right\rceil} =
-    \left\{\left\lfloor\frac{\theta}{\delta}\right\rceil\cdot\delta ~\middle\vert~ \forall \theta \in \Theta  \right\}
-\end{equation}
 
-\begin{equation} % Moda entre angulos normalizados
-    \theta_\mathcal{M_o} = \operatorname{\mathcal{M_o}}\left( \Theta_{\left\lfloor\bullet\right\rceil}  \right)
-\end{equation}
 
-\begin{equation} % Filtra no intervalo
-    \Theta_\text{F} = \left\{\theta \in \Theta  ~\middle\vert~
-    \theta_\mathcal{M_o} - \delta \leq \theta \leq \theta_\mathcal{M_o} + \delta\right\}
-\end{equation}
 
-\begin{equation} % Mediana
-    \theta_\text{AoA} = \widetilde{\Theta_\text{F}}
-\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{figure}[H]
     \centering

@@ -16,27 +16,27 @@
         \coordinate (O) at (0,0);
         \coordinate (antenna) at (\antennaAngle:\closeRange*\wavelength);
         % \draw [help lines, dashed] (-3,-3) grid (3,3); % desenha grid
-        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0) 
-        
+        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
+
         % \draw (-6.8,-4) rectangle (6.8,4);
         \clip (-1,-1.1) rectangle (5,1.1);
 
-        
+
         \draw[thick]
-            (0,0)  node[Green, dinantenna] (A00) {}
+            (0,0)  node[cmyk_B, dinantenna] (A00) {}
             % (0,\d) node[Blue,  dinantenna] (A0d) {}
-            (0.8*\d,0) node[Red,   dinantenna] (Ad0) {}
+            (0.8*\d,0) node[cmyk_R,   dinantenna] (Ad0) {}
         ;
 
         % \draw[Goldenrod, domain=-3:3, samples=100] plot[shift={(-1,-1)}, rotate=30]({\x},{sin(\x * pi * 2 / \wavelength r)});
-        \draw[Goldenrod, domain=-3:6, samples=50] 
+        \draw[Goldenrod, domain=-3:6, samples=50]
             plot ({\x},{cos(\x * pi * 2 / \wavelength r)})
         ;
-        
-        \draw[Black, dashed, domain=-3:6, samples=2] 
+
+        \draw[Black, dashed, domain=-3:6, samples=2]
             plot[Black, thin, dashed, samples=2] (\x,0)
         ;
 
-            
+
     \end{circuitikz}
   % }

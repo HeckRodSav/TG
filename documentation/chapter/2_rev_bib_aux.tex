@@ -39,24 +39,24 @@ A \autoref{fig:AoA} apresenta quatro casos de chegada do sinal de \ac{RF} em um 
 % Relacao trigonometrica de defasagem e angulo do sinal
 \begin{equation} \label{eq:defasagem}
     \ac{d} \cdot
-    \cos\left(\ac{betak}\right) =
+    \cos\left(\textcolor{Purple}{\ac{betak}}\right) =
     \ac{lambda} \cdot
     \frac{\ac{DeltaPhi}}{2 \pi}
 \end{equation}
 
 
-É importante ressaltar que um sistemas com um único par de antenas não é suficiente para determinar completamente o \ac{thetaAoA}, já que o valor calculado de \ac{betak} é igual para casos simétricos em relação ao par de antenas, criando um caso de ambiguidade.
-As Figuras \ref{fig:AoA:1} e \ref{fig:AoA:2} apresentam exemplos de diferentes valores de \ac{thetaAoA} para o mesmo valor de \ac{betak}.
+É importante ressaltar que um sistemas com um único par de antenas não é suficiente para determinar completamente o \ac{thetaAoA}, já que o valor calculado de \textcolor{Purple}{\ac{betak}} é igual para casos simétricos em relação ao par de antenas, criando um caso de ambiguidade.
+As Figuras \ref{fig:AoA:1} e \ref{fig:AoA:2} apresentam exemplos de diferentes valores de \ac{thetaAoA} para o mesmo valor de \textcolor{Purple}{\ac{betak}}.
 Existem ainda dois casos notáveis, onde o sinal chega alinhado ao par de antenas ou perpendicular a elas, apresentados respectivamente nas Figuras \ref{fig:AoA:3} e \ref{fig:AoA:4}.
 
 \begin{figure}
-    \caption{Diferentes valores de \ac{thetaAoA} para sinal incidente em par de antenas, sistema com ângulo $\ac{alphak}=\SI{20}{\degree}$ em relação à referência.}
+    \caption{Diferentes valores de \ac{thetaAoA} para sinal incidente em par de antenas, sistema com ângulo $\textcolor{cmyk_M}{\ac{alphak}}=\SI{20}{\degree}$ em relação à referência.}
     \label{fig:AoA}
 
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$ \ac{thetaAoA} = \SI{60}{\degree} $, $ \ac{betak} = \SI{40}{\degree} $}
+        \caption{$ \ac{thetaAoA} = \SI{60}{\degree} $, $ \textcolor{Purple}{\ac{betak}} = \SI{40}{\degree} $}
         \input{../pictures/AoA_1_new}
         % \includegraphics{../pictures/AoA_1.pdf}
         \label{fig:AoA:1}
@@ -64,7 +64,7 @@ Existem ainda dois casos notáveis, onde o sinal chega alinhado ao par de antena
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$ \ac{thetaAoA} = \SI{-20}{\degree} $, $ \ac{betak} = \SI{40}{\degree} $}
+        \caption{$ \ac{thetaAoA} = \SI{-20}{\degree} $, $ \textcolor{Purple}{\ac{betak}} = \SI{40}{\degree} $}
         \input{../pictures/AoA_2_new}
         % \includegraphics{../pictures/AoA_2.pdf}
         \label{fig:AoA:2}
@@ -76,7 +76,7 @@ Existem ainda dois casos notáveis, onde o sinal chega alinhado ao par de antena
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{ $\ac{thetaAoA}=\SI{110}{\degree} $, $ \ac{betak} = \SI{90}{\degree} $}
+        \caption{ $\ac{thetaAoA}=\SI{110}{\degree} $, $ \textcolor{Purple}{\ac{betak}} = \SI{90}{\degree} $}
         \input{../pictures/AoA_3_new}
         % \includegraphics{../pictures/AoA_3.pdf}
         \label{fig:AoA:3}
@@ -84,7 +84,7 @@ Existem ainda dois casos notáveis, onde o sinal chega alinhado ao par de antena
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \caption{$ \ac{thetaAoA}=\SI{20}{\degree} $, $ \ac{betak} = \SI{0}{\degree} $}
+        \caption{$ \ac{thetaAoA}=\SI{20}{\degree} $, $ \textcolor{Purple}{\ac{betak}} = \SI{0}{\degree} $}
         \input{../pictures/AoA_4_new}
         % \includegraphics{../pictures/AoA_4.pdf}
         \label{fig:AoA:4}
@@ -180,11 +180,11 @@ A \autoref{eq:raio:poligono} descreve o raio \ac{rho} do circulo que circunscrev
 Este raio equivale à distância das antenas em relação ao ponto central do polígono.
 
 \begin{equation} \label{eq:raio:poligono} % Diametro do circulo que circunscreve poligono de antenas
-	\ac{rho} = \frac{\ac{d}}{2\cdot \sin\left(\frac{\pi}{\ac{Nant}}\right)}
+	\ac{rho} = \frac{\ac{d}}{2\cdot \sin\left(\displaystyle\frac{\pi}{\ac{Nant}}\right)}
 \end{equation}
 
 Cada antena é indentificada por um índice \ac{k}, conforme a \autoref{eq:ant:idx}, e tem sua coordenada espacial definida como um valor complexom descrito na \autoref{eq:ant:coord}.
-Estas coordenadas são definidas como números complexos para simplificar a análise do ângulo \ac{alphak} em que um par de antenas \ac{Ak} e $A_{k+1}$ se dispõe em relação à geometria do sistema, conforme a \autoref{eq:ant:angle}.
+Estas coordenadas são definidas como números complexos para simplificar a análise do ângulo \textcolor{cmyk_M}{\ac{alphak}} em que um par de antenas \textcolor{cmyk_B}{\ac{Ak}} e $\textcolor{cmyk_R}{A_{k+1}}$ se dispõe em relação à geometria do sistema, conforme a \autoref{eq:ant:angle}.
 
 \begin{equation} \label{eq:ant:idx} % Indices das antenas
 	\ac{k} = \left\{1, 2, \dotsc, \ac{Nant}\right\}
@@ -192,16 +192,16 @@ Estas coordenadas são definidas como números complexos para simplificar a aná
 
 % Coordenada da antena
 \begin{equation} \label{eq:ant:coord}
-	\ac{Ak} =
+	\textcolor{cmyk_B}{\ac{Ak}} =
     \ac{rho}
     \cdot \exp\left(\ac{imath}\cdot \ac{k} \cdot \frac{2\pi}{\ac{Nant}}\right) =
-    \left( \operatorname{\mathcal{Re}}\left( \ac{Ak} \right), ~\operatorname{\mathcal{Im}}\left( \ac{Ak} \right) \right) =
+    \left( \operatorname{\mathcal{Re}}\left( \textcolor{cmyk_B}{\ac{Ak}} \right), ~\operatorname{\mathcal{Im}}\left( \textcolor{cmyk_B}{\ac{Ak}} \right) \right) =
     \left( \ac{xk}, ~ \ac{yk} \right)
 \end{equation}
 
 % Angulo do par de antenas
 \begin{equation} \label{eq:ant:angle}
-	\ac{alphak} = \arg\left( \ac{Ak} - A_{k+1} \right)
+	\textcolor{cmyk_M}{\ac{alphak}} = \arg\left( \textcolor{cmyk_B}{\ac{Ak}} - \textcolor{cmyk_R}{A_{k+1}} \right)
 \end{equation}
 
 % {Calcular fase}
@@ -209,7 +209,7 @@ Estas coordenadas são definidas como números complexos para simplificar a aná
 Para calcular a fase em uma antena, é interessante representar o sinal recebido como um valor complexo.
 Uma forma de obter o complexo de fase consiste em analisar a correlação do sinal incidente \ac{w} com sinais de referência de mesma frequência que o sinal de interesse, em um período completo, \autoref{eq:periodo}.
 Os valors \ac{Ik} (em fase) e \ac{Qk} (em quadratura) são calculados respectivamente pela correlação com um cosseno, conforme \autoref{eq:in_phase}, e com um seno, conforme \autoref{eq:out_of_phase}.
-A \autoref{eq:Z} apresenta o valor complexo \ac{Zk} de fase para a antena de \ac{Ak}.
+A \autoref{eq:Z} apresenta o valor complexo \textcolor{cmyk_B}{\ac{Zk}} de fase para a antena de \textcolor{cmyk_B}{\ac{Ak}}.
 
 
 % Periodo do sinal
@@ -233,27 +233,27 @@ A \autoref{eq:Z} apresenta o valor complexo \ac{Zk} de fase para a antena de \ac
 
 % Fase na antena
 \begin{equation} \label{eq:Z}
-    \ac{Zk} =
+    \textcolor{cmyk_B}{\ac{Zk}} =
     \frac{\ac{omega}}{\pi}\cdot\left(\ac{Ik} + \ac{imath} \ac{Qk}\right)
 \end{equation}
 
 % {Calcular defasagem entre antenas}
 
-O cálculo de defasagem de sinal em um par de antenas consiste na análise de diferença de fase dos valores \ac{Zk} e $Z_{k+1}$ do par de antenas \ac{Ak} e $A_{k+1}$, conforme apresentado na \autoref{eq:dephase}.
-Obtido o valor de defasagem \ac{DeltaPhi} entre o par de antenas, finalmente é possível calcular o ângulo \ac{betak} através da \autoref{eq:beta}, note que a simplificação somente é possível com valor de $\ac{d} = \sfrac{\ac{lambda}}{2}$.
+O cálculo de defasagem de sinal em um par de antenas consiste na análise de diferença de fase dos valores \textcolor{cmyk_B}{\ac{Zk}} e $\textcolor{cmyk_R}{Z_{k+1}}$ do par de antenas \textcolor{cmyk_B}{\ac{Ak}} e $\textcolor{cmyk_R}{A_{k+1}}$, conforme apresentado na \autoref{eq:dephase}.
+Obtido o valor de defasagem \ac{DeltaPhi} entre o par de antenas, finalmente é possível calcular o ângulo \textcolor{Purple}{\ac{betak}} através da \autoref{eq:beta}, note que a simplificação somente é possível com valor de $\ac{d} = \sfrac{\ac{lambda}}{2}$.
 A \autoref{fig:AoA:geometria} apresenta a geometria do sistema destacando os valores de interesse na análise de um dos pares de antenas, tomando $\ac{Nant} = 3$.
 
 % Defasagem entre antenas
 \begin{equation} \label{eq:dephase}
     \ac{DeltaPhi} =
-    \ac{Phik} - \Phi_{k+1} =
-    \arg\left(\ac{Zk}\right) - \arg\left(Z_{k+1}\right) =
-    \arg\left(\ac{Zk} \cdot \overline{Z_{k+1}}\right)
+    \textcolor{cmyk_B}{\ac{Phik}} - \textcolor{cmyk_R}{\Phi_{k+1}} =
+    \arg\left(\textcolor{cmyk_B}{\ac{Zk}}\right) - \arg\left(\textcolor{cmyk_R}{Z_{k+1}}\right) =
+    \arg\left(\textcolor{cmyk_B}{\ac{Zk}} \cdot \overline{\textcolor{cmyk_R}{Z_{k+1}}}\right)
 \end{equation}
 
 % Angulo do sinal em relação ao par de antenas
 \begin{equation} \label{eq:beta}
-    \ac{betak} = \arccos\left(\frac{\cancel{\ac{lambda}}}{\cancel{d}}\cdot\frac{\ac{DeltaPhi}}{\cancel{2}\pi}\right)
+    \textcolor{Purple}{\ac{betak}} = \arccos\left(\frac{\cancel{\ac{lambda}}}{\cancel{d}}\cdot\frac{\ac{DeltaPhi}}{\cancel{2}\pi}\right)
 \end{equation}
 
 \begin{figure}[htbp]
@@ -269,7 +269,7 @@ A \autoref{eq:theta:conj} define o conjunto \ac{Theta} dos valores aferidos de \
 
 % Conjunto de angulos calculados
 \begin{equation} \label{eq:theta:pmk}
-	\ac{thetak} = \ac{alphak}\pm \ac{betak}
+	\ac{thetak} = \textcolor{cmyk_M}{\ac{alphak}}\pm \textcolor{Purple}{\ac{betak}}
 \end{equation}
 
 % Conjunto de angulos calculados
@@ -345,21 +345,3 @@ Finalmente obtém-se o valor de \ac{thetaAoA} pela mediana dos valores em \ac{Th
 
 
 
-
-\begin{figure}[H]
-    \centering
-    \input{../pictures/simul_POLY_3_R_50.tex}
-    \caption{Gráfico}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \input{../pictures/simul_POLY_3_R_50_SNR_1_ATT.tex}
-    \caption{Gráfico}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \input{../pictures/simul_POLY_3_R_50_SNR_1.tex}
-    \caption{Gráfico}
-\end{figure}

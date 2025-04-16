@@ -7,53 +7,53 @@
 Coordenadas geográficas são definidas por dois valores, latitude e longitude, associadas a coordenadas esféricas referenciadas a partir do centro da terra, assumindo o raio da coordenada como o raio médio da superfície do planeta, cerca de $R_\text{Terra} = \SI{6371E3}{\metre}$ \cite{palomaguitarrara, chrisveness}.
 A latitude equivale à componente polar $\phi$ centralizada na linha do equador, enquanto a longitude equivale à componente $\theta$ centralizado do meridiano de Greenwich \cite{palomaguitarrara, henriquefleming2003}.
 
-Conhecendo as coordenadas de dois pontos distintos A e B, é possível determinar seu ângulo de \textit{bearing} $\beta$ relativo, referente ao norte, ou seja, o ângulo da direção a se seguir para chegar do ponto A ao ponto B a partir da direção do note no ponto de origem A \cite{henriquefleming2003}.
+Conhecendo as coordenadas de dois pontos distintos A e B, é possível determinar seu ângulo de \textit{bearing} \ac{betab} relativo, referente ao norte, ou seja, o ângulo da direção a se seguir partindo do ponto A para chegar ao ponto B, a partir da direção norte no ponto de origem A \cite{henriquefleming2003}.
 
-Sendo \textcolor{Green}{$\mathbf{A}$} e \textcolor{Blue}{$\mathbf{B}$} duas coordenadas geográficas, \textcolor{Green}{$\phi_A$} e \textcolor{Blue}{$\phi_B$} suas respectivas latitudes,  \textcolor{Green}{$\theta_A$} e \textcolor{Blue}{$\theta_B$} suas respectivas longitudes, conforme ilustrado na \autoref{fig:globo}.
+Sendo \textcolor{Green}{\ac{Ag}} e \textcolor{Blue}{\ac{Bg}} duas coordenadas geográficas, \textcolor{Green}{\ac{phiA}} e \textcolor{Blue}{\ac{phiB}} suas respectivas latitudes,  \textcolor{Green}{\ac{thetaA}} e \textcolor{Blue}{\ac{thetaB}} suas respectivas longitudes, conforme ilustrado na \autoref{fig:globo}.
 
 \begin{figure}[htbp]
     \centering
-    \caption{Representação geométrica de distância e ângulo em relação ao norte entre coordenadas geográficas \textcolor{Green}{$\mathbf{A}$} e \textcolor{Blue}{$\mathbf{B}$}.}
-    % \input{../pictures/globo}
-    \includegraphics{../pictures/globo.pdf}
+    \caption{Representação geométrica de distância e ângulo em relação ao norte entre coordenadas geográficas \textcolor{Green}{\ac{Ag}} e \textcolor{Blue}{\ac{Bg}}.}
+    \input{../pictures/globo}
+    % \includegraphics{../pictures/globo.pdf}
     \caption*{Fonte: Autor.}
     \label{fig:globo}
 \end{figure}
 
-Calculam-se $\Delta_\phi$ e $\Delta_\theta$.
+Calculam-se \ac{Deltaphi} e \ac{Deltatheta}.
 
     \begin{equation}
-        \Delta_\phi = \textcolor{Blue}{\phi_B} - \textcolor{Green}{\phi_A}
+        \ac{Deltaphi} = \textcolor{Blue}{\ac{phiB}} - \textcolor{Green}{\ac{phiA}}
     \end{equation}
     \begin{equation}
-        \Delta_\theta = \textcolor{Blue}{\theta_B} - \textcolor{Green}{\theta_A}
+        \ac{Deltatheta} = \textcolor{Blue}{\ac{thetaB}} - \textcolor{Green}{\ac{thetaA}}
     \end{equation}
 
-Através da lei dos haversines é possível obter a distância mínima $d$ entre as coordenadas, sobre a superfície, e também o ângulo de \textit{Bearing} \textcolor{Red}{$\beta$} formado no vértice \textcolor{Green}{$\mathbf{A}$} do triângulo esférico $\mathbf{N}$\textcolor{Green}{$\mathbf{A}$}\textcolor{Blue}{$\mathbf{B}$} \cite{chrisveness}.
+Através da lei dos haversines é possível obter a distância mínima $d$ entre as coordenadas, sobre a superfície, e também o ângulo de \textit{Bearing} \textcolor{Red}{\ac{betab}} formado no vértice \textcolor{Green}{\ac{Ag}} do triângulo esférico $\mathbf{N}\textcolor{Green}{\ac{Ag}}\textcolor{Blue}{\ac{Bg}}$ \cite{chrisveness}.
 Para o cálculo de distância, os ângulos devem ser tratados em radianos.
 
 \begin{equation}
-    X = \cos\left(\textcolor{Blue}{\theta_B}\right)\cdot \sin\left(\Delta_\phi\right)
+    X = \cos\left(\textcolor{Blue}{\ac{thetaB}}\right)\cdot \sin\left(\ac{Deltaphi}\right)
 \end{equation}
 \begin{equation}
-    Y = \cos\left(\textcolor{Green}{\theta_A}\right)\cdot\sin\left(\textcolor{Blue}{\theta_B}\right) - \sin\left(\textcolor{Green}{\theta_A}\right) \cdot \cos\left(\textcolor{Green}{\theta_B}\right) \cdot \cos\left(\Delta_\phi\right)
+    Y = \cos\left(\textcolor{Green}{\ac{thetaA}}\right)\cdot\sin\left(\textcolor{Blue}{\ac{thetaB}}\right) - \sin\left(\textcolor{Green}{\ac{thetaA}}\right) \cdot \cos\left(\textcolor{Green}{\ac{thetaB}}\right) \cdot \cos\left(\ac{Deltaphi}\right)
 \end{equation}
 \begin{equation}
-    Z = \sin^2\left(\frac{\Delta_\theta}{2}\right) + \cos\left(\textcolor{Blue}{\theta_B}\right) \cdot \cos\left(\textcolor{Green}{\theta_A}\right) \cdot \sin^2\left(\frac{\Delta_\phi}{2}\right)
+    Z = \sin^2\left(\frac{\ac{Deltatheta}}{2}\right) + \cos\left(\textcolor{Blue}{\ac{thetaB}}\right) \cdot \cos\left(\textcolor{Green}{\ac{thetaA}}\right) \cdot \sin^2\left(\frac{\ac{Deltaphi}}{2}\right)
 \end{equation}
 \begin{equation}
-    \textcolor{Red}{\beta} = \arctan\left(\frac{X}{Y}\right) - \frac{\pi}{2}
+    \textcolor{Red}{\ac{betab}} = \arctan\left(\frac{X}{Y}\right) - \frac{\pi}{2}
 \end{equation}
 \begin{equation}
-    \textcolor{Red}{d} = R_\text{Terra} \cdot 2 \cdot \arctan\left(\frac{\sqrt{Z}}{\sqrt{1-Z}}\right)
+    \textcolor{Red}{\ac{dAB}} = R_\text{Terra} \cdot 2 \cdot \arctan\left(\frac{\sqrt{Z}}{\sqrt{1-Z}}\right)
 \end{equation}
 
-O ângulo \textcolor{Red}{$\beta$} calculado aqui é referente à direção cardeal Norte, assim, uma equipe de busca equipada com uma bússola simples seria capaz de seguir a direção correta.
+O ângulo \textcolor{Red}{\ac{betab}} calculado aqui é referente à direção cardeal Norte, assim, uma equipe de busca equipada com uma bússola simples seria capaz de seguir a direção correta.
 A \autoref{fig:bearing} apresenta a aplicação desenvolvida por \citeauthor{chrisveness}, capaz de calcular o ângulo de \textit{Bearing} entre duas coordenadas, note que, neste caso, o ângulo referido é relacionado à direção cardial Leste \cite{chrisveness}.
 
 \begin{figure}[htbp]
     \centering
-    \caption{Cálculo do ângulo de \textit{Bearing} \textcolor{Red}{$\beta$} entre as coordenadas dos Campi Santo André e São Bernardo do Campo da UFABC.}
+    \caption{Cálculo do ângulo de \textit{Bearing} \textcolor{Red}{\ac{betab}} entre as coordenadas dos Campi Santo André e São Bernardo do Campo da UFABC.}
     \includegraphics[width=0.7\textwidth]{../pictures/bearing.png}
     \caption*{Fonte: \citeauthor{chrisveness} 2019 \cite{chrisveness}}
     \label{fig:bearing}

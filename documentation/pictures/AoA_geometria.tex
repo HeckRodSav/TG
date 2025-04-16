@@ -16,8 +16,6 @@
 
 	\pgfmathsetmacro\RhoAntennas{\d/(2*sin(180/\NAntennas))}
 
-    % \def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
-    % { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5) node[midway,anchor=east] {$\beta$}; }
     \def\centerarc(#1)(#2:#3:#4)% Syntax: [draw options] (center) (initial angle:final angle:radius)
     { ($(#1)+({#4*cos(#2)},{#4*sin(#2)})$) arc (#2:#3:#4) }
 
@@ -69,7 +67,7 @@
 
     % Ângulo alpha entre antenas
     \draw[thin, cmyk_M]
-        (0.3,0) node [above right, inner sep=1pt] {$\alpha_k$}
+        (0.3,0) node [above right, inner sep=1pt] {\ac{alphak}}
         \centerarc(O)(0:\antennaAngle:0.3)
     ;
 
@@ -88,7 +86,7 @@
     ;
     % Angulo Theta do sinal
     \draw[thin]
-        \centerarc(angleArrow)(0:\signalAngle:0.4) node [midway,above right,inner sep=1pt] {$\theta_\text{\ac{AoA}}$}
+        \centerarc(angleArrow)(0:\signalAngle:0.4) node [midway,above right,inner sep=1pt] {\ac{thetaAoA}}
     ;
 
     % Triangulo retângulo + quadradinho
@@ -102,15 +100,16 @@
         --++(\signalAngle+180:0.125)
     ;
     % Arco do angulo beta
-    \draw[thin] \centerarc(Ad0)(180+\antennaAngle:180+\signalAngle:0.4) node[midway,anchor=north,inner sep=1pt] {$\beta_k$};
+    \draw[thin, Purple] \centerarc(Ad0)(180+\antennaAngle:180+\signalAngle:0.4)
+        (Ad0) ++ (180+\signalAngle:0.5) node[below right, inner sep=1pt, fill=white, fill opacity=0.75,] {\ac{betak}}
+    ;
 
     % Distânci d entre antenas
     \draw[latex-latex]
-        ($(A00)+(0,1)$) -- ($(Ad0)+(0,1)$) node [midway, fill=white, circle, inner sep=1pt] {$d$}
+        ($(A00)+(0,1)$) -- ($(Ad0)+(0,1)$) node [midway, fill=white, circle, inner sep=1pt] {\ac{d}}
     ;
 
     \newcommand\CircleRadius{3cm}
-    %   \draw (0,0) circle (\CircleRadius);
     % special method of noting the position of a point
     \coordinate (P) at (50:\CircleRadius);
 
@@ -121,7 +120,7 @@
     ;
 
     \draw (brace) ++({\signalAngle+90}:5pt)
-        node[anchor=east] {$\lambda \cdot \frac{\Delta\Phi_k}{2 \pi}$}
+        node[anchor=east] {$\displaystyle\ac{lambda} \cdot \frac{\ac{DeltaPhi}}{2 \pi}$}
     ;
 
     \coordref[Black!25](3,3);

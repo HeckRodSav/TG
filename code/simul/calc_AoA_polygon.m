@@ -61,22 +61,6 @@ function return_struct = calc_AoA_polygon(
 	[delta_A_x_B delta_B_x_A] = arrayfun(@(ang, a, b) deltas_A_B(ang, a, b), ...
 		angle_Z_A_x_B_array, ant_array, circshift(ant_array,-1));
 
-	% % Fazer "votacao" de angulo escolhido
-	% range_angle = 90/N_antenas;
-	% precision = 10;
-
-	% angle_vector = [delta_A_x_B delta_B_x_A];
-	% angle_vector = mod(360+rad2deg(angle_vector),360); % Normalizar vetor de angulos
-	% angle_vector_round = round(angle_vector./precision).*precision; % Simplificar contas
-
-	% target_angle = mode(angle_vector_round); % Escolher angulo mais provavel
-
-	% angle_vector = angle_vector(abs(target_angle - angle_vector) <= range_angle ); % Descartar improvaveis
-
-	% choose_angle = median(angle_vector); % Calcular angulo provavel
-	% choose_angle = deg2rad(choose_angle);
-
-
 	% Fazer "votacao" de angulo escolhido
 	range_angle_alt = pi/(2*(N_antenas+1));
 
@@ -87,21 +71,13 @@ function return_struct = calc_AoA_polygon(
 		(angle_vector_alt((2*pi)<angle_vector_alt)-(2*pi)) ...
 	]; % Normalizar vetor de angulos entre 0 e 2 pi
 
-	% angle_vector_round_alt = round(angle_vector_alt.*(range_angle_alt*100))./(range_angle_alt*100);
-	% angle_vector_round_alt = round(angle_vector_alt.*100)./(100);
 	angle_vector_round_alt = round(angle_vector_alt./range_angle_alt).*range_angle_alt;
-	% rad2deg(angle_vector_round_alt)
 	target_angle_alt = mode(angle_vector_round_alt);
-	% rad2deg(target_angle_alt)
 
 	angle_vector_alt = angle_vector_alt(abs(target_angle_alt - angle_vector_alt) <= range_angle_alt ); % Descartar improvavei
-	% rad2deg(angle_vector_alt)
 	choose_angle_alt = median(angle_vector_alt); % Calcular angulo provavel
-	% rad2deg(choose_angle_alt)
 
-	% rad2deg(choose_angle)
 	choose_angle = choose_angle_alt;
-	% rad2deg(choose_angle)
 
 	return_struct = { ...
 		choose_angle ...

@@ -26,6 +26,7 @@
 % 2024-07-28 - Heitor Rodrigues Savegnago
 % 2024-08-14 - Heitor Rodrigues Savegnago
 % 2024-12-12 - Heitor Rodrigues Savegnago
+% 2025-04-18 - Heitor Rodrigues Savegnago
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -43,15 +44,25 @@
         ]{geometry} % Margens do documento
     \fi
 
+    % % Codificação de carecteres de entrada
+
+    \usepackage[T1]{fontenc} % Caracteres especiais
+    \usepackage[utf8]{inputenc} % Caracteres especiais
+
     % Fonte
         %\renewcommand{\rmdefault}{phv} % Arial
         \usepackage[lighttt]{lmodern} % Fonte Latin Modern
             % \renewcommand{\familydefault}{\sfdefault} % Estilo global Sans Serif
 
+        \usepackage{ae} % Cofidicação básica para fontes de codificação T1
+
         % Subistituição de fonte para casos de erro
-        \DeclareFontFamilySubstitution{TS1}{aer}{lmr}
-        \DeclareFontFamilySubstitution{TS1}{aett}{lmtt}
-        \DeclareFontFamilySubstitution{TS1}{aess}{lmss}
+            \DeclareFontFamilySubstitution{TS1}{aer}{lmr}
+            \DeclareFontFamilySubstitution{TS1}{aett}{lmtt}
+            \DeclareFontFamilySubstitution{TS1}{aess}{lmss}
+
+
+        \usepackage{fontawesome} % Símbolos especiais
 
     % Espaçamento entre linhas
         \usepackage{setspace} % Espaçamento do texto
@@ -122,16 +133,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Codificação de carecteres de entrada
-
-    \usepackage{ae} % "Almost European"
-    \usepackage[T1]{fontenc} % Caracteres especiais
-    \usepackage[utf8]{inputenc} % Caracteres especiais
-
-    \usepackage{fontawesome} % Símbolos especiais
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % Configuração de linguagem padrão do documento
 
     \usepackage[english, main=brazil]{babel} % Detalhes automáticos em Português
@@ -157,12 +158,20 @@
 
     \usepackage[svgnames]{xcolor} % Define cores
 
+        \definecolor{77F}{HTML}{7777FF}%
+        \definecolor{7F7}{HTML}{77FF77}%
+        \definecolor{F77}{HTML}{FF7777}%
+
         \definecolor{0DF}{HTML}{00DDFF}%
         \definecolor{0FD}{HTML}{00FFDD}%
         \definecolor{DF0}{HTML}{DDFF00}%
         \definecolor{FD0}{HTML}{FFDD00}%
         \definecolor{F0D}{HTML}{FF00DD}%
         \definecolor{D0F}{HTML}{DD00FF}%
+
+        \definecolor{55D}{HTML}{5555DD}%
+        \definecolor{5D5}{HTML}{55DD55}%
+        \definecolor{D55}{HTML}{DD5555}%
 
         \definecolor{0BD}{HTML}{00BBDD}%
         \definecolor{0DB}{HTML}{00DDBB}%
@@ -171,12 +180,20 @@
         \definecolor{D0B}{HTML}{DD00BB}%
         \definecolor{B0D}{HTML}{BB00DD}%
 
+        \definecolor{33B}{HTML}{3333BB}%
+        \definecolor{3B3}{HTML}{33BB33}%
+        \definecolor{B33}{HTML}{BB3333}%
+
         \definecolor{09B}{HTML}{0099BB}%
         \definecolor{0B9}{HTML}{00BB99}%
         \definecolor{9B0}{HTML}{99BB00}%
         \definecolor{B90}{HTML}{BB9900}%
         \definecolor{B09}{HTML}{BB0099}%
         \definecolor{90B}{HTML}{9900BB}%
+
+        \definecolor{119}{HTML}{111199}%
+        \definecolor{191}{HTML}{119911}%
+        \definecolor{911}{HTML}{991111}%
 
         \definecolor{079}{HTML}{007799}%
         \definecolor{097}{HTML}{009977}%
@@ -185,6 +202,10 @@
         \definecolor{907}{HTML}{990077}%
         \definecolor{709}{HTML}{770099}%
 
+        \definecolor{007}{HTML}{000077}%
+        \definecolor{070}{HTML}{007700}%
+        \definecolor{700}{HTML}{770000}%
+
         \definecolor{057}{HTML}{005577}%
         \definecolor{075}{HTML}{007755}%
         \definecolor{570}{HTML}{557700}%
@@ -192,12 +213,20 @@
         \definecolor{705}{HTML}{770055}%
         \definecolor{507}{HTML}{550077}%
 
+        \definecolor{005}{HTML}{000055}%
+        \definecolor{050}{HTML}{005500}%
+        \definecolor{500}{HTML}{550000}%
+
         \definecolor{035}{HTML}{003355}%
         \definecolor{053}{HTML}{005533}%
         \definecolor{350}{HTML}{335500}%
         \definecolor{530}{HTML}{553300}%
         \definecolor{503}{HTML}{550033}%
         \definecolor{305}{HTML}{330055}%
+
+        \definecolor{003}{HTML}{000033}%
+        \definecolor{030}{HTML}{003300}%
+        \definecolor{300}{HTML}{330000}%
 
         \definecolor{013}{HTML}{001133}%
         \definecolor{031}{HTML}{003311}%
@@ -236,6 +265,14 @@
 
         \newcommand{\showcolors}%Mostra tabela de cores
         {{\ttfamily
+        		{\color{77F}$\overset{\text{\tiny 77F}}{\blacksquare}$}
+        		{\color{55D}$\overset{\text{\tiny 55D}}{\blacksquare}$}
+        		{\color{33B}$\overset{\text{\tiny 33B}}{\blacksquare}$}
+        		{\color{119}$\overset{\text{\tiny 119}}{\blacksquare}$}
+        		{\color{007}$\overset{\text{\tiny 007}}{\blacksquare}$}
+        		{\color{005}$\overset{\text{\tiny 005}}{\blacksquare}$}
+        		{\color{003}$\overset{\text{\tiny 003}}{\blacksquare}$}
+                \\
         		{\color{0DF}$\overset{\text{\tiny 0DF}}{\blacksquare}$}
         		{\color{0BD}$\overset{\text{\tiny 0BD}}{\blacksquare}$}
         		{\color{09B}$\overset{\text{\tiny 09B}}{\blacksquare}$}
@@ -243,7 +280,7 @@
         		{\color{057}$\overset{\text{\tiny 057}}{\blacksquare}$}
         		{\color{035}$\overset{\text{\tiny 035}}{\blacksquare}$}
         		{\color{013}$\overset{\text{\tiny 013}}{\blacksquare}$}
-        		\\
+                \\
         		{\color{0FD}$\overset{\text{\tiny 0FD}}{\blacksquare}$}
         		{\color{0DB}$\overset{\text{\tiny 0DB}}{\blacksquare}$}
         		{\color{0B9}$\overset{\text{\tiny 0B9}}{\blacksquare}$}
@@ -252,6 +289,14 @@
         		{\color{053}$\overset{\text{\tiny 053}}{\blacksquare}$}
         		{\color{031}$\overset{\text{\tiny 031}}{\blacksquare}$}
         		\\
+        		{\color{7F7}$\overset{\text{\tiny 7F7}}{\blacksquare}$}
+        		{\color{5D5}$\overset{\text{\tiny 5D5}}{\blacksquare}$}
+        		{\color{3B3}$\overset{\text{\tiny 3B3}}{\blacksquare}$}
+        		{\color{191}$\overset{\text{\tiny 191}}{\blacksquare}$}
+        		{\color{070}$\overset{\text{\tiny 070}}{\blacksquare}$}
+        		{\color{050}$\overset{\text{\tiny 050}}{\blacksquare}$}
+        		{\color{030}$\overset{\text{\tiny 030}}{\blacksquare}$}
+                \\
         		{\color{DF0}$\overset{\text{\tiny DF0}}{\blacksquare}$}
         		{\color{BD0}$\overset{\text{\tiny BD0}}{\blacksquare}$}
         		{\color{9B0}$\overset{\text{\tiny 9B0}}{\blacksquare}$}
@@ -259,7 +304,7 @@
         		{\color{570}$\overset{\text{\tiny 570}}{\blacksquare}$}
         		{\color{350}$\overset{\text{\tiny 350}}{\blacksquare}$}
         		{\color{130}$\overset{\text{\tiny 130}}{\blacksquare}$}
-        		\\
+                \\
         		{\color{FD0}$\overset{\text{\tiny FD0}}{\blacksquare}$}
         		{\color{DB0}$\overset{\text{\tiny DB0}}{\blacksquare}$}
         		{\color{B90}$\overset{\text{\tiny B90}}{\blacksquare}$}
@@ -268,6 +313,14 @@
         		{\color{530}$\overset{\text{\tiny 530}}{\blacksquare}$}
         		{\color{310}$\overset{\text{\tiny 310}}{\blacksquare}$}
         		\\
+        		{\color{F77}$\overset{\text{\tiny F77}}{\blacksquare}$}
+        		{\color{D55}$\overset{\text{\tiny D55}}{\blacksquare}$}
+        		{\color{B33}$\overset{\text{\tiny B33}}{\blacksquare}$}
+        		{\color{911}$\overset{\text{\tiny 911}}{\blacksquare}$}
+        		{\color{700}$\overset{\text{\tiny 700}}{\blacksquare}$}
+        		{\color{500}$\overset{\text{\tiny 500}}{\blacksquare}$}
+        		{\color{300}$\overset{\text{\tiny 300}}{\blacksquare}$}
+                \\
         		{\color{F0D}$\overset{\text{\tiny F0D}}{\blacksquare}$}
         		{\color{D0B}$\overset{\text{\tiny D0B}}{\blacksquare}$}
         		{\color{B09}$\overset{\text{\tiny B09}}{\blacksquare}$}
@@ -275,7 +328,7 @@
         		{\color{705}$\overset{\text{\tiny 705}}{\blacksquare}$}
         		{\color{503}$\overset{\text{\tiny 503}}{\blacksquare}$}
         		{\color{301}$\overset{\text{\tiny 301}}{\blacksquare}$}
-        		\\
+                \\
         		{\color{D0F}$\overset{\text{\tiny D0F}}{\blacksquare}$}
         		{\color{B0D}$\overset{\text{\tiny B0D}}{\blacksquare}$}
         		{\color{90B}$\overset{\text{\tiny 90B}}{\blacksquare}$}
@@ -307,7 +360,7 @@
 
         \lstset{% Configurando layout para mostrar códigos C++
             language=[11]C++,
-            basicstyle=\ttfamily\small\setstretch{1},
+            basicstyle=\ttfamily\setstretch{1},
             backgroundcolor=\color{backcode!5},
             stringstyle=\color{strs},
             commentstyle=\color{coments},
@@ -338,6 +391,7 @@
             float=htbp,
             xleftmargin=2em,
             inputencoding=utf8,
+            belowskip=-0.5em,
             %texcl=true,
             upquote=true,
             literate=%

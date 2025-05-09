@@ -1,10 +1,10 @@
 function generate_fig(x_w, y_w, t_w, amp_w, ang_w, r_w, phase_w, lambda_w, omega_w, S, C, NOISE, SNR_dB, ATTENUATION, DEBUG, interval, resulution, T, d)
 
-    % Calcular a figura de fundo para visualizacao em imagem
-    z = signal_r(x_w, y_w, t_w, amp_w, ang_w, r_w, phase_w, ...
-    lambda_w, omega_w, S, C, NOISE, SNR_dB, ATTENUATION);
-    
-    if ~DEBUG
+	% Calcular a figura de fundo para visualizacao em imagem
+	z = signal_r(x_w, y_w, t_w, amp_w, ang_w, r_w, phase_w, ...
+	lambda_w, omega_w, S, C, NOISE, SNR_dB, ATTENUATION);
+
+	if ~DEBUG
 
 		t = linspace(0,T,resulution);
 
@@ -169,6 +169,6 @@ function generate_fig(x_w, y_w, t_w, amp_w, ang_w, r_w, phase_w, lambda_w, omega
 
 		hold off;
 
-    end %if
+	end %if
 
 end %function

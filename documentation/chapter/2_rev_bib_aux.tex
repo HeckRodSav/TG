@@ -1,7 +1,7 @@
 \subsection{Estimar \acs{AoA} utilizando malha de antenas}
 
 Analisando a defasagem de um sinal de \ac{RF} incidindo em uma malha de antenas, é possível estimar seu \acf{AoA}, ou seja, determinar a direção do emissor do sinal em relação ao sistema.
-Este valor é calculado utilizando dados como a distância entre as antenas, o comprimento de onda \ac{lambda} do sinal e a velocidade da luz no meio, usualmente tomada como $\ac{c} = \SI{299792458,6 \pm 0,3}{\metre\per\second}$ no ar \cite{jennings1987continuity, bensky2016wireless, horst2021localization}.
+Este valor é calculado utilizando dados como a distância entre as antenas, o comprimento de onda \ac{lambda} do sinal e a velocidade da luz no meio, usualmente tomada como $\ac{c} = \SI{299792458,6 \pm 0,3}{\metre\per\second}$ no ar \cite{jennings1987continuity, bensky2016wireless, horst2021localization, Schssel2016AngleOA}.
 A \autoref{eq:wavelength} apresenta a relação do comprimento de onda \ac{lambda} com a frequência \ac{f}, a frequência angular \ac{omega} e a velocidade da luz \ac{c}.
 
 % Comprimento de onda
@@ -97,7 +97,7 @@ Existem ainda dois casos notáveis, onde o sinal chega alinhado ao par de antena
 % {Distância entre antenas}
 
 A escolha da distância \ac{d} entre as antenas deve ser feita de forma a otimizar a resolução da medida de defasagem, com a maior distância possível. Porém é necessário evitar ambiguidades na análise, por se tratar de um sinal periódico, o valor se repetirá a cada \ac{lambda}, e terá valores simétricos quando $\ac{d} > \sfrac{\ac{lambda}}{2}$, ilustrado na \autoref{fig:AoA_d:fail}.
-Adota-se então $\ac{d}=\sfrac{\ac{lambda}}{2}$, conforme apresentado na \autoref{fig:AoA_d:ok} e \autoref{eq:distancia} \cite{bensky2016wireless, horst2021localization}.
+Adota-se então $\ac{d}=\sfrac{\ac{lambda}}{2}$, conforme apresentado na \autoref{fig:AoA_d:ok} e \autoref{eq:distancia} \cite{bensky2016wireless, horst2021localization, Schssel2016AngleOA}.
 
 \begin{figure}[htbp]
     \caption{Diferentes valores para \ac{d}.}

@@ -1,9 +1,9 @@
 \begin{tikzpicture}
     % \pgfsetfillopacity{0.5}
 
-    \def\fileName{simul_POLY_3_R_50_SNR_1}
-    \def\fileAddress{../../code/simul/Output/POLY_3/\fileName.dat}
-	% \def\fileAddress{../data/\fileName.dat}
+    \def\fileName{simul_POLY_5_R_50}
+    \def\fileAddress{../../code/simul/Output/POLY_5/\fileName.dat}
+    % \def\fileAddress{../data/\fileName.dat}
 
     \def\height{.225\linewidth}
     \def\width{0.75\linewidth}
@@ -99,7 +99,7 @@
     ] table [
         % col sep=comma,
         x=percent, % cabeçalho da coluna de dados X no arquivo
-        y=delta_1_x_3, % cabeçalho da coluna de dados Y no arquivo
+        y=delta_1_x_5, % cabeçalho da coluna de dados Y no arquivo
     ]
     {\fileAddress};	\label{\fileName.1.1}
 
@@ -113,7 +113,7 @@
     ] table [
         % col sep=comma,
         x=percent, % cabeçalho da coluna de dados X no arquivo
-        y=delta_3_x_1, % cabeçalho da coluna de dados Y no arquivo
+        y=delta_5_x_1, % cabeçalho da coluna de dados Y no arquivo
     ]
     {\fileAddress};	\label{\fileName.1.2}
 
@@ -170,6 +170,60 @@
         y=delta_2_x_3, % cabeçalho da coluna de dados Y no arquivo
     ]
     {\fileAddress};	\label{\fileName.1.6}
+
+	\addplot[
+        cmyk_C,
+        mark=triangle*,
+		opacity=0.5,
+        only marks,
+        % smooth
+    ] table [
+        % col sep=comma,
+        x=percent, % cabeçalho da coluna de dados X no arquivo
+        y=delta_4_x_3, % cabeçalho da coluna de dados Y no arquivo
+    ]
+    {\fileAddress};	\label{\fileName.1.7}
+
+    \addplot[
+        cmyk_C,
+        mark=triangle*,
+		opacity=0.5,
+		mark options={rotate=180},
+        only marks,
+        % smooth
+    ] table [
+        % col sep=comma,
+        x=percent, % cabeçalho da coluna de dados X no arquivo
+        y=delta_3_x_4, % cabeçalho da coluna de dados Y no arquivo
+    ]
+    {\fileAddress};	\label{\fileName.1.8}
+
+	\addplot[
+        Goldenrod,
+        mark=triangle*,
+		opacity=0.5,
+        only marks,
+        % smooth
+    ] table [
+        % col sep=comma,
+        x=percent, % cabeçalho da coluna de dados X no arquivo
+        y=delta_5_x_4, % cabeçalho da coluna de dados Y no arquivo
+    ]
+    {\fileAddress};	\label{\fileName.1.9}
+
+    \addplot[
+        Goldenrod,
+        mark=triangle*,
+		opacity=0.5,
+		mark options={rotate=180},
+        only marks,
+        % smooth
+    ] table [
+        % col sep=comma,
+        x=percent, % cabeçalho da coluna de dados X no arquivo
+        y=delta_4_x_5, % cabeçalho da coluna de dados Y no arquivo
+    ]
+    {\fileAddress};	\label{\fileName.1.10}
 
     \end{axis}
 
@@ -400,6 +454,13 @@
 
     \addlegendimage{/pgfplots/refstyle=\fileName.1.5}\addlegendentry{$\theta_{+3}$}
 	\addlegendimage{/pgfplots/refstyle=\fileName.1.6}\addlegendentry{$\theta_{-3}$}
+
+    \addlegendimage{/pgfplots/refstyle=\fileName.1.7}\addlegendentry{$\theta_{+4}$}
+	\addlegendimage{/pgfplots/refstyle=\fileName.1.8}\addlegendentry{$\theta_{-4}$}
+
+    \addlegendimage{/pgfplots/refstyle=\fileName.1.9}\addlegendentry{$\theta_{+5}$}
+	\addlegendimage{/pgfplots/refstyle=\fileName.1.10}\addlegendentry{$\theta_{-5}$}
+
 
     \end{axis}
 

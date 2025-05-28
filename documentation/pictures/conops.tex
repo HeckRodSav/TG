@@ -1,43 +1,65 @@
-\begin{center}
+% \begin{center}
 \begin{tikzpicture}
-    
+
     % Variables
-    \def\D{\N*\T}        
-    \def\wavelength{1}
-    \def\d{0.5*\wavelength}
 
-    
+
+    \coordinate (bottomleft) at (-0.5,-0.5);
+    \coordinate (topright) at (10.5,5);
+
+    \def\coordref[#1](#2){%
+
+        \coordinate(sysref) at (#2);
+
+        \draw[#1, -latex] (sysref) ++(-0.4,-0.3) -- ++(0.9,0) node[midway, below]{$x$};
+        \draw[#1, -latex] (sysref) ++(-0.3,-0.4) -- ++(0,0.9) node[midway, left]{$y$};
+        \draw[#1, -latex] \centerarc(sysref)(-90:180:0.25);
+        \draw[#1] (sysref) node{$+$}
+    }
+
+    % \draw[Red,dashed] (bottomleft) rectangle (topright);
+    \clip (bottomleft) rectangle (topright);
+
     \coordinate (O) at (0,0);
-    % \draw [help lines, dashed] (-0.5,-0.5) grid (10.5,5); % desenha grid
-    % \draw [red, thin] (O) node[draw,cross out] {}; % marca pont(0,0) 
-    
-    % \draw (-6.8,-4) rectangle (6.8,4);
-    \clip (-0.5,-0.5) rectangle (10.5,5);
 
-    \draw
-        (-0.5,0) -- (10.5,0)
-    ;
-    
-    % Rocket
-    % \draw (0,0) node[anchor=south west, rotate=45, draw] {\faRocket};
+    % \draw [help lines, dashed] (bottomleft) grid (topright); % desenha grid
+    % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
 
-    \draw[Red, line width = 1mm, arrows = {Latex[reversed,round,angle'=30]-Latex[angle'=25]}] (0,0) --++ (90:1);
-    
-    
-    \draw[Red, line width = 1mm, arrows = {Latex[reversed,round,angle'=30]-Latex[angle'=25]}] (0.5,2) --++ (80:1);
-    
-    
-    \draw[Red, line width = 1mm, arrows = {Latex[reversed,round,angle'=30]-Latex[angle'=25]}] (5,4) --++ (-5:1);
-    
-    
-    \draw[Red, line width = 1mm, arrows = {Latex[reversed,round,angle'=30]-Latex[angle'=25]}] (9,0) --++ (00:1);
-    
-    
-    
-    % \draw[Red, line width = 1mm]
-    %     (0,1) --++ (0,0.5)
+    % \draw[Red] (4,2)
+    %     node[draw, thick, shape=foguete, fill=cmyk_R!25, scale=4] {}
+    %     node[draw, circle, inner sep=2pt] {}
     % ;
-        
+
+    % \shade[inner color=yellow,outer color=white] (6,0) rectangle +(2,1);
+
+    % \draw
+    %     (-0.5,0) -- (10.5,0)
+    % ;
+
+
+    \coordinate (left) at (-0.5,0);
+    \coordinate (right) at (10.5,0);
+    \coordinate (middle) at ($(left)!0.5!(right)$);
+    \draw[thin, Black!50, path fading=west] (left) -- (middle);
+    \draw[thin, Black!50, path fading=east] (middle) -- (right);
+    % \shade[draw, inner color=Green!10,outer color=Red] (-0.5,0) -- (10.5,3);
+
+
+    \draw[cmyk_K] (0,0) node[draw, shape=foguete, fill=cmyk_R, anchor=south, rotate=0] {};
+
+    \draw[cmyk_K] (0.5,2) node[OrangeRed, rotate=170, anchor=south, inner sep=-2.5pt, xshift=0.25pt] {\Fire} node[draw, shape=foguete, fill=cmyk_R, anchor=south, rotate=-10] {};
+
+    \draw[cmyk_K] (5,4) node[draw, shape=foguete, fill=cmyk_R, anchor=south, rotate=-95] {};
+
+    \draw[cmyk_K] (9,0) node[draw, shape=foguete, fill=cmyk_R, anchor=east, rotate=-90] {};
+
+
+
+    \begin{pgfonlayer}{background}    % select the background layer
+        \clip (bottomleft) rectangle (10.5,0);
+        \shade[inner color=SaddleBrown!50,outer color=White] (bottomleft) rectangle (10.5,0.5);
+    \end{pgfonlayer}
+
 
 \end{tikzpicture}
-\end{center}
+% \end{center}

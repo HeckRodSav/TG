@@ -150,6 +150,86 @@
     }
 }
 
+\makeatletter
+
+\pgfdeclareshape{foguete}{
+  \nodeparts{}
+  \savedmacro\fogueteparameters{%
+	\pgfmathsetlengthmacro\unit{+0.125cm}%
+    \addtosavedmacro\unit%
+  }
+  \anchor{center}{\pgfpointorigin}%
+  \anchor{north}{\fogueteparameters%
+    \pgfpoint{0*\unit}{4*\unit}}
+  \anchor{south}{\fogueteparameters%
+    \pgfpoint{0*\unit}{-4*\unit}}
+  \anchor{east}{\fogueteparameters%
+    \pgfpoint{0.5*\unit}{0\unit}}%
+  \anchor{west}{\fogueteparameters%
+    \pgfpoint{-0.5*\unit}{0\unit}}%
+%   \anchor{north west}{\fogueteparameters%
+%     \pgfpointpolar{135}{\radius*sqrt(2)}}
+%   \anchor{south west}{\fogueteparameters%
+%     \pgfpointpolar{225}{\radius*sqrt(2)}}
+%   \anchor{north east}{\fogueteparameters%
+%     \pgfpointpolar{45}{\radius+\outersep}}%
+%   \anchor{south east}{\fogueteparameters%
+%     \pgfpointpolar{315}{\radius+\outersep}}%
+  \behindforegroundpath{%
+    \fogueteparameters%
+%     \pgfpathmoveto{\pgfpointpolar{135}{\radius}}%
+%     \pgfpathlineto{\pgfpointpolar{135}{\radius*sqrt(2)}}%
+%     \pgfpathmoveto{\pgfpointpolar{225}{\radius}}%
+%     \pgfpathlineto{\pgfpointpolar{225}{\radius*sqrt(2)}}%
+%     \pgfpathmoveto{\pgfpointpolar{0}{\radius}}%
+%     \pgfpathlineto{\pgfpointpolar{0}{\radius*sqrt(2)}}%
+    \pgfpathmoveto{\pgfpoint{0.5*\unit}{-2*\unit}}%
+    \pgfpathlineto{\pgfpoint{0.5*\unit}{-4*\unit}}%
+    \pgfusepath{stroke}
+    %
+    \pgfpathmoveto{\pgfpoint{-0.5*\unit}{-2*\unit}}%
+    \pgfpathlineto{\pgfpoint{-0.5*\unit}{-4*\unit}}%
+    \pgfusepath{stroke}
+    %
+    % \pgfpathmoveto{\pgfpoint{-0.5*\unit}{2*\unit}}%
+    % \pgfpatharcaxes{0}{180}{\pgfpoint{0.5*\unit}{0*\unit}}{\pgfpoint{0*\unit}{2*\unit}}
+    % % % \pgfpatharcaxes{180}{120}{\pgfpoint{1*\unit}{0*\unit}}{\pgfpoint{0*\unit}{3*\unit}}
+    % % % \pgfpatharcaxes{60}{0}{\pgfpoint{1*\unit}{0*\unit}}{\pgfpoint{0*\unit}{3*\unit}}
+    % \pgfusepath{stroke}
+  }
+  \backgroundpath{%
+    \fogueteparameters%
+    % \pgfsetplottension{0.9}
+    % \pgfplothandlercurveto
+    % \pgfplotstreamstart
+    %     \pgfplotstreampoint{\pgfpoint{0*\unit}{4*\unit}}
+    %     \pgfplotstreampoint{\pgfpoint{0.35*\unit}{3.2*\unit}}
+    %     \pgfplotstreampoint{\pgfpoint{0.475*\unit}{2.5*\unit}}
+    %     \pgfplotstreampoint{\pgfpoint{0.5*\unit}{2*\unit}}
+    % \pgfplotstreamend
+    \pgfpathmoveto{\pgfpoint{0.5*\unit}{2*\unit}}%
+    \pgfpathlineto{\pgfpoint{0.5*\unit}{-2*\unit}}%
+    \pgfpathlineto{\pgfpoint{1.5*\unit}{-2.5*\unit}}%
+	\pgfpathlineto{\pgfpoint{1.5*\unit}{-3.5*\unit}}%
+	\pgfpathlineto{\pgfpoint{0.5*\unit}{-4*\unit}}%
+	\pgfpathlineto{\pgfpoint{-0.5*\unit}{-4*\unit}}%
+	\pgfpathlineto{\pgfpoint{-1.5*\unit}{-3.5*\unit}}%
+	\pgfpathlineto{\pgfpoint{-1.5*\unit}{-2.5*\unit}}%
+	\pgfpathlineto{\pgfpoint{-0.5*\unit}{-2*\unit}}%
+	\pgfpathlineto{\pgfpoint{-0.5*\unit}{2*\unit}}%
+    \pgfpatharcaxes{180}{0}{\pgfpoint{0.5*\unit}{0*\unit}}{\pgfpoint{0*\unit}{2*\unit}}
+    % \pgfplothandlercurveto
+    % \pgfplotstreamstart
+    %     \pgfplotstreampoint{\pgfpoint{-0.5*\unit}{2*\unit}}
+    %     \pgfplotstreampoint{\pgfpoint{-0.475*\unit}{2.5*\unit}}
+    %     \pgfplotstreampoint{\pgfpoint{-0.35*\unit}{3.2*\unit}}
+    %     \pgfplotstreampoint{\pgfpoint{0*\unit}{4*\unit}}
+    % \pgfplotstreamend
+  }
+}
+
+
+\makeatother
 
 
 \newcommand{\drawArc}[9]

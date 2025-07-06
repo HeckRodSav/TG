@@ -465,6 +465,12 @@
         \sisetup{multi-part-units=single}
         \sisetup{group-separator = {}}
         \sisetup{detect-all}
+        \newcommand{\infinity}{\ensuremath{\infty}}
+        \robustify{\infinity}
+        % \DeclareCommandCopy{\infty}{\infinity}
+        \sisetup{
+            input-digits = 0123456789\infty\infinity
+        }
 
         \DeclareSIUnit{\nothing}{{\relax}}
         \DeclareSIUnit{\var}{VAR}

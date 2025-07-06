@@ -16,25 +16,37 @@ function generate_fig(...
 
 	index_list = 1:length(ant_array);
 
-	color_list = [...
-		[1 0 0];
-		[0 1 0];
-		[0 0 1]];
+	% Utilizar conjunto de cores diversas para antenas
+	color_list = hsv(length(hsv))(:,:);
+	% if isoctave()
+	% 	color_list = rainbow(length(rainbow))(:,:);
+	% else
+	% 	color_list = gist_rainbow(length(gist_rainbow))(:,:);
+	% end % if
 
-	if length(color_list) < length(ant_array)
-		color_list = [...
-			[1 0 0];
-			[1 1 0];
-			[0 1 0];
-			[0 1 1];
-			[0 0 1];
-			[1 0 1]];
-	end % if
+	% color_list = [...
+	% 	[1 0 0];
+	% 	[0 1 0];
+	% 	[0 0 1]];
+
+	% if length(color_list) < length(ant_array)
+	% 	color_list = [...
+	% 		[1 0 0];
+	% 		[1 1 0];
+	% 		[0 1 0];
+	% 		[0 1 1];
+	% 		[0 0 1];
+	% 		[1 0 1]];
+	% end % if
 
 	while length(color_list) < length(ant_array)
 		aux_color_list = normalize(color_list+circshift(color_list,1),"range");
 		color_list = sortrows(cat(1,color_list, aux_color_list.*0.75));
 	end %while
+
+	% Garantir maior contraste entre cores de antenas
+	% color_index =  floor(linspace(1,length(color_list),length(ant_array)));
+	color_index = floor(index_list * (length(color_list)/length(ant_array)));
 
 	if isoctave()
 		AoA_x = cos(choose_angle);
@@ -61,7 +73,8 @@ function generate_fig(...
 		% Desenhar antenas
 		for idx = index_list
 			ant = ant_array(idx);
-			color = color_list(1 + mod(idx-1, length(color_list)),:);
+			color = color_list(color_index(idx),:);
+			% color = color_list(1 + mod(idx-1, length(color_list)),:);
 			plot3(real(ant)*[1 1], imag(ant)*[1 1], [-lambda_w lambda_w], '-p', 'color', color);
 		end % for
 
@@ -109,8 +122,12 @@ function generate_fig(...
 		end %if
 		% color = color_list(idx);
 		% color_next = color_list(idx_next);
-		color = color_list(1 + mod(idx-1, length(color_list)),:);
-		color_next = color_list(1 + mod(idx_next-1, length(color_list)),:);
+		% color = color_list(1 + mod(idx-1, length(color_list)),:);
+		% color_next = color_list(1 + mod(idx_next-1, length(color_list)),:);
+		% color = color_list(floor((idx/length(ant_array)) * length(color_list)),:);
+		% color_next = color_list(floor((idx_next/length(ant_array)) * length(color_list)),:);
+		color = color_list(color_index(idx),:);
+		color_next = color_list(color_index(idx_next),:);
 		part_ang_r = 8 + (12-8)*(idx-1)/(length(ant_array)-1);
 
 		% Antenas

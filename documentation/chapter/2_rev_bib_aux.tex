@@ -1,4 +1,4 @@
-\subsection{Estimar \acs{AoA} utilizando malha de antenas}
+\subsection{Estimar \acs{AoA} utilizando malha de antenas}\label{ssec:aoa}
 
 Analisando a defasagem de um sinal de \ac{RF} incidindo em uma malha de antenas, é possível estimar seu \acf{AoA}, ou seja, determinar a direção do emissor do sinal em relação ao sistema.
 Este valor é calculado utilizando dados como a distância entre as antenas, o comprimento de onda \ac{lambda} do sinal e a velocidade da luz no meio, usualmente tomada como $\ac{c} = \SI{299792458,6 \pm 0,3}{\metre\per\second}$ no ar \cite{jennings1987continuity, bensky2016wireless, horst2021localization, Schssel2016AngleOA}.
@@ -32,7 +32,7 @@ A \autoref{fig:plana_0} ilustra o comportamento planar de uma frente de onda, co
 % {Trigonometria}
 
 Tomando agora um par de antenas separadas por uma distância fixa \ac{d}, torna-se viável fazer a análise trigonométrica entre as antenas e a frente de onda incidente, onde essa distância \ac{d} será a hipotenusa do triângulo retângulo formado.
-Para realizar esta análise, ainda é necessário conhecer uma segunda dimensão do triângulo retângulo envolvido, esta é obtida da defasagem \ac{DeltaPhi} dos sinais indicentes nas antenas, conforme apresentado na \autoref{eq:defasagem}.
+Para realizar esta análise, ainda é necessário conhecer uma segunda dimensão do triângulo retângulo envolvido, esta é obtida da defasagem \ac{DeltaPhi} dos sinais incidentes nas antenas, conforme apresentado na \autoref{eq:defasagem}.
 A \autoref{fig:AoA} apresenta quatro casos de chegada do sinal de \ac{RF} em um par de antenas.
 
 
@@ -45,7 +45,7 @@ A \autoref{fig:AoA} apresenta quatro casos de chegada do sinal de \ac{RF} em um 
 \end{equation}
 
 
-É importante ressaltar que um sistemas com um único par de antenas não é suficiente para determinar completamente o \ac{thetaAoA}, já que o valor calculado de \textcolor{Purple}{\ac{betak}} é igual para casos simétricos em relação ao par de antenas, criando um caso de ambiguidade.
+É importante ressaltar que um sistema com um único par de antenas não é suficiente para determinar completamente o \ac{thetaAoA}, já que o valor calculado de \textcolor{Purple}{\ac{betak}} é igual para casos simétricos em relação ao par de antenas, criando um caso de ambiguidade.
 As Figuras \ref{fig:AoA:1} e \ref{fig:AoA:2} apresentam exemplos de diferentes valores de \ac{thetaAoA} para o mesmo valor de \textcolor{Purple}{\ac{betak}}.
 Existem ainda dois casos notáveis, onde o sinal chega alinhado ao par de antenas ou perpendicular a elas, apresentados respectivamente nas Figuras \ref{fig:AoA:3} e \ref{fig:AoA:4}.
 
@@ -176,15 +176,15 @@ A \autoref{fig:antennas} apresenta exemplos dessa disposição de antenas, note 
     \caption*{Fonte: Autor.}
 \end{figure}
 
-A \autoref{eq:raio:poligono} descreve o raio \ac{rho} do circulo que circunscreve o polígono regular de \ac{Nant} antenas.
+A \autoref{eq:raio:poligono} descreve o raio \ac{rho} do círculo que circunscreve o polígono regular de \ac{Nant} antenas.
 Este raio equivale à distância das antenas em relação ao ponto central do polígono.
 
 \begin{equation} \label{eq:raio:poligono} % Diametro do circulo que circunscreve poligono de antenas
 	\ac{rho} = \frac{\ac{d}}{2\cdot \sin\left(\displaystyle\frac{\pi}{\ac{Nant}}\right)}
 \end{equation}
 
-Cada antena é indentificada por um índice \ac{k}, conforme a \autoref{eq:ant:idx}, e tem sua coordenada espacial definida como um valor complexom descrito na \autoref{eq:ant:coord}.
-Estas coordenadas são definidas como números complexos para simplificar a análise do ângulo \textcolor{cmyk_M}{\ac{alphak}} em que um par de antenas \textcolor{cmyk_B}{\ac{Ak}} e $\textcolor{cmyk_R}{A_{k+1}}$ se dispõe em relação à geometria do sistema, conforme a \autoref{eq:ant:angle}.
+Cada antena é identificada por um índice \ac{k}, conforme a \autoref{eq:ant:idx}, e tem sua coordenada espacial definida como um valor complexo descrito na \autoref{eq:ant:coord}.
+Essas coordenadas são definidas como números complexos para simplificar a análise do ângulo \textcolor{cmyk_M}{\ac{alphak}} em que um par de antenas \textcolor{cmyk_B}{\ac{Ak}} e $\textcolor{cmyk_R}{A_{k+1}}$ se dispõe em relação à geometria do sistema, conforme \autoref{eq:ant:angle}.
 
 \begin{equation} \label{eq:ant:idx} % Indices das antenas
 	\ac{k} = \left\{1, 2, \dotsc, \ac{Nant}\right\}
@@ -209,7 +209,7 @@ Estas coordenadas são definidas como números complexos para simplificar a aná
 Para calcular a fase em uma antena, é interessante representar o sinal recebido como um valor complexo.
 Uma forma de obter o complexo de fase consiste em analisar a correlação do sinal incidente \ac{w} com sinais de referência de mesma frequência que o sinal de interesse, em um período completo, \autoref{eq:periodo}.
 Os valors \ac{Ik} (em fase) e \ac{Qk} (em quadratura) são calculados respectivamente pela correlação com um cosseno, conforme \autoref{eq:in_phase}, e com um seno, conforme \autoref{eq:out_of_phase}.
-A \autoref{eq:Z} apresenta o valor complexo \textcolor{cmyk_B}{\ac{Zk}} de fase para a antena de \textcolor{cmyk_B}{\ac{Ak}}.
+A \autoref{eq:Z} apresenta o valor complexo \textcolor{cmyk_B}{\ac{Zk}} de fase para a antena \textcolor{cmyk_B}{\ac{Ak}}.
 
 
 % Periodo do sinal
@@ -296,7 +296,7 @@ A quantização implica que os valores de \ac{Theta} serão agrupados por faixas
 \end{equation}
 
 Salvo casos com muito ruído, espera-se que alguns valores em \ac{ThetaQuanti} se repitam, partindo disso, calcula-se \ac{thetaMo}, a moda estatística destes valores, conforme \autoref{eq:theta:moda}.
-Este valor deverá estar próximo ao \ac{thetaAoA}, e será utilizado na filtragem dos valores aferidos em \ac{Theta}.
+Esse valor deverá estar próximo ao \ac{thetaAoA}, e será utilizado na filtragem dos valores aferidos em \ac{Theta}.
 
 % Moda entre angulos normalizados
 \begin{equation} \label{eq:theta:moda}

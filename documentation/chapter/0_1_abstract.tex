@@ -1,0 +1,11 @@
+Upon launch, an atmospheric sounding rocket can land anywhere within its range, and conducting the search can be a major challenge without an effective location strategy.
+Many of these vehicles rely on \acs{GNSS} location, such as \acs{GPS}, but they still rely on a telemetry system to ensure the correct transmission of geographic coordinates to the search team.
+This work considers a scenario where the location information could not be decoded, but the \acs{RF} signal is still detectable, proposing the Angle of Arrival (\acs{AoA}) measurement to determine the search direction.
+A simulation was built for a system that, based on the phase shift difference in a circular antenna array, is capable of determining the \acs{AoA} of the incident \ac{RF} signal.
+During development, compatibility with various numerical resolution software programs was sought, particularly GNU Octave and MATLAB, which proved challenging given the limitations of using free software.
+Antenna arrays with three, five, and seven antennas were considered. The geometry with fewer antennas showed lower overall accuracy compared to the others.
+The simulations considered cases with different levels of \acs{AWGN} noise interference and considered scenarios with and without signal attenuation.
+In all simulations, the R² value was above \qty{75}{\percent} and, on average, above \qty{92}{\percent}.
+These results indicate that the proposed method is effective in different contexts.
+
+\paragraph*{\textit{Keywords:}} Angle of Arrival; Radio Frequency; Atmospheric Sounding Rockets; Numerical Resolution; Telemetry; Location.

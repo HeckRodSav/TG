@@ -1,11 +1,9 @@
-\chapter{Metodologia}
+\chapter{Metodologia}\label{cap:metodologia}
+
+Neste capítulo, são explorados os métodos utilizados para a construção do trabalho proposto.
+
 
 \section{Simulação}
-
-% Falar do octave
-
-% A simulação do sistema proposto foi construída utilizando o \textit{software} GNU Octave e suas bibliot
-
 
 A construção da simulação partiu de uma abordagem físico-matemática, definindo o sinal \ac{w} como uma função de onda relativa ao tempo e ao espaço, analisando seus valores incidindo em cada antena \ac{Ak} e comparando as defasagens \ac{DeltaPhi} entre os diferentes pares de antenas.
 Para simplificar a construção da simulação, foram utilizadas funções paramétricas, descritas na presente seção.
@@ -18,14 +16,14 @@ Estes parâmetros são divididos entre os que recebem valores numéricos, boolea
 Os parâmetros numéricos são:
 \begin{itemize}
 	\item \lstinline|amp_w|, amplitude desejada para o sinal;
-	\item \lstinline|ang_w|, direção do emissor do sinal, equivalente ao ângulo \ac{thetaAoA} de chegada do sinal em relacao à malha de antenas;
+	\item \lstinline|ang_w|, direção do emissor do sinal, equivalente ao ângulo \ac{thetaAoA} de chegada do sinal em relação à malha de antenas;
 	\item \lstinline|angle_Z_A_x_B|, ângulo relativo \ac{betak} para par de antenas;
 	\item \lstinline|d|, distância \ac{d} entre par de antenas da malha;
-	\item \lstinline|choose_angle|, ângulo \ac{thetaAoA} calculado pelo sistema;
+	\item \lstinline|choose_angle|, ângulo \ac{thetaAoA} final calculado pelo sistema;
 	\item \lstinline|interval|, indica os limites para a geração de imagem da simulação;
 	\item \lstinline|lambda_w|, comprimento de onda \ac{lambda};
 	\item \lstinline|N_antenas|, quantidade \ac{Nant} de antenas da malha;
-	\item \lstinline|omega_w|, frêquencia angular \ac{omega};
+	\item \lstinline|omega_w|, frequência angular \ac{omega};
 	\item \lstinline|phase_w|, fase $\phi$ do sinal no emissor;
 	\item \lstinline|Rho|, raio \ac{rho} do polígono que dispõe as antenas na malha;
 	\item \lstinline|r_w|, distância que o emissor de sinal está da coordenada $(0,~0)$ do sistema;
@@ -161,7 +159,7 @@ Os Códigos \ref{cod:ref_cos} e \ref{cod:ref_sin} apresentam, respectivamente, v
 
 
 % signal_r
-A próxima função contruída foi \lstinline|signal_r|, que calcula o valor do sinal \ac{w} numa coordenada $(x,~y)$ e um instante $t$.
+A próxima função construída foi \lstinline|signal_r|, que calcula o valor do sinal \ac{w} numa coordenada $(x,~y)$ e um instante $t$.
 Considera-se que o sinal é composto pela soma de seno e cosseno, e que são determinadas a distância e a direção de sua fonte emissora.
 Também é possível definir amplitude e fase na origem, além da presença de atenuação e ruído do tipo \ac{AWGN}.
 Seus argumentos são, respectivamente, \lstinline|x_w|, \lstinline|y_w|, \lstinline|t_w|, \lstinline|amp_w|, \lstinline|ang_w|, \lstinline|r_w|, \lstinline|phase_w|, \lstinline|lambda_w|, \lstinline|omega_w|, \lstinline|S|, \lstinline|C|, \lstinline|NOISE|, \lstinline|SNR_dB| e \lstinline|ATT|.
@@ -280,23 +278,5 @@ A \autoref{fig:example:simul_POLY_3_R_50} ilustra os gráficos gerados pela fun�
 Finalmente a função responsável por juntar todas as partes é \lstinline|w_xyt|, a base para a simulação, ela invoca as funções \lstinline|calc_AoA| e \lstinline|generate_fig| com os devidos parâmetros, além de garantir que os arquivos gerados sejam salvos corretamente.
 Seus argumentos são, respectivamente, \lstinline|NOISE|, \lstinline|ATT|, \lstinline|CHG_PHI|, \lstinline|CHG_R|, \lstinline|CHG_THETA|, \lstinline|S_GIF|, \lstinline|S_DAT|, \lstinline|SNR|, \lstinline|range_step| e \lstinline|N_antenas|.
 
-% \subsection{Outras funções}
 
-% A função \lstinline|isoctave| confere se a corrente simulação está sendo realizada no GNU Octave, retornando um valor binário e não recebe qualquer parâmetro.
-% O \autoref{cod:isoctave} apresenta uma versão simplificada da função \lstinline|isoctave| desenvolvida.
-
-% \begin{lstfloat}[htbp]
-% 	\centering
-% 	\lstinputlisting[
-% 			basicstyle=\ttfamily\small\setstretch{1},
-% 			label=cod:isoctave,
-% 			caption={Função \lstinline|isoctave|, simplificada.}
-% 		]{../code/isoctave_alt.m}
-% 	\caption*{Fonte: Autor.}
-% \end{lstfloat}
-
-% Falar sobre simular duas voltas na geometria
-
-
-% Falar sobre exportação de arquivo .dat
 

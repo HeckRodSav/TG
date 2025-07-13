@@ -1,23 +1,44 @@
-\chapter{Códigos desenvolvidos para simulação}
+\chapter{Códigos desenvolvidos para simulação} \label{apdx:codigo}
 
-O sistema desenvolvido e os arquivos-fonte deste relatório estão disponíveis \href{https://github.com/HeckRodSav/TG}{\underline{neste repositório no GitHub}}.
+\lstset{belowskip=\medskipamount}
 
-\section{Simulação de direcionamento GNSS}
+O sistema desenvolvido, os arquivos de saída das simulações citadas ao longo do documento e os arquivos-fonte deste relatório estão disponíveis \href{https://github.com/HeckRodSav/TG}{\underline{neste repositório no GitHub}}.
 
-\lstinputlisting{../code/azimuth.m}
+\section{Simulação de direcionamento \acs{GNSS}}
+
+\lstinputlisting[label=cod:apdx:bearing, caption={Arquivo de código \lstinline|bearing.m|.}]{../../code/simul/bearing.m}
 
 \section{Simulação de AoA}
 
-\lstinputlisting{../code/xyt.m}
+\subsection{Funções auxiliares}
 
-\lstinputlisting{../code/generate_fig.m}
+\lstinputlisting[label=cod:apdx:argument_r, caption={Arquivo de código \lstinline|argument_r.m|.}]{../../code/simul/argument_r.m}
 
-\lstinputlisting{../code/signal_r.m}
+\lstinputlisting[label=cod:apdx:ref_cos, caption={Arquivo de código \lstinline|ref_cos.m|.}]{../../code/simul/ref_cos.m}
 
-\lstinputlisting{../code/ref_cos.m}
+\lstinputlisting[label=cod:apdx:ref_sin, caption={Arquivo de código \lstinline|ref_sin.m|.}]{../../code/simul/ref_sin.m}
 
-\lstinputlisting{../code/ref_sin.m}
+\lstinputlisting[label=cod:apdx:signal_r, caption={Arquivo de código \lstinline|signal_r.m|.}]{../../code/simul/signal_r.m}
 
-\lstinputlisting{../code/argument_r.m}
+\lstinputlisting[label=cod:apdx:isoctave, caption={Arquivo de código \lstinline|isoctave.m|.}]{../../code/simul/isoctave.m}
 
-\lstinputlisting{../code/isoctave.m}
+\subsection{Função de cálculo para \acs{AoA}}
+
+\lstinputlisting[label=cod:apdx:calc_AoA, caption={Arquivo de código \lstinline|calc_AoA.m|.}]{../../code/simul/calc_AoA.m}
+
+\subsection{Função de geração saída visual}
+
+\lstinputlisting[label=cod:apdx:generate_fig, caption={Arquivo de código \lstinline|generate_fig.m|.}]{../../code/simul/generate_fig.m}
+
+\subsection{Função geral da simulção}
+
+\lstinputlisting[label=cod:apdx:w_xyt, caption={Arquivo de código \lstinline|w_xyt.m|.}]{../../code/simul/w_xyt.m}
+
+\subsection{Arquivos de simulação em sequência}
+
+\lstinputlisting[label=cod:apdx:w_xyt_single, caption={Arquivo de código \lstinline|w_xyt_single.m|.}]{../../code/simul/w_xyt_single.m}
+
+\lstinputlisting[label=apdx:w_xyt_dat:w_xyt_dat, caption={Arquivo de código \lstinline|w_xyt_dat.m|.}]{../../code/simul/w_xyt_dat.m}
+
+\lstinputlisting[label=apdx:w_xyt_auto:w_xyt_auto, caption={Arquivo de código \lstinline|w_xyt_auto.m|.}]{../../code/simul/w_xyt_auto.m}
+

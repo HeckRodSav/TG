@@ -17,15 +17,12 @@
 \begin{document}
     \pagestyle{clear}
     \capa
-
     \cleardoublepage
 
     \folhaDeRosto
-
     \cleardoublepage
 
     \folhaAgradecimentos
-
     \cleardoublepage
 
     % \folhaDeAprovacao
@@ -34,31 +31,36 @@
         \input{../chapter/0_resumo}%
     %
     \end{abstract}
+    \cleardoublepage
 
-    % \begin{otherlanguage}{english}\itshape
-    %     \begin{abstract}%
-    %     %
-    %         \input{../chapter/0_1_abstract}%
-    %     %
-    %     \end{abstract}
-    % \end{otherlanguage}
+    \begin{otherlanguage}{english}\itshape
+        \begin{abstract}%
+        %
+            \input{../chapter/0_1_abstract}%
+        %
+        \end{abstract}
+    \end{otherlanguage}
+    \cleardoublepage
 
     % \begingroup
 
-    \cleardoublepage
     \pagestyle{toc}
 
     \listoffigures
+    \cleardoublepage
 
     \listoftables
+    \cleardoublepage
 
     \lstlistoflistings
+    \cleardoublepage
 
     % \addcontentsline{toc}{chapter}{Abreviaturas e Siglas}
     \noindent\printacronyms[%
         display=all,
         exclude={symbols, operators}
     ]
+    \cleardoublepage
 
     \noindent\printacronyms[%
         display=all,
@@ -88,7 +90,7 @@
     \addcontentsline{toc}{chapter}{Apêndices}
     \appendix
 
-    % \input{../chapter/apdx_codigo}
+    \input{../chapter/apdx_codigo}
 
 \end{document}
 

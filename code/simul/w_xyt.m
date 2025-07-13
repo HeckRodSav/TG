@@ -21,7 +21,7 @@ function w_xyt( ...
 		end % if
 	end % function
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	DEBUG = false;
 
@@ -37,7 +37,7 @@ function w_xyt( ...
 	DoA_range = (0+range_shift):range_step:(360+range_shift-1);
 	DoA = deg2rad(DoA_range);
 
-	limits = 2; % ± * Lambda
+	limits = 2; % -+ * Lambda
 
 	c = 1; % Velocidade da luz, simplificacao
 	lambda = 4;

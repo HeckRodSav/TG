@@ -1,1 +1,15 @@
-\input{../_aux}
+% \input{../_aux}
+
+Ao ser lançado, um foguete de sondagem atmosférica pode pousar em qualquer lugar dentro do seu raio de alcance, e realizar a busca pode se tornar um grande desafio sem uma estratégia de localização eficaz.
+Muitos desses veículos contam com localização por \acs{GNSS}, como o \acs{GPS}, porém ainda dependem de um sistema de telemetria que garanta a correta transmissão das coordenadas geográficas à equipe de busca.
+O presente trabalho considera o cenário onde a informação de localização não pôde ser decodificada, porém o sinal de \acs{RF} ainda é detectável, propondo a aferição de \acf{AoA} para determinar a direção de busca.
+Foi construída a simulação de um sistema que, baseado na diferença de defasagens em uma malha circular de antenas, é capaz de determinar o \acs{AoA} do sinal \acs{RF} incidente.
+Durante o desenvolvimento, foi almejada a compatibilidade com diferentes \textit{softwares} de resolução numérica, particularmente o GNU Octave e o MATLAB, o que se mostrou um desafio, considerando as limitações no uso de \textit{software} livre.
+Foram consideradas malhas de antenas com três, cinco e sete antenas.
+A geometria com menos antenas apresentou uma acurácia geral mais baixa comparada às demais.
+As simulações contemplaram casos com diferentes níveis de interferência por ruído do tipo \acs{AWGN}, e consideraram cenários com e sem atenuação no sinal.
+Em todas as simulações, o valor de R² foi acima de \qty{75}{\percent} e, em média, acima de \qty{92}{\percent}.
+Esses resultados indicam que o método proposto se mostra eficaz em diferentes contextos.
+
+\paragraph*{Palavras-chave:} \textit{Angle of Arrival}; Radiofrequência; Foguetes de Sondagem Atmosférica; Resolução Numérica; Telemetria; Localização.
+

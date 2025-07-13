@@ -1,21 +1,22 @@
-\chapter{Resultados}
+\chapter{Resultados}\label{cap:resultados}
 
-Neste capítulo são apresentados resultados e detalhes sobre a perfomance do sistema proposto, comparando a acurária para diferentes configurações.
-Também são apontandos problemas encontrados ao longo do desenvolvimento do trabalho.
+Neste capítulo são apresentados resultados e detalhes sobre a performance do sistema proposto, comparando a acurácia para diferentes configurações.
+Também são apontados problemas encontrados ao longo do desenvolvimento do trabalho.
 
-\section{Perfomance da simulação}
+\section{Performance da simulação}
 
 Foram analisadas diferentes quantidades de antenas, contando ou não com ruído e atenuação no sinal.
-Para todas as quantidades de antenas analisadas, são sumarizadas simulações com a sem \ac{ATT}, diferentes valores de \ac{SNR}, partindo do caso de ruído ideal (sem qualquer ruído, $\text{\acs{SNR}} \rightarrow \qty{\infty}{\deci\bel}$) ao caso de potência de ruído igual à potência de sinal ($\text{\acs{SNR}} = \qty{0}{\deci\bel}$), com o emissor do sinal circular orbitando a uma distância fixa de $ 50 \lambda $ do centro do sistema de antenas.
-Outras simulações realizadas consideram casos onde o emissor está se aproximando do sistema de antenas e também casos onde o emissor está estático no espaço.
+Para todas as quantidades de antenas analisadas, são sumarizadas simulações com e sem \ac{ATT}, diferentes valores de \ac{SNR}, partindo do caso de ruído ideal (sem qualquer ruído, $\text{\acs{SNR}} \rightarrow \qty{\infty}{\deci\bel}$) ao caso de potência de ruído igual à potência de sinal ($\text{\acs{SNR}} = \qty{0}{\deci\bel}$), com o emissor do sinal circular orbitando a uma distância fixa de $ 50 \lambda $ do centro do sistema de antenas.
+
+Para garantir a robustez do sistema, foram realizadas outras simulações, considerando casos onde o emissor está se aproximando do sistema de antenas e também casos onde o emissor está estático no espaço.
+Estas simulações não foram sumarizadas.
 
 \subsection{Três antenas}
 
 As simulações com três antenas foram as que apresentaram menores valores de R² dentre as analisadas.
 Apesar disso, todos os valores foram acima de \qty{75}{\percent}.
 
-Algumas simulações realizadas na configurações de três antenas têm os valores de R² apresentados na \autoref{tab:POLY_3}, e os resultados dos valores destacados são apresentados nas Figuras \ref{fig:simul_POLY_3_R_50}, \ref{fig:simul_POLY_3_R_50_SNR_1} e \ref{fig:simul_POLY_3_R_50_SNR_1_ATT}.
-% A \autoref{tab:POLY_3} apresenta os valores de R² enquanto as Figuras \ref{fig:simul_POLY_3_R_50}, \ref{fig:simul_POLY_3_R_50_SNR_1} e \ref{fig:simul_POLY_3_R_50_SNR_1_ATT} apresentam os respectivos resultados para as simulações, na configuração de três antenas.
+Simulações realizadas na configurações de três antenas têm os valores de R² apresentados na \autoref{tab:POLY_3}, e os resultados dos valores destacados são apresentados nas Figuras \ref{fig:simul_POLY_3_R_50}, \ref{fig:simul_POLY_3_R_50_SNR_1} e \ref{fig:simul_POLY_3_R_50_SNR_1_ATT}.
 
 \begin{table}[htbp]
     \centering
@@ -27,7 +28,7 @@ Algumas simulações realizadas na configurações de três antenas têm os valo
         S[table-format = 3.2, table-model-setup = \bfseries]
         @{}}
         \toprule
-        {\acs{SNR} (\unit{\deci\bel})} & {Sem \acs{ATT} (R² \unit{\percent})} & {Com \acs{ATT} (R² \unit{\percent})}\\\midrule
+        {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
         \infinity & \bfseries 100.00 & 100.00\\
         20 & 88.06 & 90.45\\
         17 & 88.18 & 87.98\\
@@ -44,9 +45,10 @@ Algumas simulações realizadas na configurações de três antenas têm os valo
 
 \begin{figure}[H]
     \centering
-    \caption{Simulação para três antenas, caso ideal ($\text{\acs{SNR}} = \qty{0}{\deci\bel}$).}
+    \caption{Simulação para três antenas, caso ideal ($\text{\acs{SNR}} \rightarrow \qty{\infinity}{\deci\bel}$).}
     \label{fig:simul_POLY_3_R_50}
-    \input{../pictures/simul_POLY_3_R_50.tex}
+    % \input{../pictures/simul_POLY_3_R_50.tex}
+    \includegraphics{../pictures/simul_POLY_3_R_50.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
@@ -54,7 +56,8 @@ Algumas simulações realizadas na configurações de três antenas têm os valo
     \centering
     \caption{Simulação para três antenas, caso $\text{\acs{SNR}} = \SI{0}{\deci\bel}$, sem atenuação.}
     \label{fig:simul_POLY_3_R_50_SNR_1}
-    \input{../pictures/simul_POLY_3_R_50_SNR_1.tex}
+    % \input{../pictures/simul_POLY_3_R_50_SNR_1.tex}
+    \includegraphics{../pictures/simul_POLY_3_R_50_SNR_1.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
@@ -62,7 +65,8 @@ Algumas simulações realizadas na configurações de três antenas têm os valo
     \centering
     \caption{Simulação para três antenas, caso $\text{\acs{SNR}} = \SI{0}{\deci\bel}$, com atenuação.}
     \label{fig:simul_POLY_3_R_50_SNR_1_ATT}
-    \input{../pictures/simul_POLY_3_R_50_SNR_1_ATT.tex}
+    % \input{../pictures/simul_POLY_3_R_50_SNR_1_ATT.tex}
+    \includegraphics{../pictures/simul_POLY_3_R_50_SNR_1_ATT.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
@@ -72,8 +76,7 @@ Algumas simulações realizadas na configurações de três antenas têm os valo
 As simulações com cinco antenas apresentaram valores intermediários de R².
 Todos os valores foram acima de \qty{80}{\percent}.
 
-Algumas simulações realizadas na configurações de cinco antenas têm os valores de R² apresentados na \autoref{tab:POLY_5}, e os resultados dos valores destacados são apresentados nas Figuras \ref{fig:simul_POLY_5_R_50}, \ref{fig:simul_POLY_5_R_50_SNR_1} e \ref{fig:simul_POLY_5_R_50_SNR_1_ATT}.
-% A \autoref{tab:POLY_5} apresenta os valores de R² enquanto as Figuras \ref{fig:simul_POLY_5_R_50}, \ref{fig:simul_POLY_5_R_50_SNR_1} e \ref{fig:simul_POLY_5_R_50_SNR_1_ATT} apresentam os respectivos resultados para as simulações, na configuração de cingo antenas.
+Simulações realizadas na configurações de cinco antenas têm os valores de R² apresentados na \autoref{tab:POLY_5}, e os resultados dos valores destacados são apresentados nas Figuras \ref{fig:simul_POLY_5_R_50}, \ref{fig:simul_POLY_5_R_50_SNR_1} e \ref{fig:simul_POLY_5_R_50_SNR_1_ATT}.
 
 \begin{table}[htbp]
     \centering
@@ -85,7 +88,7 @@ Algumas simulações realizadas na configurações de cinco antenas têm os valo
         S[table-format = 3.2, table-model-setup = \bfseries]
         @{}}
         \toprule
-        {\acs{SNR} (\unit{\deci\bel})} & {Sem \acs{ATT} (R² \unit{\percent})} & {Com \acs{ATT} (R² \unit{\percent})}\\\midrule
+        {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
         \infinity & \bfseries 100.00 & 100.00\\
         20 & 100.00 & 100.00\\
         17 & 91.90 & 91.89\\
@@ -101,9 +104,10 @@ Algumas simulações realizadas na configurações de cinco antenas têm os valo
 
 \begin{figure}[H]
     \centering
-    \caption{Simulação para cinco antenas, caso ideal.}
+    \caption{Simulação para cinco antenas, caso ideal ($\text{\acs{SNR}} \rightarrow \qty{\infinity}{\deci\bel}$).}
     \label{fig:simul_POLY_5_R_50}
-    \input{../pictures/simul_POLY_5_R_50.tex}
+    % \input{../pictures/simul_POLY_5_R_50.tex}
+    \includegraphics{../pictures/simul_POLY_5_R_50.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
@@ -111,7 +115,8 @@ Algumas simulações realizadas na configurações de cinco antenas têm os valo
     \centering
     \caption{Simulação para cinco antenas, caso $\text{\acs{SNR}} = \SI{0}{\deci\bel}$, sem atenuação.}
     \label{fig:simul_POLY_5_R_50_SNR_1}
-    \input{../pictures/simul_POLY_5_R_50_SNR_1.tex}
+    % \input{../pictures/simul_POLY_5_R_50_SNR_1.tex}
+    \includegraphics{../pictures/simul_POLY_5_R_50_SNR_1.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
@@ -119,7 +124,8 @@ Algumas simulações realizadas na configurações de cinco antenas têm os valo
     \centering
     \caption{Simulação para cinco antenas, caso $\text{\acs{SNR}} = \SI{0}{\deci\bel}$, com atenuação.}
     \label{fig:simul_POLY_5_R_50_SNR_1_ATT}
-    \input{../pictures/simul_POLY_5_R_50_SNR_1_ATT.tex}
+    % \input{../pictures/simul_POLY_5_R_50_SNR_1_ATT.tex}
+    \includegraphics{../pictures/simul_POLY_5_R_50_SNR_1_ATT.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
@@ -128,8 +134,7 @@ Algumas simulações realizadas na configurações de cinco antenas têm os valo
 As simulações com sete antenas apresentaram os melhores valores de R², com casos acima de \qty{99}{\percent}.
 Todos os valores foram acima de \qty{80}{\percent}.
 
-Algumas simulações realizadas na configurações de sete antenas têm os valores de R² apresentados na \autoref{tab:POLY_7}, e os resultados dos valores destacados são apresentados nas Figuras \ref{fig:simul_POLY_7_R_50}, \ref{fig:simul_POLY_7_R_50_SNR_1} e \ref{fig:simul_POLY_7_R_50_SNR_1_ATT}.
-% A \autoref{tab:POLY_7} apresenta os valores de R² enquanto as Figuras \ref{fig:simul_POLY_7_R_50}, \ref{fig:simul_POLY_7_R_50_SNR_1} e \ref{fig:simul_POLY_7_R_50_SNR_1_ATT} apresentam os respectivos resultados para as simulações, na configuração de sete antenas.
+Simulações realizadas na configurações de sete antenas têm os valores de R² apresentados na \autoref{tab:POLY_7}, e os resultados dos valores destacados são apresentados nas Figuras \ref{fig:simul_POLY_7_R_50}, \ref{fig:simul_POLY_7_R_50_SNR_1} e \ref{fig:simul_POLY_7_R_50_SNR_1_ATT}.
 
 \begin{table}[htbp]
     \centering
@@ -141,7 +146,7 @@ Algumas simulações realizadas na configurações de sete antenas têm os valor
         S[table-format = 3.2, table-model-setup = \bfseries]
         @{}}
         \toprule
-        {\acs{SNR} (\unit{\deci\bel})} & {Sem \acs{ATT} (R² \unit{\percent})} & {Com \acs{ATT} (R² \unit{\percent})}\\\midrule
+        {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
         \infinity & \bfseries 100.00 & 100.00\\
         20 & 84.25 & 100.00\\
         17 & 100.00 & 84.24\\
@@ -157,9 +162,10 @@ Algumas simulações realizadas na configurações de sete antenas têm os valor
 
 \begin{figure}[H]
     \centering
-    \caption{Simulação para sete antenas, caso ideal.}
+    \caption{Simulação para sete antenas, caso ideal ($\text{\acs{SNR}} \rightarrow \qty{\infinity}{\deci\bel}$).}
     \label{fig:simul_POLY_7_R_50}
-    \input{../pictures/simul_POLY_7_R_50.tex}
+    % \input{../pictures/simul_POLY_7_R_50.tex}
+    \includegraphics{../pictures/simul_POLY_7_R_50.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
@@ -167,7 +173,8 @@ Algumas simulações realizadas na configurações de sete antenas têm os valor
     \centering
     \caption{Simulação para sete antenas, caso $\text{\acs{SNR}} = \SI{0}{\deci\bel}$, sem atenuação.}
     \label{fig:simul_POLY_7_R_50_SNR_1}
-    \input{../pictures/simul_POLY_7_R_50_SNR_1.tex}
+    % \input{../pictures/simul_POLY_7_R_50_SNR_1.tex}
+    \includegraphics{../pictures/simul_POLY_7_R_50_SNR_1.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
@@ -175,22 +182,23 @@ Algumas simulações realizadas na configurações de sete antenas têm os valor
     \centering
     \caption{Simulação para sete antenas, caso $\text{\acs{SNR}} = \SI{0}{\deci\bel}$, com atenuação.}
     \label{fig:simul_POLY_7_R_50_SNR_1_ATT}
-    \input{../pictures/simul_POLY_7_R_50_SNR_1_ATT.tex}
+    % \input{../pictures/simul_POLY_7_R_50_SNR_1_ATT.tex}
+    \includegraphics{../pictures/simul_POLY_7_R_50_SNR_1_ATT.pdf}
     \caption*{Fonte: Autor.}
 \end{figure}
 
 \section{Problemas encontrados}
 
 Ao longo do desenvolvimento do projeto, alguns problemas foram encontrados e contornados da melhor forma possível.
-Esta seção sumariza estes problemas e quais soluções foram dadas.
+Esta seção sumariza estes problemas e as soluções aplicadas.
 
 \subsection{Compatibilidade de código}
 
 Apesar de ter sido desenvolvido para o GNU Octave, houve a preocupação de manter o código compatível com o MATLAB.
-Partindo dessa ideia, foram necessárias várias alterações em partes do código, que não tinham o mesmo comportamento em ambos os \textit{softwares}.
+Partindo disso, foram necessárias várias alterações em partes do código, que não tinham o mesmo comportamento em ambos os \textit{softwares}.
 
-\subsection{Limitações de \textit{software} gratuito}
+\subsection{Limitações de \textit{software} livre}
 
 Por se tratar de um \textit{software} proprietário, o MATLAB não disponibiliza o código fonte de todas as suas ferramentas internas e, assim, nem todas as funcionalidades estão implementadas no GNU Octave.
-A falta de algumas dessas funções modelou o decorrer do densenvolvimento do projeto, optando por operações viáveis à versão de uso livre.
+A falta de algumas dessas funções moldou o decorrer do desenvolvimento do projeto, optando por operações viáveis à versão de uso livre.
 

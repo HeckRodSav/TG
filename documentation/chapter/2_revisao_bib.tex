@@ -1,15 +1,19 @@
-\chapter{Revisão Bibliográfica}
+\chapter{Revisão Bibliográfica}\label{cap:revbib}
+
+Este capítulo apresenta a fundamentação teórica utilizada ao longo do trabalho, bem como um breve levantamento de trabalhos relacionados, que mostram a relevância do assunto abordado.
 
 \section{Fundamentação teórica}
 
-\subsection{Direcionamento por coordenadas geográficas}
+A construção deste trabalho fundamentou-se em princípios teóricos, utilizando as bases de direcionamento por coordenadas geográficas, apresentada na \autoref{ssec:gnss}, e princípios de eletromagnetismo para estimar o \ac{AoA}, apresentados na \autoref{ssec:aoa}.
+
+\subsection{Direcionamento por coordenadas geográficas}\label{ssec:gnss}
 
 Coordenadas geográficas são definidas por dois valores, latitude e longitude, associadas a coordenadas esféricas referenciadas a partir do centro da terra, assumindo o raio da coordenada como o raio médio da superfície do planeta, cerca de $R_\text{Terra} = \SI{6371E3}{\metre}$ \cite{palomaguitarrara, chrisveness}.
-A latitude equivale à componente polar $\phi$ centralizada na linha do equador, enquanto a longitude equivale à componente $\theta$ centralizado do meridiano de Greenwich \cite{palomaguitarrara, henriquefleming2003}.
+A latitude equivale à componente polar $\phi$ centralizada na linha do equador, enquanto a longitude equivale à componente $\theta$ centralizada no meridiano de Greenwich \cite{palomaguitarrara, henriquefleming2003}.
 
 Conhecendo as coordenadas de dois pontos distintos A e B, é possível determinar seu ângulo de \textit{bearing} \ac{betab} relativo, referente ao norte, ou seja, o ângulo da direção a se seguir partindo do ponto A para chegar ao ponto B, a partir da direção norte no ponto de origem A \cite{henriquefleming2003}.
 
-Sendo \textcolor{Green}{\ac{Ag}} e \textcolor{Blue}{\ac{Bg}} duas coordenadas geográficas, \textcolor{Green}{\ac{phiA}} e \textcolor{Blue}{\ac{phiB}} suas respectivas latitudes,  \textcolor{Green}{\ac{thetaA}} e \textcolor{Blue}{\ac{thetaB}} suas respectivas longitudes, conforme ilustrado na \autoref{fig:globo}.
+Sendo \textcolor{Green}{\ac{Ag}} e \textcolor{Blue}{\ac{Bg}} duas coordenadas geográficas, \textcolor{Green}{\ac{phiA}} e \textcolor{Blue}{\ac{phiB}} suas respectivas latitudes, e \textcolor{Green}{\ac{thetaA}} e \textcolor{Blue}{\ac{thetaB}} suas respectivas longitudes, conforme ilustrado na \autoref{fig:globo}.
 
 \begin{figure}[htbp]
     \centering
@@ -20,12 +24,12 @@ Sendo \textcolor{Green}{\ac{Ag}} e \textcolor{Blue}{\ac{Bg}} duas coordenadas ge
     \label{fig:globo}
 \end{figure}
 
-Calculam-se \ac{Deltaphi} e \ac{Deltatheta}.
+Calculam-se \ac{Deltaphi} e \ac{Deltatheta} conforme Equações \ref{eq:Deltaphi} e \ref{eq:Deltatheta}, respectivamente.
 
-    \begin{equation}
+    \begin{equation}\label{eq:Deltaphi}
         \ac{Deltaphi} = \textcolor{Blue}{\ac{phiB}} - \textcolor{Green}{\ac{phiA}}
     \end{equation}
-    \begin{equation}
+    \begin{equation}\label{eq:Deltatheta}
         \ac{Deltatheta} = \textcolor{Blue}{\ac{thetaB}} - \textcolor{Green}{\ac{thetaA}}
     \end{equation}
 
@@ -49,7 +53,7 @@ Para o cálculo de distância, os ângulos devem ser tratados em radianos.
 \end{equation}
 
 O ângulo \textcolor{Red}{\ac{betab}} calculado aqui é referente à direção cardeal Norte, assim, uma equipe de busca equipada com uma bússola simples seria capaz de seguir a direção correta.
-A \autoref{fig:bearing} apresenta a aplicação desenvolvida por \citeauthor{chrisveness}, capaz de calcular o ângulo de \textit{Bearing} entre duas coordenadas, note que, neste caso, o ângulo referido é relacionado à direção cardial Leste \cite{chrisveness}.
+A \autoref{fig:bearing} apresenta a aplicação desenvolvida por \citeauthor{chrisveness}, capaz de calcular o ângulo de \textit{Bearing} entre duas coordenadas, note que, neste caso, o ângulo referido é relacionado à direção cardinal Leste \cite{chrisveness}.
 
 \begin{figure}[htbp]
     \centering
@@ -70,13 +74,13 @@ A \autoref{fig:bearing} apresenta a aplicação desenvolvida por \citeauthor{chr
 
 Em seu trabalho, \citeauthor{horst2021localization} \cite{horst2021localization} analisa dois algoritmos de detecção de \ac{AoA}, realizando as análises em ambientes internos e utilizando matrizes de antenas.
 O primeiro método analisado consiste em uma aproximação do ângulo, feita utilizando um \textit{software} fornecido pela Texas Instruments, fabricante do \textit{hardware} utilizado.
-Já o segundo método, baseia-se na construção matemática do \ac{AoA} baseado na diferença de fase instantânea do sinal entre as antenas do sistema, uma abordagem semelhante à proposta neste trabalho.
+Já o segundo método, baseia-se na construção matemática do \ac{AoA} calculado pela diferença de fase instantânea do sinal entre as antenas do sistema, uma abordagem semelhante à proposta neste trabalho.
 Os resultados obtidos indicam que o método de aproximação teve melhor acurácia nos valores de ângulo.
 
 A proposta de \citeauthor{zeaiter:hal-03693641} \cite{zeaiter:hal-03693641} busca validar a performance da detecção de \ac{AoA} em ambiente fechado, realizando a análise em diferentes modulações, larguras de canal e fatores de espalhamento.
 Também propõe que, ao combinar de seu algoritmo de localização de \ac{AoA} com a função de autocorrelação, é possível analisar os dados de dois sinais recebidos simultaneamente.
 
-Outro trabalho de \citeauthor{zeaiter:hal-03932846} \cite{zeaiter:hal-03932846} consiste um uma aproximação do \ac{AoA} utilizando um método de autocorrelação em um sinal \ac{LoRa} de baixa potência.
+Outro trabalho de \citeauthor{zeaiter:hal-03932846} \cite{zeaiter:hal-03932846} consiste em uma aproximação do \ac{AoA} utilizando um método de autocorrelação em um sinal \ac{LoRa} de baixa potência.
 Seu objetivo consiste em detectar o sinal \ac{LoRa} operando em transmissão de baixa potência, caso onde a vida útil da bateria do sistema transmissor é estendida.
 O algoritmo apresentado busca picos de autocorrelação no sinal recebido, além de utilizar \ac{FFT} para denotá-los e melhorar a \ac{SNR}.
 Quando um pico é detectado, o algoritmo é capaz de encontrar o \ac{AoA}.
@@ -93,21 +97,21 @@ Também propõe um modelo probabilístico adaptativo que opera no modelo de esti
 Seus resultados indicam que estes métodos superam a performance de modelos probabilísticos estáticos tradicionais, tanto em acurácia de localização quanto em estabilidade no valor obtido.
 
 Neste trabalho, \citeauthor{bnilam2019low} \cite{bnilam2019low} propõe um dispositivo de baixo custo capaz de estimar o \ac{AoA}, de forma que seja viável sua utilização em dispositivos de \ac{IoT}.
-O dispositivo consiste numa conversão de vários \ac{SDR} individuais de baixo custo num único \ac{SDR} com múltiplos canais de \ac{RF}.
+O dispositivo consiste em uma conversão de vários \ac{SDR} individuais de baixo custo num único \ac{SDR} com múltiplos canais de \ac{RF}.
 Seus resultados experimentais indicam que o dispositivo é capaz de estimar valores de \ac{AoA} de forma estável e acurada.
 
 A proposta de \citeauthor{bnilam2020angle} \cite{bnilam2020angle} neste trabalho consiste em um novo algoritmo para determinação de \ac{AoA} chamado ANGLE (\textit{ANGular Location Estimation}), baseado em modelos probabilísticos para a resposta do sinal recebido.
 Sua proposta ainda sugere duas versões do método, para o caso de amostragem única e de decomposição de subespaço, como utilizado no algoritmo MUSIC (\textit{MUltiple SIgnal Classification}).
 
-\citeauthor{bnilam2020lora} \cite{bnilam2020lora} apresenta neste trabalho uma abordagem mais amigável para estimativa de \ac{AoA} em redes \ac{LoRa}.
+\citeauthor{bnilam2020lora} \cite{bnilam2020lora} apresenta, neste trabalho, uma abordagem mais amigável para estimativa de \ac{AoA} em redes \ac{LoRa}.
 O sistema proposto, denominado LoRay (\ac{LoRa} array) é composto por \textit{hardware} e \textit{software} preparados para fazer a estimativa de \ac{AoA} em ambiente urbano, onde o sistema foi validado.
 O hardware utilizado foi descrito em um trabalho anterior \cite{bnilam2019low}.
-Este sistema apresentou resultados estáveis e acurados para estimativa de \ac{AoA} tanto nos casos \ac{LoS} e quanto nos \ac{NLoS}.
+Este sistema apresentou resultados estáveis e acurados para estimativa de \ac{AoA} tanto nos casos \ac{LoS} quanto nos \ac{NLoS}.
 
 % \citeauthor{steckel2018low} \cite{steckel2018low}
 
 % \citeauthor{du2018long} \cite{du2018long}
 
 Em seu trabalho, \citeauthor{niculescu2003ad} \cite{niculescu2003ad} propõe métodos para detecção de posição e orientação em cada nó de uma rede \textit{ad hoc}.
-A proposta parte de possíveis problemas relacionados a utilização de \ac{GPS} em ambiente fechado
+A proposta parte de possíveis problemas relacionados à utilização de \ac{GPS} em ambiente fechado
 

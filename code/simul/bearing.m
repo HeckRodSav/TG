@@ -1,8 +1,8 @@
 EARTH_RADIUS = 6371E3;
 
-                  % Lat               Lon
-coord_ufabc_SA  = [-23.64450271006082 -46.52808340455618];
-coord_ufabc_SBC = [-23.67751377362596 -46.563491717644425];
+                  % Lat         Lon
+coord_ufabc_SA  = [-23.64450270 -46.52808340];
+coord_ufabc_SBC = [-23.67751378 -46.56349172];
 
 A = coord_ufabc_SA;
 B = coord_ufabc_SBC;

@@ -32,7 +32,7 @@ Os parâmetros numéricos são:
 	\item \lstinline|SNR|, valor da \ac{SNR} linear;
 	\item \lstinline|SNR_dB|, valor da \ac{SNR} em \si{\decibel};
 	\item \lstinline|t_w|, tempo $t$ associado ao instante de aferição do sinal;
-	\item \lstinline|x_w| ou \lstinline|y_w|, coordenada \ac{xk} ou \ac{yk} da antena \ac{Ak} em relação ao sistema;
+	\item \lstinline|x_w| ou \lstinline|y_w|, coordenada $x$ ou $y$ no espaço para aferição do sinal \ac{w};
 	\item \lstinline|Z_antenna|, \lstinline|Z_antenna_A| ou \lstinline|Z_antenna_B|, valor complexo, coordenada de antena;
 	\item \lstinline|Z_phase_A| ou \lstinline|Z_phase_B|, valor complexo, fase \ac{Phik} de antena;
 \end{itemize}
@@ -115,7 +115,7 @@ Os parâmetros de matrizes numéricas são:
 
 % argument_r
 A primeira função a ser definida é \lstinline|argument_r|, que opera como auxiliar para normalização de argumento para as funções trigonométricas utilizadas nas análises, garantindo coerência em frequência angular e coordenadas espaciais.
-Seus argumentos são, respectivamente, \lstinline|x_w|, \lstinline|y_w|, \lstinline|t_w|, \lstinline|ang_w|, \lstinline|r_w|, \lstinline|lambda_w| e \lstinline|omega_w|.
+Seus argumentos são, respectivamente, \lstinline|x_w|, \lstinline|y_w|, \lstinline|t_w|, \lstinline|ang_w|, \lstinline|r_w|, \lstinline|phase_w|, \lstinline|lambda_w| e \lstinline|omega_w|.
 O \autoref{cod:argument_r} apresenta uma versão simplificada da função \lstinline|argument_r| desenvolvida.
 
 \begin{lstfloat}[htbp]
@@ -268,7 +268,7 @@ A \autoref{fig:example:simul_POLY_3_R_50} ilustra os gráficos gerados pela fun�
 	\caption{Exemplo de quadro da animação de saída da função \lstinline|generate_fig|.}
 	\includegraphics[width=0.9\textwidth]{../pictures/simul_POLY_3_R_50.png}
 	\label{fig:example:simul_POLY_3_R_50}
-	\caption*{Fonte: Autor.}
+	\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50.gif}{\underline{GitHub}}.}
 \end{figure}
 
 \subsection{Função geral da simulção}

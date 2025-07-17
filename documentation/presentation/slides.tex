@@ -1,12 +1,16 @@
-\documentclass[11pt, svgnames, compress, handout]{beamer}
+\PassOptionsToPackage{rgb}{xcolor}
 % \documentclass[11pt, svgnames, compress, handout, showframe]{beamer}
-% \documentclass[11pt, svgnames, compress]{beamer}
+% \documentclass[11pt, svgnames, compress, handout]{beamer}
+\documentclass[11pt, svgnames, compress]{beamer}
 
 % \input{template/slideTemplate}
 \input{../template/slideTamplate}
 \input{../commands}
 \input{../capa}
 \renewcommand{\localLogo}{../template/logo_ufabc.png}
+
+% \input{../acronyms}
+% \input{../symbols}
 
 \lstset{
     basicstyle={\ttfamily\small},
@@ -56,10 +60,11 @@
     \end{frame}
 
     \input{../slides/1_intro}
-    \input{../slides/2_gps}
+    \input{../slides/2_gnss}
     \input{../slides/3_sinais}
     \input{../slides/4_aoa}
-    \input{../slides/5_outtro}
+    \input{../slides/5_resultados.tex}
+    % \input{../slides/5_outtro}
 
     \section{Finalização}
     \begin{frame}
@@ -75,4 +80,3 @@
     \end{frame}
 
 \end{document}
-|

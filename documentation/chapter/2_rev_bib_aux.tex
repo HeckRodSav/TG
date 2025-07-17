@@ -143,14 +143,16 @@ A \autoref{fig:antennas} apresenta exemplos dessa disposição de antenas, note 
     \begin{subfigure}[c]{0.4\textwidth}
         \centering
         \caption{$ \ac{Nant} = 3 $.}
-        \input{../pictures/antennas_3}
+        % \input{../pictures/antennas_3}
+        \includegraphics{../pictures/antennas_3.pdf}
         \label{fig:antennas:3}
     \end{subfigure}
     \hfill
     \begin{subfigure}[c]{0.575\textwidth}
         \centering
         \caption{$ \ac{Nant} = 6 $.}
-        \input{../pictures/antennas_6}
+        % \input{../pictures/antennas_6}
+        \includegraphics{../pictures/antennas_6.pdf}
         \label{fig:antennas:6}
     \end{subfigure}
     \hfill
@@ -158,17 +160,19 @@ A \autoref{fig:antennas} apresenta exemplos dessa disposição de antenas, note 
     \vspace{\floatsep}
 
     \hfill
-    \begin{subfigure}[c]{0.45\textwidth}
+    \begin{subfigure}[c]{0.425\textwidth}
         \centering
         \caption{$ \ac{Nant} = 4 $.}
-        \input{../pictures/antennas_4}
+        % \input{../pictures/antennas_4}
+        \includegraphics{../pictures/antennas_4.pdf}
         \label{fig:antennas:4}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[c]{0.5\textwidth}
+    \begin{subfigure}[c]{0.525\textwidth}
         \centering
         \caption{$ \ac{Nant} = 5 $.}
-        \input{../pictures/antennas_5}
+        % \input{../pictures/antennas_5}
+        \includegraphics{../pictures/antennas_5.pdf}
         \label{fig:antennas:5}
     \end{subfigure}
     \hfill
@@ -221,14 +225,14 @@ A \autoref{eq:Z} apresenta o valor complexo \textcolor{cmyk_B}{\ac{Zk}} de fase 
 \begin{equation} \label{eq:in_phase}
     \ac{Ik} =
     \int\limits_0^{\ac{T}} \cos\left(\ac{omega} \cdot\tau\right)
-    \cdot \ac{w}\left( \tau, ~\ac{xk}, ~\ac{yk} \right) \partial \tau
+    \cdot \ac{w}\left( \ac{xk}, ~\ac{yk}, ~\tau \right) \partial \tau
 \end{equation}
 
 % Out of phase
 \begin{equation} \label{eq:out_of_phase}
     \ac{Qk} =
     \int\limits_0^{\ac{T}} \sin\left(\ac{omega}\cdot\tau\right)
-    \cdot \ac{w}\left( \tau, ~\ac{xk}, ~\ac{yk} \right) \partial \tau
+    \cdot \ac{w}\left( \ac{xk}, ~\ac{yk}, ~\tau \right) \partial \tau
 \end{equation}
 
 % Fase na antena

@@ -16,25 +16,25 @@
         \coordinate (O) at (0,0);
         \coordinate (antenna) at (\antennaAngle:\closeRange*\wavelength);
         % \draw [help lines, dashed] (-5,-3) grid (5,3); % desenha grid
-        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0) 
-        
+        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
+
         % \draw (-6.8,-4) rectangle (6.8,4);
         \clip (-6.8,-4) rectangle (6.8,4);
 
         % \draw[thick]
         %     (antenna) node[dinantenna]{}
         % ;
-        
+
         \foreach \x [evaluate={\y=int((\x+\closeRange));\z=int((\x+\closeRange)*\wavelength);}] in {-3,...,3} {
-            \draw [black, thin] 
+            \draw [black, thin]
             (antenna) ++ (\antennaAngle:-\z)
                 % node[anchor=west, font = {\footnotesize\bfseries}]{$\y\lambda$}
             ($(antenna) + (\antennaAngle:-\z) + ({10*cos(\antennaAngle+90)},{10*sin(\antennaAngle+90)})$)
-                -- 
+                --
             ($(antenna) + (\antennaAngle:-\z) - ({10*cos(\antennaAngle+90)},{10*sin(\antennaAngle+90)})$);
             % \draw [gray, thin] (antenna) circle (\z);
         }
-        
+
         \draw[thick]
             (0,0)  node[Green, dinantenna] (A00) {}
             (0,\d) node[Blue,  dinantenna] (A0d) {}
@@ -45,13 +45,13 @@
             (A00) ++(-\d,0) coordinate(aux) ++(\antennaAngle:0.5*\d) -- ++(\antennaAngle:-\d)
         ;
 
-        
-        % \draw[Goldenrod, domain=-8:8, samples=100] plot[shift={(aux)}, rotate=\antennaAngle]({\x},{sin(\x * pi * 2 / \wavelength r)});
+
+        % \draw[antena_5_5, domain=-8:8, samples=100] plot[shift={(aux)}, rotate=\antennaAngle]({\x},{sin(\x * pi * 2 / \wavelength r)});
 
         \draw[thin, Red, opacity=0.5]
             (A00) ++ ($({\antennaAngle-90}:{\d*sin(\antennaAngle)})$) -- (Ad0) -- (A00)
 
-            ($({\antennaAngle-90}:{\d*sin(\antennaAngle)})$) 
+            ($({\antennaAngle-90}:{\d*sin(\antennaAngle)})$)
               ++(\antennaAngle+180:0.25)
             --++(\antennaAngle-90:0.25)
             --++(\antennaAngle:0.25)
@@ -60,14 +60,14 @@
 
         \centerarc[thin, Red, opacity=0.5](A00)(\antennaAngle+90:360:0.4)($\beta_{0d}$)(north)
 
-        
+
         \draw[thin, Blue, opacity=0.5]
             (A00) ++ ($({\antennaAngle+90}:{\d*cos(\antennaAngle)})$) -- (A0d) -- (A00)
 
-            ($({\antennaAngle+90}:{\d*cos(\antennaAngle)})$) 
+            ($({\antennaAngle+90}:{\d*cos(\antennaAngle)})$)
               ++(\antennaAngle+180:0.25)
             --++(\antennaAngle+90:0.25)
-            --++(\antennaAngle:0.25)    
+            --++(\antennaAngle:0.25)
         ;
 
         \centerarc[thin, Blue, opacity=0.5](A00)(\antennaAngle-90:90:0.4)($\beta_{d0}$)(north east)
@@ -75,12 +75,12 @@
         \draw[latex-latex]
             ($(A00)+(0,1)$) -- ($(Ad0)+(0,1)$) node [midway, fill=white] {$d$}
         ;
-        
+
 
 
         % \foreach \x in {0,60,...,300} {
         %     \draw[thick] (\x:1 cm) -- (\x + 60:1 cm);
-            
+
         %     \draw (\x + 30:1.732 cm) node[Gray, circ]{};
         %     \draw[Gray, dashed] (\x:1 cm) -- ++(\x: 0.9cm);
         %     \draw[Gray, dotted]
@@ -89,13 +89,13 @@
         %         (\x:1 cm) arc [start angle=\x+120, delta angle=-50, radius=1cm]
         %     ;
         % }
-    
+
         % \draw (0,0) node [circ] {} node [below left,font={\scriptsize\bfseries}] {BS};
         % \draw[thick, densely dotted] (0,0) circle (1cm);
-        
+
         % \draw[-latex] (0,0) -- (0:1cm) node[midway, below] {$R_c$};
         % \draw[-latex] (0,0) -- (90:0.866cm) node[midway, left] {$R$};
-            
+
     \end{circuitikz}
   % }
 

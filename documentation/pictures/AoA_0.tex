@@ -32,14 +32,14 @@
         ;
 
 
-        % \pause
+        \pause
         \draw[thick]
             (0,0)  node[cmyk_B, dinantenna] (A00) {}
             % (0,\d) node[Blue,  dinantenna] (A0d) {}
             % (\d,0) node[Red,   dinantenna] (Ad0) {}
         ;
 
-        % \pause
+        \pause
         \draw[thick]
             % (0,0)  node[Green, dinantenna] (A00) {}
             % (0,\d) node[Blue,  dinantenna] (A0d) {}
@@ -49,11 +49,11 @@
         \draw[latex-latex]
             ($(A00)+(0,1.1)$) -- ++(\wavelength,0) node [midway, fill=white] {$\lambda$}
         ;
-    % \visible<7->{
+    \visible<7->{
         \draw[latex-latex]
             ($(A00)+(0,-0.1)$) -- ++(0.5*\wavelength,0) node [midway, fill=white, fill opacity=0.75, anchor=north] {$d = \sfrac{\lambda}{2}$}
         ;
-    % }
+    }
 
     \end{circuitikz}
   % }

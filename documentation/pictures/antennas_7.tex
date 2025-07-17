@@ -10,9 +10,9 @@
     \def\closeRange{9}
     \def\farRange{\closeRange+13}
 
-	\def\NAntennas{5}
+	\def\NAntennas{7}
 	\pgfmathsetmacro\AngleAntennas{360/\NAntennas}
-	\pgfmathsetmacro\ShiftAngleAntennas{-90+\AngleAntennas}
+	\pgfmathsetmacro\ShiftAngleAntennas{-90+2*\AngleAntennas}
 
 	\pgfmathsetmacro\RhoAntennas{\d/(2*sin(180/\NAntennas))}
 
@@ -50,16 +50,20 @@
 
 	\draw[densely dotted] (O) circle (\RhoAntennas);
 
-    \draw[thick, antena_5_1] (O) ++(1*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A1) {} node [above right] {$A_{1}$};
-    \draw[thick, antena_5_2] (O) ++(2*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A2) {} node [above left] {$A_{2}$};
-    \draw[thick, antena_5_3] (O) ++(3*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A3) {};
-    \draw[thick, antena_5_4] (O) ++(4*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A4) {};
-    \draw[thick, antena_5_5] (O) ++(5*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A5) {};
+    \draw[thick, antena_7_1] (O) ++(1*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A1) {} node [above right] {$A_{1}$};
+    \draw[thick, antena_7_2] (O) ++(2*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A2) {} node [above left] {$A_{2}$};
+    \draw[thick, antena_7_3] (O) ++(3*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A3) {};
+    \draw[thick, antena_7_4] (O) ++(4*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A4) {};
+    \draw[thick, antena_7_5] (O) ++(5*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A5) {};
+    \draw[thick, antena_7_6] (O) ++(6*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A6) {};
+    \draw[thick, antena_7_7] (O) ++(7*\AngleAntennas+\ShiftAngleAntennas:\RhoAntennas) node[dinantenna] (A7) {};
 
 	\coordinate (A1_2) at ($(A1)!0.5!(A2)$);
 
 	\draw[Black!25, dotted]
 		(A1) --
+		(A7) --
+		(A6) --
 		(A5) --
 		(A4) --
 		(A3) --

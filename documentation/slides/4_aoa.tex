@@ -1,6 +1,26 @@
-\section{Posicionamento por AoA}
+\section{AoA}
 
-    \begin{frame}{Estimar defasagem}
+    \begin{frame}{\textit{Angle of Arrival}}
+        % \input{../pictures/AoA_1}
+        \centering\includegraphics{../pictures/AoA_1_new}
+    \end{frame}
+
+    \begin{frame}{\textit{Angle of Arrival}}
+        % \input{../pictures/AoA_2}
+        \centering\includegraphics{../pictures/AoA_2_new}
+    \end{frame}
+
+    \begin{frame}{\textit{Angle of Arrival}}
+        % \input{../pictures/AoA_3}
+        \centering\includegraphics{../pictures/AoA_3_new}
+    \end{frame}
+
+    \begin{frame}{\textit{Angle of Arrival}}
+        % \input{../pictures/AoA_4}
+        \centering\includegraphics{../pictures/AoA_4_new}
+    \end{frame}
+
+    \begin{frame}{Distância $d$}
                 \begin{columns}
             \begin{column}{0.45\textwidth}
                 \centering \vfill
@@ -10,7 +30,7 @@
             \end{column}
             \begin{column}{0.55\textwidth}
                 \begin{itemize}[<+(-1)->]
-                    \item Toma-se uma \textcolor{Green}{antena} como referência
+                    \item Toma-se uma \textcolor{cmyk_B}{antena} como referência
                     \item Posiciona-se uma segunda \textcolor{Red}{antena} a uma distância determinada
                     \item Analisando a defasagem entre as antenas, é possível determinar o ângulo de incidência do sinal
                     \item Se a distância for maior que $\sfrac{\lambda}{2}$, haverá conflito de defasagem
@@ -21,72 +41,187 @@
         \end{columns}
     \end{frame}
 
-    \begin{frame}{\textit{Angle of Arrival}}
-        \input{../pictures/AoA_1}
+\subsection{Malha de antenas}
+    \begin{frame}{Geometria da malha de antenas}
+
+        \begin{equation*}
+            \rho = \frac{d}{2\cdot \sin\left(\displaystyle\frac{\pi}{N_\text{ant}}\right)}
+        \end{equation*}
+
+        \begin{equation*}
+            k = \left\{1, 2, \dotsc, N_\text{ant}\right\}
+        \end{equation*}
+
+        \begin{equation*}
+            \textcolor{cmyk_B}{A_k} =
+            \rho
+            \cdot \exp\left(\imath\cdot k \cdot \frac{2\pi}{N_\text{ant}}\right) =
+            \left( \operatorname{\mathcal{Re}}\left( \textcolor{cmyk_B}{A_k} \right), ~\operatorname{\mathcal{Im}}\left( \textcolor{cmyk_B}{A_k} \right) \right) =
+            \left( x_{A_k}, ~ y_{A_k} \right)
+        \end{equation*}
+
+        \begin{equation*}
+            \textcolor{cmyk_M}{\alpha_k} = \arg\left( \textcolor{cmyk_B}{A_k} - \textcolor{cmyk_R}{A_{k+1}} \right)
+        \end{equation*}
     \end{frame}
 
-    \begin{frame}{\textit{Angle of Arrival}}
-        \input{../pictures/AoA_2}
+    \begin{frame}{Três antenas}
+        \centering%
+        % \fbox{%
+            % \scalebox{0.75}%
+            % \resizebox{0.5\textwidth}{!}
+            % {\input{../pictures/antennas_3}}%
+            \includegraphics[scale=0.8]{../pictures/antennas_3.pdf}%
+        % }
+        % \vfill
+    \end{frame}
+    \begin{frame}{Cinco antenas}
+        \centering%
+        % \fbox{%
+            % \scalebox{0.75}%
+            % \resizebox{0.5\textwidth}{!}
+            % {\input{../pictures/antennas_5}}%
+            \includegraphics[scale=0.8]{../pictures/antennas_5.pdf}%
+        % }
+        % \vfill
+    \end{frame}
+    \begin{frame}{Sete antenas}
+        \centering%
+        % \fbox{%
+            % \scalebox{0.75}%
+            % \resizebox{0.5\textwidth}{!}
+            % {\input{../pictures/antennas_7}}%
+            \includegraphics[scale=0.8]{../pictures/antennas_7.pdf}%
+        % }
+        % \vfill
     \end{frame}
 
-    \begin{frame}{\textit{Angle of Arrival}}
-        \input{../pictures/AoA_3}
+\section{Calculo de fase}
+    \begin{frame}{Geometria do sistema}
+        \begin{equation*}
+            T = \frac{2\pi}{\omega} = \frac{1}{f}
+        \end{equation*}
+
+        \begin{equation*}
+            I_k =
+            \int\limits_0^{T} \cos\left(\omega \cdot\tau\right)
+            \cdot w\left( x_{A_k}, ~y_{A_k}, ~\tau \right) \partial \tau
+        \end{equation*}
+
+        \begin{equation*}
+            Q_k =
+            \int\limits_0^{T} \sin\left(\omega\cdot\tau\right)
+            \cdot w\left( x_{A_k}, ~y_{A_k}, ~\tau \right) \partial \tau
+        \end{equation*}
+
+        \begin{equation*}
+            \textcolor{cmyk_B}{Z_k} =
+            \frac{\omega}{\pi}\cdot\left(I_k + \imath Q_k\right)
+        \end{equation*}
+
+        \begin{equation*}
+            \Delta_\Phi =
+            \textcolor{cmyk_B}{\Phi_k} - \textcolor{cmyk_R}{\Phi_{k+1}} =
+            \arg\left(\textcolor{cmyk_B}{Z_k}\right) - \arg\left(\textcolor{cmyk_R}{Z_{k+1}}\right) =
+            \arg\left(\textcolor{cmyk_B}{Z_k} \cdot \overline{\textcolor{cmyk_R}{Z_{k+1}}}\right)
+        \end{equation*}
+
+        \begin{equation*}
+            \textcolor{Purple}{\beta_{\pm k}} = \arccos\left(\frac{\cancel{\lambda}}{\cancel{d}}\cdot\frac{\Delta_\Phi}{\cancel{2}\pi}\right)
+        \end{equation*}
+
     \end{frame}
 
-    \begin{frame}{\textit{Angle of Arrival}}
-        \input{../pictures/AoA_4}
+    \begin{frame}{Geometria do sistema}
+        \centering\includegraphics{../pictures/AoA_geometria.pdf}
     \end{frame}
 
-    \section{Matriz de antenas}
-    \begin{frame}{\textit{Angle of Arrival}}
-        \input{../pictures/AoA_5}
+    \begin{frame}{Determinar AoA}
+        \begin{equation*}
+            \theta_{\pm k} = \textcolor{cmyk_M}{\alpha_k}\pm \textcolor{Purple}{\beta_{\pm k}}
+        \end{equation*}
+
+        \begin{equation*}
+            \Theta = \left\{\theta_{\pm k} ~\middle\vert~ \forall k\right\}
+        \end{equation*}
+
+        \begin{equation*}
+            \delta = \frac{\pi}{2 \cdot \left( 1 + N_\text{ant} \right)}
+        \end{equation*}
+
+        \begin{equation*}
+            \Theta_{\left\lfloor\bullet\right\rceil} =
+            \left\{\left\lfloor\frac{\theta}{\delta}\right\rceil\cdot\delta ~\middle\vert~ \forall \theta \in \Theta  \right\}
+        \end{equation*}
+
+        \begin{equation*}
+            \theta_\mathcal{M_o} = \operatorname{\mathcal{M_o}}\left( \Theta_{\left\lfloor\bullet\right\rceil}  \right)
+        \end{equation*}
+
+        \begin{equation*}
+            \Theta_\text{F} = \left\{\theta \in \Theta  ~\middle\vert~
+            \theta_\mathcal{M_o} - \delta \leq \theta \leq \theta_\mathcal{M_o} + \delta\right\}
+        \end{equation*}
+
+        \begin{equation*}
+            \theta_\text{AoA} = \widetilde{\Theta_\text{F}}
+        \end{equation*}
     \end{frame}
 
-\subsection{Cálculo de Ângulo de chegada}
+\section{Simulação}
     \begin{frame}{Definição de onda}
         % \begin{multicols}{2}
             \begin{equation*}
-                r = r_\omega \cdot \lambda
+                r_0 = r \cdot \lambda
             \end{equation*}
 
             \begin{equation*}
-                x_0 = r \cdot \cos(\theta_\omega)
+                x_0 = r_0 \cdot \cos(\theta)
             \end{equation*}
 
             \begin{equation*}
-                y_0 = r \cdot \sin(\theta_\omega)
+                y_0 = r_0 \cdot \sin(\theta)
             \end{equation*}
 
             \begin{equation*}
-                k(x, y, t, \theta_\omega, r_\omega, \lambda, \omega) = \frac{2\pi}{\lambda} \cdot \sqrt{(y - y_0)^2+(x - x_0)^2} + \omega \cdot t
+                \mathcal{aux}_{\text{\lstinline|argument_r|}}(x, y, t, \theta, r, \phi, \lambda, \omega) =
+                \frac{2\pi}{\lambda} \cdot \sqrt{(y - y_0)^2+(x - x_0)^2} + \omega \cdot t + \phi
             \end{equation*}
 
             \begin{equation*}
-                w(x, y, t, \theta_\omega, r_\omega, \lambda, \omega) = \sin(k + \phi)+ \cos(k + \phi)
+                w(x, y, t, \theta, r, \phi, \lambda, \omega) = \frac{\sin\left(\mathcal{aux}\right)+ \cos\left(\mathcal{aux}\right)}{\sqrt{2}}
             \end{equation*}
         % \end{multicols}
     \end{frame}
 
-    \begin{frame}{\href{https://drive.google.com/file/d/1-ep5hH8TSrnHU_m9b4AFmUJlB_hGR41m/view?usp=drive_link}{Análise de vetores complexos}}
-        % \begin{multicols}{2}
-            \begin{equation*}
-                C(x,y) = \int_0^T w(x,y,t) \cdot \cos(k(x,y,t)) \partial t
-            \end{equation*}
 
-            \begin{equation*}
-                S(x,y) = \int_0^T w(x,y,t) \cdot \sin(k(x,y,t)) \partial t
-            \end{equation*}
+    \begin{frame}
 
-            \begin{equation*}
-                Z(x,y) = 2\cdot(S + \imath C)
-            \end{equation*}
+        \centering
+        \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50.gif}{\includegraphics[width=\textwidth]{../pictures/simul_POLY_3_R_50.png}}
 
-            \begin{equation*}
-                \Delta_{x,y} = \arg(\textcolor{Green}{Z_{0,0}}\cdot Z^*_{x,y})
-            \end{equation*}
-
-            \begin{equation*}
-                \text{componente}_{x,y} = -\frac{\Delta_{x,y}}{\pi}\cdot\frac{\cancel{\lambda}}{\cancel{d \cdot 2}} = -\frac{\Delta_{x,y}}{\pi}
-            \end{equation*}
-            % \end{multicols}
     \end{frame}
+
+    % \begin{frame}{\href{https://drive.google.com/file/d/1-ep5hH8TSrnHU_m9b4AFmUJlB_hGR41m/view?usp=drive_link}{Análise de vetores complexos}}
+    %     % \begin{multicols}{2}
+    %         \begin{equation*}
+    %             C(x,y) = \int_0^T w(x,y,t) \cdot \cos(k(x,y,t)) \partial t
+    %         \end{equation*}
+
+    %         \begin{equation*}
+    %             S(x,y) = \int_0^T w(x,y,t) \cdot \sin(k(x,y,t)) \partial t
+    %         \end{equation*}
+
+    %         \begin{equation*}
+    %             Z(x,y) = 2\cdot(S + \imath C)
+    %         \end{equation*}
+
+    %         \begin{equation*}
+    %             \Delta_{x,y} = \arg(\textcolor{Green}{Z_{0,0}}\cdot Z^*_{x,y})
+    %         \end{equation*}
+
+    %         \begin{equation*}
+    %             \text{componente}_{x,y} = -\frac{\Delta_{x,y}}{\pi}\cdot\frac{\cancel{\lambda}}{\cancel{d \cdot 2}} = -\frac{\Delta_{x,y}}{\pi}
+    %         \end{equation*}
+    %         % \end{multicols}
+    % \end{frame}

@@ -10,19 +10,19 @@
         \coordinate (O) at (0,0);
         \coordinate (antenna) at (-\closeRange*\wavelength,0);
         % \draw [help lines, dashed] (-5,-3) grid (5,3); % desenha grid
-        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0) 
+        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
 
         % \draw[thick]
         %     (antenna) node[dinantenna]{}
         % ;
-        
+
         % \draw (-0.5,-1.5) rectangle (13.1,1.5);
-        \clip (-0.5,-1.5) rectangle (13.1,1.5);
+        \clip (-0.5,-1.5) rectangle (13.2,1.5);
         \foreach \x [evaluate={\z=int((\x+\closeRange));}] in {0,...,20} {
-            \draw [black, thick] 
-            (antenna) ++ (\z*\wavelength,0) 
+            \draw [black, thick]
+            (antenna) ++ (\z*\wavelength,0)
             node[anchor=south, font = {\footnotesize\bfseries}, rotate=-90]{$\z\lambda$}
-            ++(0, -4) 
+            ++(0, -4)
             -- ++(0,8);
             \draw [gray, thin] (antenna) circle (\z*\wavelength);
         }
@@ -30,7 +30,7 @@
 
         % \foreach \x in {0,60,...,300} {
         %     \draw[thick] (\x:1 cm) -- (\x + 60:1 cm);
-            
+
         %     \draw (\x + 30:1.732 cm) node[Gray, circ]{};
         %     \draw[Gray, dashed] (\x:1 cm) -- ++(\x: 0.9cm);
         %     \draw[Gray, dotted]
@@ -39,13 +39,13 @@
         %         (\x:1 cm) arc [start angle=\x+120, delta angle=-50, radius=1cm]
         %     ;
         % }
-    
+
         % \draw (0,0) node [circ] {} node [below left,font={\scriptsize\bfseries}] {BS};
         % \draw[thick, densely dotted] (0,0) circle (1cm);
-        
+
         % \draw[-latex] (0,0) -- (0:1cm) node[midway, below] {$R_c$};
         % \draw[-latex] (0,0) -- (90:0.866cm) node[midway, left] {$R$};
-            
+
     \end{circuitikz}
 }
 
@@ -58,7 +58,7 @@
 %         \def\wavelength{1}
 %         \def\d{0.5*\wavelength}
 
-        
+
 %         \def\closeRange{-50}
 %         \def\closeRangePlus{\closeRange+1}
 %         \def\farRange{\closeRange+13}
@@ -66,12 +66,12 @@
 %         \coordinate (O) at (0,0);
 %         \coordinate (antenna) at (\closeRange,0);
 %         % \draw [help lines, dashed] (-5,-3) grid (5,3); % desenha grid
-%         % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0) 
+%         % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
 
 %         % \draw[thick]
 %         %     (antenna) node[dinantenna]{}
 %         % ;
-        
+
 %         % \draw (\closeRange-0.5,-4) rectangle (\farRange+0.1,4);
 %         \clip (-0.5,-4) rectangle (13.1,4);
 %         \foreach \x in {0,...,13} {
@@ -81,7 +81,7 @@
 
 %         % \foreach \x in {0,60,...,300} {
 %         %     \draw[thick] (\x:1 cm) -- (\x + 60:1 cm);
-            
+
 %         %     \draw (\x + 30:1.732 cm) node[Gray, circ]{};
 %         %     \draw[Gray, dashed] (\x:1 cm) -- ++(\x: 0.9cm);
 %         %     \draw[Gray, dotted]
@@ -90,13 +90,13 @@
 %         %         (\x:1 cm) arc [start angle=\x+120, delta angle=-50, radius=1cm]
 %         %     ;
 %         % }
-    
+
 %         % \draw (0,0) node [circ] {} node [below left,font={\scriptsize\bfseries}] {BS};
 %         % \draw[thick, densely dotted] (0,0) circle (1cm);
-        
+
 %         % \draw[-latex] (0,0) -- (0:1cm) node[midway, below] {$R_c$};
 %         % \draw[-latex] (0,0) -- (90:0.866cm) node[midway, left] {$R$};
-            
+
 %     \end{circuitikz}
 %   % }
 % \end{center}

@@ -17,10 +17,10 @@ function res = signal_r(x_w, y_w, t_w, amp_w, ang_w, r_w, phase_w, lambda_w, ome
 
 	res = 0;
 	if S
-		res = res + sin( argument_r(x_w, y_w, t_w, ang_w, r_w, lambda_w, omega_w, phase_w) );
+		res = res + sin( argument_r(x_w, y_w, t_w, ang_w, r_w, phase_w, lambda_w, omega_w) );
 	end %if
 	if C
-		res = res + cos( argument_r(x_w, y_w, t_w, ang_w, r_w, lambda_w, omega_w, phase_w) );
+		res = res + cos( argument_r(x_w, y_w, t_w, ang_w, r_w, phase_w, lambda_w, omega_w) );
 	end %if
 	if S && C
 		res = res / sqrt(2);

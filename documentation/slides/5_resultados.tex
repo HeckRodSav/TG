@@ -1,142 +1,167 @@
 \section{Resultados}
 
-\subsection{Três antenas}
-\begin{frame}{R\textsuperscript{2} para três antenas}
-	\centering
-	\begin{tabular}{@{}
-		S[table-format = 3.1]
-		S[table-format = 3.2, table-model-setup = \bfseries]
-		S[table-format = 3.2, table-model-setup = \bfseries]
-		@{}}
-		\toprule
-		{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
-		\\\midrule
-		\infinity & \bfseries 100.00 & 100.00\\
-		20 & 88.06 & 90.45\\
-		17 & 88.18 & 87.98\\
-		14 & 99.99 & 84.49\\
-		7 & 90.12 & 83.50\\
-		0 & \bfseries 76.32 & \bfseries 78.73\\
-		\bottomrule
-	\end{tabular}
-\end{frame}
 
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_3_R_50}
-		\includegraphics{../pictures/simul_POLY_3_R_50.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50.gif}{\underline{GitHub}}.}
-	\end{figure}
-	% \input{../pictures/simul_POLY_3_R_50}
-\end{frame}
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_3_R_50_SNR_1}
-		\includegraphics{../pictures/simul_POLY_3_R_50_SNR_1.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50_SNR_1.gif}{\underline{GitHub}}.}
-	\end{figure}
-	% \input{../pictures/simul_POLY_3_R_50_SNR_1}
-\end{frame}
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_3_R_50_SNR_1_ATT}
-		\includegraphics{../pictures/simul_POLY_3_R_50_SNR_1_ATT.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50_SNR_1_ATT.gif}{\underline{GitHub}}.}
-	\end{figure}
-	% \input{../pictures/simul_POLY_3_R_50_SNR_1_ATT}
-\end{frame}
+\subsection{Simulação}
+
+    \begin{frame}
+
+        \centering
+        \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50.gif}{\includegraphics[width=\textwidth]{../pictures/simul_POLY_3_R_50.png}}
+
+    \end{frame}
+
+\subsection{Três antenas}
+	\begin{frame}{R\textsuperscript{2} para três antenas}
+		\begin{table}
+			\centering
+			\begin{tabular}{@{}
+				S[table-format = 3.1]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				@{}}
+				\toprule
+				{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
+				\\\midrule
+				\infinity & \bfseries 100.00 & 100.00\\
+				20 & 88.06 & 90.45\\
+				17 & 88.18 & 87.98\\
+				14 & 99.99 & 84.49\\
+				7 & 90.12 & 83.50\\
+				0 & \bfseries 76.32 & \bfseries 78.73\\
+				\bottomrule
+			\end{tabular}
+			\caption*{\tiny Fonte: Autor, saídas das simulações disponíveis em \href{https://github.com/HeckRodSav/TG/tree/main/documentation/data/POLY_3}{\underline{GitHub}}.}
+		\end{table}
+	\end{frame}
+
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso ideal ($\text{SNR} \rightarrow \qty{\infinity}{\deci\bel}$).}
+			% \input{../pictures/simul_POLY_3_R_50}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_3_R_50.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso $\text{SNR} = \SI{0}{\deci\bel}$, sem atenuação.}
+			% \input{../pictures/simul_POLY_3_R_50_SNR_1}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_3_R_50_SNR_1.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50_SNR_1.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso $\text{SNR} = \SI{0}{\deci\bel}$, com atenuação.}
+			% \input{../pictures/simul_POLY_3_R_50_SNR_1_ATT}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_3_R_50_SNR_1_ATT.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_3/simul_POLY_3_R_50_SNR_1_ATT.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}
 
 \subsection{Cinco antenas}
-\begin{frame}{R\textsuperscript{2} para cinco antenas}
-	\centering
-	\begin{tabular}{@{}
-		S[table-format = 3.1]
-		S[table-format = 3.2, table-model-setup = \bfseries]
-		S[table-format = 3.2, table-model-setup = \bfseries]
-		@{}}
-		\toprule
-		{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
-		\\\midrule
-        \infinity & \bfseries 100.00 & 100.00\\
-        20 & 100.00 & 100.00\\
-        17 & 91.90 & 91.89\\
-        14 & 91.91 & 91.90\\
-        7 & 84.27 & 91.93\\
-        0 & \bfseries 80.73 & \bfseries 96.28\\
-		\bottomrule
-	\end{tabular}
-\end{frame}
+	\begin{frame}{R\textsuperscript{2} para cinco antenas}
+		\begin{table}
+			\centering
+			\begin{tabular}{@{}
+				S[table-format = 3.1]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				@{}}
+				\toprule
+				{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
+				\\\midrule
+				\infinity & \bfseries 100.00 & 100.00\\
+				20 & 100.00 & 100.00\\
+				17 & 91.90 & 91.89\\
+				14 & 91.91 & 91.90\\
+				7 & 84.27 & 91.93\\
+				0 & \bfseries 80.73 & \bfseries 96.28\\
+				\bottomrule
+			\end{tabular}
+			\caption*{\tiny Fonte: Autor, saídas das simulações disponíveis em \href{https://github.com/HeckRodSav/TG/tree/main/documentation/data/POLY_5}{\underline{GitHub}}.}
+		\end{table}
+	\end{frame}
 
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_5_R_50}
-		\includegraphics{../pictures/simul_POLY_5_R_50.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_5/simul_POLY_5_R_50.gif}{\underline{GitHub}}.}
-	\end{figure}
-\end{frame}
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_5_R_50_SNR_1}
-		\includegraphics{../pictures/simul_POLY_5_R_50_SNR_1.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_5/simul_POLY_5_R_50_SNR_1.gif}{\underline{GitHub}}.}
-	\end{figure}
-\end{frame}
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_5_R_50_SNR_1_ATT}
-		\includegraphics{../pictures/simul_POLY_5_R_50_SNR_1_ATT.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_5/simul_POLY_5_R_50_SNR_1_ATT.gif}{\underline{GitHub}}.}
-	\end{figure}
-\end{frame}
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso ideal ($\text{SNR} \rightarrow \qty{\infinity}{\deci\bel}$).}
+			% \input{../pictures/simul_POLY_5_R_50}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_5_R_50.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_5/simul_POLY_5_R_50.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso $\text{SNR} = \SI{0}{\deci\bel}$, sem atenuação.}
+			% \input{../pictures/simul_POLY_5_R_50_SNR_1}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_5_R_50_SNR_1.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_5/simul_POLY_5_R_50_SNR_1.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso $\text{SNR} = \SI{0}{\deci\bel}$, com atenuação.}
+			% \input{../pictures/simul_POLY_5_R_50_SNR_1_ATT}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_5_R_50_SNR_1_ATT.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_5/simul_POLY_5_R_50_SNR_1_ATT.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}
 
 \subsection{Setes antenas}
-\begin{frame}{R\textsuperscript{2} para sete antenas}
-	\centering
-	\begin{tabular}{@{}
-		S[table-format = 3.1]
-		S[table-format = 3.2, table-model-setup = \bfseries]
-		S[table-format = 3.2, table-model-setup = \bfseries]
-		@{}}
-		\toprule
-		{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
-		\\\midrule
-        \infinity & \bfseries 100.00 & 100.00\\
-        20 & 84.25 & 100.00\\
-        17 & 100.00 & 84.24\\
-        14 & 91.90 & 100.00\\
-        7 & 99.99 & 84.28\\
-        0 & \bfseries 80.15 & \bfseries 99.98\\
-		\bottomrule
-	\end{tabular}
-\end{frame}
+	\begin{frame}{R\textsuperscript{2} para sete antenas}
+		\begin{table}
+			\centering
+			\begin{tabular}{@{}
+			S[table-format = 3.1]
+			S[table-format = 3.2, table-model-setup = \bfseries]
+			S[table-format = 3.2, table-model-setup = \bfseries]
+			@{}}
+			\toprule
+			{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
+			\\\midrule
+			\infinity & \bfseries 100.00 & 100.00\\
+			20 & 84.25 & 100.00\\
+			17 & 100.00 & 84.24\\
+			14 & 91.90 & 100.00\\
+			7 & 99.99 & 84.28\\
+			0 & \bfseries 80.15 & \bfseries 99.98\\
+			\bottomrule
+		\end{tabular}
+		\caption*{\tiny Fonte: Autor, saídas das simulações disponíveis em \href{https://github.com/HeckRodSav/TG/tree/main/documentation/data/POLY_7}{\underline{GitHub}}.}
+	\end{table}
+	\end{frame}
 
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_7_R_50}
-		\includegraphics{../pictures/simul_POLY_7_R_50.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_7/simul_POLY_7_R_50.gif}{\underline{GitHub}}.}
-	\end{figure}
-\end{frame}
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_7_R_50_SNR_1}
-		\includegraphics{../pictures/simul_POLY_7_R_50_SNR_1.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_7/simul_POLY_7_R_50_SNR_1.gif}{\underline{GitHub}}.}
-	\end{figure}
-\end{frame}
-\begin{frame}
-	\begin{figure}
-		\centering
-		% \input{../pictures/simul_POLY_7_R_50_SNR_1_ATT}
-		\includegraphics{../pictures/simul_POLY_7_R_50_SNR_1_ATT.pdf}
-		\caption*{Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_7/simul_POLY_7_R_50_SNR_1_ATT.gif}{\underline{GitHub}}.}
-	\end{figure}
-\end{frame}
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso ideal ($\text{SNR} \rightarrow \qty{\infinity}{\deci\bel}$).}
+			% \input{../pictures/simul_POLY_7_R_50}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_7_R_50.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_7/simul_POLY_7_R_50.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso $\text{SNR} = \SI{0}{\deci\bel}$, sem atenuação.}
+			% \input{../pictures/simul_POLY_7_R_50_SNR_1}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_7_R_50_SNR_1.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_7/simul_POLY_7_R_50_SNR_1.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}
+	\begin{frame}
+		\begin{figure}
+			\centering
+			\caption*{Caso $\text{SNR} = \SI{0}{\deci\bel}$, com atenuação.}
+			% \input{../pictures/simul_POLY_7_R_50_SNR_1_ATT}
+			\includegraphics[height=0.785\textheight]{../pictures/simul_POLY_7_R_50_SNR_1_ATT.pdf}
+			\caption*{\tiny Fonte: Autor, saída gráfica disponível em \href{https://github.com/HeckRodSav/TG/blob/main/documentation/pictures/POLY_7/simul_POLY_7_R_50_SNR_1_ATT.gif}{\underline{GitHub}}.}
+		\end{figure}
+	\end{frame}

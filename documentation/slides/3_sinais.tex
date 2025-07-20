@@ -1,6 +1,32 @@
 
 \section{Emissão de sinais}
 
+    \subsection{Equação do sinal}
+    \begin{frame}{Definição de onda}
+        \begin{equation*}
+            w(x, y, t, \theta, r, \phi, \lambda, \omega) = \frac{\sin\left(\mathcal{aux}\right)+ \cos\left(\mathcal{aux}\right)}{\sqrt{2}}
+        \end{equation*}
+
+        \begin{equation*}
+            \mathcal{aux}(x, y, t, \theta, r, \phi, \lambda, \omega) =
+            \frac{2\pi}{\lambda} \cdot \sqrt{(y - y_0)^2+(x - x_0)^2} + \omega \cdot t + \phi
+        \end{equation*}
+
+        \begin{equation*}
+            x_0 = r_0 \cdot \cos(\theta)
+        \end{equation*}
+
+        \begin{equation*}
+            y_0 = r_0 \cdot \sin(\theta)
+        \end{equation*}
+
+        \begin{equation*}
+            r_0 = r \cdot \lambda
+        \end{equation*}
+
+    \end{frame}
+
+    \subsection{Frente de onda}
     \begin{frame}{Emissão de sinal radial}
         % \input{../pictures/signal}
         \includegraphics{../pictures/signal.pdf}

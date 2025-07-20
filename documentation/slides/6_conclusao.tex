@@ -1,0 +1,32 @@
+\section{Conclusão}
+
+\begin{frame}{Conclusão}
+	\begin{itemize}[<+->]\addtolength{\itemsep}{0.5\baselineskip}
+		\item É necessário ter uma boa estratégia para localizar um foguete de sondagem;
+		\item Para utilizar um GNSS, é necessário decodificar o sinal recebido;
+		% \item Se não for possível decodificar, ainda é possível determinar AoA;
+		\item Mesmo com o sinal detectável, ainda é possível ter problemas para decodificá-lo;
+		\item Analisando a defasagem do sinal entre pares de antenas torna possível estimar o AoA;
+		\item Cada par de antenas gera dois possíveis ângulos candidatos;
+		\item A proposta utilizando votação se mostrou eficaz.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusão}
+	\begin{itemize}[<+->]\addtolength{\itemsep}{0.5\baselineskip}
+		\item Dispor as antenas da malha nos vértices de um polígono regular simplificou os cálculos;
+		\item Polígonos com quantidade par de lados sempre terão lados paralelos;
+		\item Mais pares na malha levaram a maior precisão nos valores obtidos;
+		\item O valor mínimo de R\textsuperscript{2} obtido foi superior a \qty{75}{\percent};
+		\item O valor médio de R\textsuperscript{2} obtido foi superior a \qty{92}{\percent};
+		\item Houveram problemas relacionados ao uso de \textit{software} livre e a manter a compatibilidade entre o GNU Octave e o MATLAB;.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Melhorias futuras}
+	\begin{itemize}[<+->]\addtolength{\itemsep}{0.5\baselineskip}
+		\item Analisar diferentes disposições de antenas na malha, já que os cálculos não exigem a disposição poligonal;
+		\item Contemplar outros tipos de ruído pode acrescentar ao modelo;
+		\item Construir um \textit{hardware} capaz de aferir a defasagem em uma malha de antenas poderá contribuir para simulações mais completas.
+	\end{itemize}
+\end{frame}

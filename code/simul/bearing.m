@@ -26,7 +26,6 @@ if beta < -pi
 	beta = beta + 2*pi
 end
 
-
 d = EARTH_RADIUS * 2 * atan2(sqrt(Z), sqrt(1 - Z))
 
 d_deg = rad2deg(beta)

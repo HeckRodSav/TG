@@ -1,13 +1,13 @@
-function res = argument_r(x_w, y_w, t_w, ang_w, r_w, phase_w, lambda_w, omega_w)
-	% Argumento da funcao senoidal
-	% x_w = coordenada x associada ao ponto da antena
-	% y_w = coordenada y associada ao ponto da antena
-	% t_w = tempo t associado ao instante de afericao do sinal
-	% ang_w = angulo theta de chegada do sinal em relacao ao sistema de antenas
-	% r_w = distância que o emissor de sinal está da coordenada (0,0) do sistema
-	% phase_w = defasagem do sinal no emissor
-	% lambda_w = comprimento de onda
-	% omega_w = frequencia angular
+function res = argument_r( ... %
+	x_w, ... % coordenada x associada ao ponto da antena
+	y_w, ... % coordenada y associada ao ponto da antena
+	t_w, ... % tempo t associado ao instante de afericao do sinal
+	ang_w, ... % angulo theta de chegada do sinal em relacao ao sistema de antenas
+	r_w, ... % distancia que o emissor de sinal está da coordenada (0,0) do sistema
+	phase_w, ... % defasagem do sinal no emissor
+	lambda_w, ... % comprimento de onda
+	omega_w ... % frequencia angular
+)
 
 	r_0 = r_w * lambda_w;
 

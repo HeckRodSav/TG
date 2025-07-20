@@ -1,46 +1,57 @@
 \section{GNSS}
+\subsection{Coordenadas Geográficas}
     \begin{frame}{Coordenadas Geográficas}
         \begin{columns}
             \begin{column}{0.55\textwidth}
                 \centering
-                % \input{../pictures/globo}
-                \includegraphics[width=0.95\textwidth]{../pictures/globo.pdf}
+                \input{../pictures/globo_B}
+                % \includegraphics[width=0.95\textwidth]{../pictures/globo.pdf}
             \end{column}
             \begin{column}{0.45\textwidth}
-                \begin{itemize}[<+->]
-                    \item \textcolor{Green}{$A$} e \textcolor{Blue}{$B$} são coordenadas geográficas
-                    \item \textcolor{Green}{$\theta_A$} e \textcolor{Blue}{$\theta_B$} são latitudes
-                    \item \textcolor{Green}{$\phi_A$} e \textcolor{Blue}{$\phi_B$} são longitudes
-                    \item Conhecendo essas informações, é possível determinar o ângulo \textcolor{Red}{$\beta$} relativo entre as duas coordenadas
-                    \item Também é possível determinar sua distância
+                \begin{itemize}[<+(-3)->]\addtolength{\itemsep}{0.5\baselineskip}
+                    \item \textcolor{Green}{$\mathbf{A}_\text{g}$} e \textcolor{Blue}{$\mathbf{B}_\text{g}$} são coordenadas geográficas
+                    \item \textcolor{Green}{$\theta_{\mathbf{A}_\text{g}}$} e \textcolor{Blue}{$\theta_{\mathbf{B}_\text{g}}$} são latitudes
+                    \item \textcolor{Green}{$\phi_{\mathbf{A}_\text{g}}$} e \textcolor{Blue}{$\phi_{\mathbf{B}_\text{g}}$} são longitudes
+                    \item Conhecendo essas informações, é possível determinar o ângulo \textcolor{Red}{$\beta_b$} relativo entre as duas coordenadas
+                    \item Também é possível determinar sua distância \textcolor{Red}{$d_\mathbf{AB}$}
                 \end{itemize}
             \end{column}
         \end{columns}
     \end{frame}
 
-    \begin{frame}{Cálculo de Bearing}
-        % \begin{multicols}{2}
-            \begin{equation*}
-                \Delta_\phi = \textcolor{Blue}{\phi_B} - \textcolor{Green}{\phi_A}
-            \end{equation*}
-            \begin{equation*}
-                \Delta_\theta = \textcolor{Blue}{\theta_B} - \textcolor{Green}{\theta_A}
-            \end{equation*}
-            \begin{equation*}
-                X = \cos\left(\textcolor{Blue}{\theta_B}\right)\cdot \sin\left(\Delta_\phi\right)
-            \end{equation*}
-            \begin{equation*}
-                Y = \cos\left(\textcolor{Green}{\theta_A}\right)\cdot\sin\left(\textcolor{Blue}{\theta_B}\right) - \sin\left(\textcolor{Green}{\theta_A}\right) \cdot \cos\left(\textcolor{Green}{\theta_B}\right) \cdot \cos\left(\Delta_\phi\right)
-            \end{equation*}
-            \begin{equation*}
-                Z = \sin^2\left(\frac{\Delta_\theta}{2}\right) + \cos\left(\textcolor{Blue}{\theta_B}\right) \cdot \cos\left(\textcolor{Green}{\theta_A}\right) \cdot \sin^2\left(\frac{\Delta_\phi}{2}\right)
-            \end{equation*}
-            \begin{equation*}
-                \textcolor{Red}{\beta_b} = \arctan\left(\frac{X}{Y}\right)
-            \end{equation*}
-            \begin{equation*}
-                d_{AB} = R_\text{Terra} \cdot 2 \cdot \arctan\left(\frac{\sqrt{Z}}{\sqrt{1-Z}}\right)
-            \end{equation*}
-        % \end{multicols}
-    \end{frame}
+% \subsection{Cálculo de Bearing}
+%     \begin{frame}{Cálculo de Bearing}
+%         % \begin{multicols}{2}
+%             \begin{equation*}
+%                 \Delta_\phi = \textcolor{Blue}{\phi_{\mathbf{B}_\text{g}}} - \textcolor{Green}{\phi_{\mathbf{A}_\text{g}}}
+%             \end{equation*}
+%             \begin{equation*}
+%                 \Delta_\theta = \textcolor{Blue}{\theta_{\mathbf{B}_\text{g}}} - \textcolor{Green}{\theta_{\mathbf{A}_\text{g}}}
+%             \end{equation*}
+%             \begin{equation*}
+%                 X = \cos\left(\textcolor{Blue}{\theta_{\mathbf{B}_\text{g}}}\right)\cdot \sin\left(\Delta_\phi\right)
+%             \end{equation*}
+%             \begin{equation*}
+%                 Y = \cos\left(\textcolor{Green}{\theta_{\mathbf{A}_\text{g}}}\right)\cdot\sin\left(\textcolor{Blue}{\theta_{\mathbf{B}_\text{g}}}\right) - \sin\left(\textcolor{Green}{\theta_{\mathbf{A}_\text{g}}}\right) \cdot \cos\left(\textcolor{Green}{\theta_{\mathbf{B}_\text{g}}}\right) \cdot \cos\left(\Delta_\phi\right)
+%             \end{equation*}
+%             \begin{equation*}
+%                 Z = \sin^2\left(\frac{\Delta_\theta}{2}\right) + \cos\left(\textcolor{Blue}{\theta_{\mathbf{B}_\text{g}}}\right) \cdot \cos\left(\textcolor{Green}{\theta_{\mathbf{A}_\text{g}}}\right) \cdot \sin^2\left(\frac{\Delta_\phi}{2}\right)
+%             \end{equation*}
+%             \begin{equation*}
+%                 \textcolor{Red}{\beta_b} = \arctan\left(\frac{X}{Y}\right) - \frac{\pi}{2}
+%             \end{equation*}
+%             \begin{equation*}
+%                 \textcolor{Red}{d_\mathbf{AB}} = R_\text{Terra} \cdot 2 \cdot \arctan\left(\frac{\sqrt{Z}}{\sqrt{1-Z}}\right)
+%             \end{equation*}
+%         % \end{multicols}
+%     \end{frame}
 
+\begin{frame}{Coordenadas Geográficas}
+	\begin{itemize}[<+->]\addtolength{\itemsep}{0.5\baselineskip}
+		\item É necessário decodificar os dados recebidos pela telemetria do foguete;
+		\item A precisão da busca fica dependente da precisão do GNSS;
+		\item O método baseia-se na ideia de que a equipe de busca tem acesso à própria coordenada geográfica;
+		\item Num espaço sem acesso à internet, obter tal coordenada pode ser um problema;
+		\item Se o sinal da telemetria for fraco, pode se tornar inviável utilizar este método.
+	\end{itemize}
+\end{frame}

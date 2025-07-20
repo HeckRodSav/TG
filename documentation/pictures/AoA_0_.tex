@@ -4,45 +4,54 @@
         \def\wavelength{4}
         \def\d{0.5*\wavelength}
 
+
+        \def\antennaAngle{120}
+        \def\closeRange{9}
+        \def\farRange{\closeRange+13}
+
         \def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
         { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5) node[midway,anchor=west] {$\beta$}; }
 
-        \coordinate (bottomleft) at (-1,-1.25);
-        \coordinate (topright) at (5,1.1);
-
-        % \draw[Red,dashed] (bottomleft) rectangle (topright);
-        \clip (bottomleft) rectangle (topright);
 
         \coordinate (O) at (0,0);
+        \coordinate (antenna) at (\antennaAngle:\closeRange*\wavelength);
         % \draw [help lines, dashed] (-3,-3) grid (3,3); % desenha grid
         % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
 
+        % \draw (5,1.25) rectangle (-1,-1.1);
+        \clip (5,1.25) rectangle (-1,-1.1);
+
+
         % \draw[Goldenrod, domain=-3:3, samples=100] plot[shift={(-1,-1)}, rotate=30]({\x},{sin(\x * pi * 2 / \wavelength r)});
         \draw[Goldenrod, domain=-3:6, samples=50]
-            plot ({\x},{-cos(\x * pi * 2 / \wavelength r)})
-        ;
-
-        \draw[latex-latex]
-            (0,-1.1) -- ++(\wavelength,0) node [midway, fill=white] {$\lambda$}
+            plot ({\x},{cos(\x * pi * 2 / \wavelength r)})
         ;
 
         \draw[Black, dashed, domain=-3:6, samples=2]
             plot[Black, thin, dashed, samples=2] (\x,0)
         ;
 
+
         % \pause
         \draw[thick]
-            (2,0)  node[cmyk_B, dinantenna] (A00) {}
+            (0,0)  node[cmyk_B, dinantenna] (A00) {}
+            % (0,\d) node[Blue,  dinantenna] (A0d) {}
+            % (\d,0) node[Red,   dinantenna] (Ad0) {}
         ;
 
         % \pause
         \draw[thick]
-            (-0,0) node[cmyk_R,   dinantenna] (Ad0) {}
+            % (0,0)  node[Green, dinantenna] (A00) {}
+            % (0,\d) node[Blue,  dinantenna] (A0d) {}
+            (\d,0) node[cmyk_R,   dinantenna] (Ad0) {}
         ;
 
+        \draw[latex-latex]
+            ($(A00)+(0,1.1)$) -- ++(\wavelength,0) node [midway, fill=white] {$\lambda$}
+        ;
     % \visible<7->{
         \draw[latex-latex]
-            ($(A00)+(0,-0.1)$) -- ++(-\d,0) node [midway, fill=white, fill opacity=0.75, anchor=north] {$d = \sfrac{\lambda}{2}$}
+            ($(A00)+(0,-0.1)$) -- ++(0.5*\wavelength,0) node [midway, fill=white, fill opacity=0.75, anchor=north] {$d = \sfrac{\lambda}{2}$}
         ;
     % }
 

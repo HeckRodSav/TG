@@ -3,11 +3,11 @@
     \def\T{1}
     \def\A{1}
     \def\N{5}
-    \def\D{\N*\T}        
+    \def\D{\N*\T}
     \def\wavelength{1}
     \def\d{0.5*\wavelength}
 
-    
+
     \begin{axis}[
         at={(0,0)},
         view={0}{90},
@@ -32,12 +32,12 @@
 
         \coordinate (O) at (0,0);
         % \draw [help lines, dashed] (-5,-3) grid (5,3); % desenha grid
-        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0) 
+        % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
 
         \draw[thick]
             (0,0) node[dinantenna]{}
         ;
-        
+
         % \clip[] (-0.1,-4) rectangle (13.1,4);
         \pgfplotsinvokeforeach{1,2,...,13} {
         \draw [Black] (axis cs:0,0) circle (#1*\wavelength);
@@ -45,6 +45,6 @@
 
 
     \end{axis}
-        
+
 
 \end{circuitikz}

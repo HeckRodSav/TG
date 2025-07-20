@@ -14,34 +14,43 @@
         \clip (bottomleft) rectangle (topright);
 
         \coordinate (O) at (0,0);
-        % \draw [help lines, dashed] (bottomleft) grid (topright); % desenha grid
+        % \draw [help lines, dashed] (-3,-3) grid (3,3); % desenha grid
         % \draw [red] (O) node[draw,cross out] {}; % marca pont(0,0)
-
-        \pgfmathsetmacro\vCos{-cos(-0.5*pi*2/\wavelength r)}
-
-        \draw[thick]
-            (2,0)  node[cmyk_B, dinantenna] (A00) {}
-            % (0,\d) node[Blue,  dinantenna] (A0d) {}
-            (-0.5,0) node[cmyk_R,   dinantenna] (Ad0) {}
-            (3.5,0) node[cmyk_R,   dinantenna, opacity=0.2] (Ad0_phantom) {}
-        ;
 
         % \draw[Goldenrod, domain=-3:3, samples=100] plot[shift={(-1,-1)}, rotate=30]({\x},{sin(\x * pi * 2 / \wavelength r)});
         \draw[Goldenrod, domain=-3:6, samples=50]
             plot ({\x},{-cos(\x * pi * 2 / \wavelength r)})
         ;
 
+        \draw[latex-latex]
+            (0,-1.1) -- ++(\wavelength,0) node [midway, fill=white] {$\lambda$}
+        ;
+
         \draw[Black, dashed, domain=-3:6, samples=2]
             plot[Black, thin, dashed, samples=2] (\x,0)
         ;
 
-        \draw [densely dotted, cmyk_R]
-            (Ad0_phantom) |-
-            % ++(0,{cos(1.2*\d * pi * 2 / \wavelength r)}) --
-            (0,\vCos) -|
-            % ++({0.4*\d},0) --
-            (Ad0)
+        \pause
+        \draw[thick]
+            (2,0)  node[cmyk_B, dinantenna] (A00) {}
         ;
+
+        \pause
+        \draw[thick]
+            (-0,0) node[cmyk_R,   dinantenna] (Ad0) {}
+        ;
+
+    \visible<3-6>{
+        \draw[latex-latex]
+            ($(A00)+(0,-0.1)$) -- ++(-\d,0) node [midway, fill=white, fill opacity=0.75, anchor=north] {$d$}
+        ;
+    }
+
+    \visible<7->{
+        \draw[latex-latex]
+            ($(A00)+(0,-0.1)$) -- ++(-\d,0) node [midway, fill=white, fill opacity=0.75, anchor=north] {$d = \sfrac{\lambda}{2}$}
+        ;
+    }
 
     \end{circuitikz}
   % }

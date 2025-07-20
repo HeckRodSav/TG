@@ -43,8 +43,8 @@
 \draw[thick,-latex,opacity=0] (O) -- (0,0,-1.35*\rvec) node[anchor=north]{$z$};
 
 
-\draw[-latex,very thick,opacity=\auxOpacity, color=Green] (O) -- (A) node[anchor=south west, opacity=1] {\acs{Ag}};
-\draw[-latex,very thick,opacity=\auxOpacity, color=Blue] (O) -- (B) node[anchor=south east, opacity=1] {\acs{Bg}};
+\draw[-latex,very thick,opacity=\auxOpacity, color=Green] (O) -- (A) node[anchor=south west, opacity=1] {$\mathbf{A}_\text{g}$};
+\draw[-latex,very thick,opacity=\auxOpacity, color=Blue] (O) -- (B) node[anchor=south east, opacity=1] {$\mathbf{A}_\text{g}$};
 \draw[very thick,color=Black] (N) node[anchor=west] {$\mathbf{N}$};
 
 
@@ -61,23 +61,23 @@
 \draw[dotted, color=Blue, opacity=\auxOpacity] (Bx) -- (Bxy);
 \draw[dotted, color=Blue, opacity=\auxOpacity] (By) -- (Bxy);
 
-% \pause
+\pause
 
 
-\tdplotdrawarc[color=Green, opacity=\auxOpacity]{(O)}{\ac}{0}{\thetavecA}{anchor=north}{\acs{thetaA}}
+\tdplotdrawarc[color=Green, opacity=\auxOpacity]{(O)}{\ac}{0}{\thetavecA}{anchor=north}{$\theta_{\mathbf{A}_\text{g}}$}
 
-\tdplotdrawarc[color=Blue, opacity=\auxOpacity]{(O)}{\bc}{0}{\thetavecB}{anchor=north east}{\acs{thetaB}}
+\tdplotdrawarc[color=Blue, opacity=\auxOpacity]{(O)}{\bc}{0}{\thetavecB}{anchor=north east}{$\theta_{\mathbf{B}_\text{g}}$}
 
-% \pause
+\pause
 
 
 \tdplotsetthetaplanecoords{\thetavecA}
-\tdplotdrawarc[color=Green, opacity=\auxOpacity, tdplot_rotated_coords]{(O)}{\ac}{90}{\phivecA}{anchor=west}{\acs{phiA}}
+\tdplotdrawarc[color=Green, opacity=\auxOpacity, tdplot_rotated_coords]{(O)}{\ac}{90}{\phivecA}{anchor=west}{$\phi{\mathbf{A}_\text{g}}$}
 
 \tdplotsetthetaplanecoords{\thetavecB}
-\tdplotdrawarc[color=Blue, opacity=\auxOpacity, tdplot_rotated_coords]{(O)}{\bc}{90}{\phivecB}{anchor=east}{\acs{phiB}}
+\tdplotdrawarc[color=Blue, opacity=\auxOpacity, tdplot_rotated_coords]{(O)}{\bc}{90}{\phivecB}{anchor=east}{$\phi{\mathbf{B}_\text{g}}$}
 
-% \pause
+\pause
 
 \tdplotsetthetaplanecoords{\thetavecB}
 \draw[dashed, Blue, opacity=0.15, tdplot_rotated_coords] (\rvec,0,0) arc (180:-40:-\rvec);
@@ -92,12 +92,12 @@
 \draw[very thick, color=Green, tdplot_rotated_coords] (\rvec,0,0) arc (0:\phivecA:\rvec);
 
 
-\drawArc{\ax}{\ay}{\az}{\bx}{\by}{\bz}{\rvec}{anchor=north}{\acs{dAB}}
+\drawArc{\ax}{\ay}{\az}{\bx}{\by}{\bz}{\rvec}{anchor=north}{$d_\mathbf{AB}$}
 
 \tdplotsetrotatedcoords{\phivecA}{\thetavecA}{0}
 
 \def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
-    { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5) node[midway,anchor=south east] {\acs{betab}}; }
+    { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5) node[midway,anchor=south east] {$\beta_b$}; }
 
 \centerarc[Red, tdplot_rotated_coords](A)(292:214:0.4)
 

@@ -20,20 +20,18 @@ function generate_fig( ...
 	color_list = hsv(length(hsv))(:,:);
 
 	while length(color_list) < length(ant_array)
-		aux_color_list = normalize(color_list+circshift(color_list,1),"range");
+		aux_color_list = normalize(color_list+circshift(color_list,1),'range');
 		color_list = sortrows(cat(1,color_list, aux_color_list.*0.75));
 	end %while
 
 	% Garantir maior contraste entre cores de antenas
 	color_index = floor(index_list * (length(color_list)/length(ant_array)));
 
-	if isoctave()
-		AoA_x = cos(choose_angle);
-		AoA_y = sin(choose_angle);
+	AoA_x = cos(choose_angle);
+	AoA_y = sin(choose_angle);
 
-		DoA_x = cos(ang_w);
-		DoA_y = sin(ang_w);
-	end % if
+	DoA_x = cos(ang_w);
+	DoA_y = sin(ang_w);
 
 	set(0, 'defaultlinelinewidth', 0.5);
 	set(0, 'defaultlinemarkersize', 5);
@@ -61,7 +59,6 @@ function generate_fig( ...
 
 		% Angulo de chegada real
 		plot3(DoA_x*lambda_w, DoA_y*lambda_w, lambda_w, 'ok', 'markerfacecolor', 'none', 'markersize', 10, 'linewidth', 1);
-
 
 		shading interp;
 		axis([-interval interval -interval interval -interval interval],'square')
@@ -153,21 +150,21 @@ function generate_fig( ...
 	if isoctave()
 		% Angulo de chegada calculado
 		plot([0 7/8]*AoA_x, [0 7/8]*AoA_y,':k');
-		plot(7/8*AoA_x, 7/8*AoA_y,'hk');
+		plot(7/8*AoA_x, 7/8*AoA_y,'hk', 'markersize', 10, 'linewidth', 1);
 		cplx_aux_AoA = i*exp(i*choose_angle);
 		plot(real(cplx_aux_AoA)*[1 -1], imag(cplx_aux_AoA)*[1 -1],'-k');
 
 		% Angulo de chegada real
-		plot(DoA_x*7/8, DoA_y*7/8,'ok', 'markerfacecolor', 'none', 'markersize', 10, 'linewidth', 1);
+		plot(DoA_x*7/8, DoA_y*7/8,'ok', 'markerfacecolor', 'none', 'markersize', 15, 'linewidth', 1);
 	else % MATLAB
 		% Angulo de chegada calculado
-		plot(choose_angle, [0 7/8],':k');
-		plot(choose_angle, 7/8,'hk');
-		cplx_aux_AoA = i*exp(i*choose_angle);
-		plot(real(cplx_aux_AoA)*[1 -1], imag(cplx_aux_AoA)*[1 -1],'-k');
+		polarplot([choose_angle choose_angle], [0 7/8],':k');
+		polarplot(choose_angle, 7/8,'hk', 'markersize', 10, 'linewidth', 1);
+		cplx_aux_AoA = choose_angle + pi/2;
+		polarplot([cplx_aux_AoA cplx_aux_AoA], [1 -1],'-k');
 
 		% Angulo de chegada real
-		plot(ang_w, 7/8,'ok', 'markerfacecolor', 'none', 'markersize', 10, 'linewidth', 1);
+		polarplot(ang_w, 7/8,'ok', 'markerfacecolor', 'none', 'markersize', 15, 'linewidth', 1);
 	end % if
 
 	hold off;

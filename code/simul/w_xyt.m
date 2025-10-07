@@ -107,18 +107,18 @@ function w_xyt( ...
 
 	if S_DAT
 		dat_file = fopen(dat_filename, 'w');
-		fprintf(dat_file, "%s", "percent");
-		fprintf(dat_file, "\t%s", "ang_W");
-		fprintf(dat_file, "\t%s", "r");
-		fprintf(dat_file, "\t%s", "phase");
-		fprintf(dat_file, "\t%s", "choose_angle");
+		fprintf(dat_file, '%s', 'percent');
+		fprintf(dat_file, '\t%s', 'ang_W');
+		fprintf(dat_file, '\t%s', 'r');
+		fprintf(dat_file, '\t%s', 'phase');
+		fprintf(dat_file, '\t%s', 'choose_angle');
 		for i = ant_idx_list
-			fprintf(dat_file, "\t%s%d_x_%d", "delta_", i, ant_idx_list_shift(i));
+			fprintf(dat_file, '\t%s%d_x_%d', 'delta_', i, ant_idx_list_shift(i));
 		end % for
 		for i = ant_idx_list
-			fprintf(dat_file, "\t%s%d_x_%d", "delta_", ant_idx_list_shift(i), i);
+			fprintf(dat_file, '\t%s%d_x_%d', 'delta_', ant_idx_list_shift(i), i);
 		end % for
-		fprintf(dat_file, "\n");
+		fprintf(dat_file, '\n');
 		if isoctave()
 			fflush(dat_file);
 		end %if
@@ -192,12 +192,21 @@ function w_xyt( ...
 			im = frame2im(frame);
 
 			[imind, cm] = rgb2ind(im);
+			% [imind, cm] = rgb2ind(RGB, im); % MATLAB
 			if it == 1
 				% Create GIF file
-				imwrite(imind, cm, gif_filename,'gif','DelayTime', DelayTime , 'Compression' , 'lzw');
+				if isoctave()
+					imwrite(imind, cm, gif_filename,'gif','DelayTime', DelayTime , 'Compression' , 'lzw');
+				else % MATLAB
+					imwrite(imind, cm, gif_filename,'gif','DelayTime', DelayTime);
+				end % if
 			else
 				% Add each new plot to GIF
-				imwrite(imind, cm, gif_filename,'gif','WriteMode','append','DelayTime', DelayTime , 'Compression' , 'lzw');
+				if isoctave()
+					imwrite(imind, cm, gif_filename,'gif','WriteMode','append','DelayTime', DelayTime , 'Compression' , 'lzw');
+				else
+					imwrite(imind, cm, gif_filename,'gif','WriteMode','append','DelayTime', DelayTime); % MATLAB
+				end % if
 			end %if
 		else
 			% pause(1/30)
@@ -205,20 +214,20 @@ function w_xyt( ...
 		end %if
 
 		if S_DAT
-			fprintf(dat_file, "%.2f", percent*100);
-			fprintf(dat_file, "\t%.3f", normalize_angle(ang_W));
-			fprintf(dat_file, "\t%.3f", r);
-			fprintf(dat_file, "\t%.3f", normalize_angle(phase));
-			fprintf(dat_file, "\t%.3f", normalize_angle(choose_angle));
+			fprintf(dat_file, '%.2f', percent*100);
+			fprintf(dat_file, '\t%.3f', normalize_angle(ang_W));
+			fprintf(dat_file, '\t%.3f', r);
+			fprintf(dat_file, '\t%.3f', normalize_angle(phase));
+			fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle));
 
 			for i = ant_idx_list
-				fprintf(dat_file, "\t%.3f", normalize_angle(delta_A_x_B(i)));
+				fprintf(dat_file, '\t%.3f', normalize_angle(delta_A_x_B(i)));
 			end % for
 			for i = ant_idx_list
-				fprintf(dat_file, "\t%.3f", normalize_angle(delta_B_x_A(i)));
+				fprintf(dat_file, '\t%.3f', normalize_angle(delta_B_x_A(i)));
 			end % for
 
-			fprintf(dat_file, "\n");
+			fprintf(dat_file, '\n');
 			if isoctave()
 				fflush(dat_file);
 			end %if
@@ -229,12 +238,12 @@ function w_xyt( ...
 	end %for
 
 	if S_GIF
-		printf('Check: %s\a\n', gif_filename);
+		fprintf('Check: %s\a\n', gif_filename);
 	end %if
 
 	if S_DAT
 		fclose(dat_file);
-		printf('Check: %s\a\n', dat_filename);
+		fprintf('Check: %s\a\n', dat_filename);
 	end %if
 
 end %function

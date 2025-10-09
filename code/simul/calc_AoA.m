@@ -15,32 +15,6 @@ function return_struct = calc_AoA( ...
 	N_antenas ...
 )
 
-	function Z_phase = phase_z(t, Z_antenna, amp_w, ang_w, r_w, phase_w, lambda_w, omega_w, S, C, NOISE, SNR_dB, ATT)
-			% Calculos de amostra I/Q para antena em (0,0)
-		I_medido = trapz(t,ref_cos(t, omega_w) ...
-			.* signal_r(real(Z_antenna), imag(Z_antenna), t, ...
-			amp_w, ang_w, r_w, phase_w, lambda_w, omega_w, ...
-			S, C, NOISE, SNR_dB, ATT));
-		Q_medido = trapz(t,ref_sin(t, omega_w) ...
-			.* signal_r(real(Z_antenna), imag(Z_antenna), t, ...
-			amp_w, ang_w, r_w, phase_w, lambda_w, omega_w, ...
-			S, C, NOISE, SNR_dB, ATT));
-
-		Z_phase = (omega_w/pi)*(I_medido + i*Q_medido);
-	end % function
-
-	function [Z_phase_A_x_B angle_Z_A_x_B] = dephase_A_to_B(Z_phase_A, Z_phase_B)
-		Z_phase_A_x_B = Z_phase_A * conj(Z_phase_B);
-		deltaPhi_A_x_B = angle(Z_phase_A_x_B);
-		angle_Z_A_x_B = acos(deltaPhi_A_x_B/(pi));
-	end % function
-
-	function [delta_A_x_B delta_B_x_A] = deltas_A_B(angle_Z_A_x_B, Z_antenna_A, Z_antenna_B)
-		ang_A_x_B = deg2rad(mod(rad2deg(angle(Z_antenna_A - Z_antenna_B)),360));
-		delta_A_x_B = ang_A_x_B + angle_Z_A_x_B;
-		delta_B_x_A = ang_A_x_B - angle_Z_A_x_B;
-	end % function
-
 	% Raio do circulo de circunscreve o poligono com N lados de tamanho d
 	Rho = d/(2*sin(pi / N_antenas));
 	ant_angles_shift = -90;

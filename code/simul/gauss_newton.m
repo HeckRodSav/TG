@@ -12,7 +12,9 @@ function return_struct = gauss_newton( ...
 	ATT, ...
 	resolution, ...
 	d, ...
-	N_antenas ...
+	N_antenas, ...
+	it, ...
+	P_b_estimado ...
 )
 
 	% Distancia entre pares de Locators
@@ -31,75 +33,93 @@ function return_struct = gauss_newton( ...
 
 	% ant_array = [ locator_pair Rho+locator_pair -Rho+locator_pair ];
 
-	P_b_estimado = [0.1, 0.1]; % [x, y]
+	% P_b_estimado = [0.1, 0.1]; % [x, y]
 
 	t = linspace(0,(2 * pi / omega_w), resolution); % Intervalo de integração
 
-	% % Calculos de fase
-	% Z_phase_array = arrayfun(@(a) phase_z(t, a, amp_w, ...
-	% 	ang_w, r_w, phase_w, lambda_w, omega_w, S, C, NOISE, ...
-	% 	SNR_dB, ATT), ant_array);
-	% Calculos de fase
-	Z_phase_matrix = arrayfun(@(a) phase_z(t, a, amp_w, ...
-		ang_w, r_w, phase_w, lambda_w, omega_w, S, C, NOISE, ...
-		SNR_dB, ATT), ant_matrix);
-	% Z_phase_matrix'(:)'
+	for iteration = 1:5
 
-	[Z_x_L _] = arrayfun(@(a,b) dephase_A_to_B(a, b), Z_phase_matrix(:,1), Z_phase_matrix(:,2));
-	deltaPhi_L = angle(Z_x_L);
-	phi_L = asin(deltaPhi_L/(pi));
+		% % Calculos de fase
+		% Z_phase_array = arrayfun(@(a) phase_z(t, a, amp_w, ...
+		% 	ang_w, r_w, phase_w, lambda_w, omega_w, S, C, NOISE, ...
+		% 	SNR_dB, ATT), ant_array);
+		% Calculos de fase
+		Z_phase_matrix = arrayfun(@(a) phase_z(t, a, amp_w, ...
+			ang_w, r_w, phase_w, lambda_w, omega_w, S, C, NOISE, ...
+			SNR_dB, ATT), ant_matrix);
+		% Z_phase_matrix'(:)'
 
-	% Posicao_B lido
-	% Coordenada X do emissor em relação ao sistema
-	x_B = (y_L(2) - y_L(1) + tan(phi_L(1)) * x_L(1) - tan(phi_L(2)) * x_L(2)) / (tan(phi_L(1)) - tan(phi_L(2)));
+		[Z_x_L phi_L] = arrayfun(@(a,b) dephase_A_to_B(a, b), Z_phase_matrix(:,2), Z_phase_matrix(:,1));
+		% deltaPhi_L = angle(Z_x_L);
+		% phi_L = asin(deltaPhi_L/(pi));
 
-	% Coordenada Y do emissor em relação ao sistema
-	y_B = y_L(1) - tan(phi_L(1)) * (x_L(1) - x_B);
+		% [Z_x_L_1 phi_L_1] = arrayfun(@(a,b) dephase_A_to_B(a, b), Z_phase_matrix(1,2), Z_phase_matrix(1,1));
+		% % deltaPhi_L_1 = angle(Z_x_L_1);
+		% % phi_L_1 = asin(deltaPhi_L_1/(pi));
 
-	% Componente Z desconsiderada
-	% z_B
+		% [Z_x_L_2 phi_L_2] = arrayfun(@(a,b) dephase_A_to_B(a, b), Z_phase_matrix(2,2), Z_phase_matrix(2,1));
+		% % deltaPhi_L_2 = angle(Z_x_L_2);
+		% % phi_L_2 = asin(deltaPhi_L_2/(pi));
 
-	phi_medido = atan2((y_L-y_B),(x_L-x_B));
-	% phi_medido = atan((y_L-y_B)./(x_L-x_B))
-	% phi_medido_1 = atan((y_L(1)-y_B)/(x_L(1)-x_B))
-	% phi_medido_2 = atan((y_L(2)-y_B)/(x_L(2)-x_B))
-	% phi_medido_3 = atan((y_L(3)-y_B)/(x_L(3)-x_B))
+		% [Z_x_L_3 phi_L_3] = arrayfun(@(a,b) dephase_A_to_B(a, b), Z_phase_matrix(3,2), Z_phase_matrix(3,1));
+		% % deltaPhi_L_3 = angle(Z_x_L_3);
+		% % phi_L_3 = asin(deltaPhi_L_3/(pi));
 
-	phi_estimado = atan2((y_L-P_b_estimado(2)),(x_L-P_b_estimado(1)));
-	% phi_estimado = atan((y_L-P_b_estimado(2))./(x_L-P_b_estimado(1)))
-	% phi_estimado_1 = atan((y_L(1)-P_b_estimado(2))/(x_L(1)-P_b_estimado(1)))
-	% phi_estimado_2 = atan((y_L(2)-P_b_estimado(2))/(x_L(2)-P_b_estimado(1)))
-	% phi_estimado_3 = atan((y_L(3)-P_b_estimado(2))/(x_L(3)-P_b_estimado(1)))
+		% Posicao_B lido
+		% Coordenada X do emissor em relação ao sistema
+		x_B = (y_L(2) - y_L(1) + tan(phi_L(1)) * x_L(1) - tan(phi_L(2)) * x_L(2)) / (tan(phi_L(1)) - tan(phi_L(2)));
 
-	A = (phi_medido - phi_estimado);
-	% A_1 = phi_medido_1 - phi_estimado_1
-	% A_2 = phi_medido_2 - phi_estimado_2
-	% A_3 = phi_medido_3 - phi_estimado_3
+		% Coordenada Y do emissor em relação ao sistema
+		y_B = y_L(1) - tan(phi_L(1)) * (x_L(1) - x_B);
 
-	function res = phi_dxB(x_L, x_B, y_L, y_B)
-		res = (y_L - y_B)./(-2 .* x_L .* x_B + x_B.^2 + (y_L - y_B).^2 + x_L.^2);
-	end % function
+		% Componente Z desconsiderada
+		% z_B
 
-	function res = phi_dyB(x_L, x_B, y_L, y_B)
-		res = (x_B - x_L)./(-2 .* x_L .* x_B + x_B.^2 + (y_L - y_B).^2 + x_L.^2);
-	end % function
+		if iteration == 1
+			P_b_estimado = [x_B, y_B];
+		end % if
 
-	% arrayfun(@(a,b) dephase_A_to_B(a, b), Z_phase_matrix(:,1), Z_phase_matrix(:,2));
-	Jacobiano = [ phi_dxB(x_L, P_b_estimado(1), y_L, P_b_estimado(2)) phi_dyB(x_L, P_b_estimado(1), y_L, P_b_estimado(2)) ];
+		phi_medido = atan2((y_L-y_B),(x_L-x_B));
+		% phi_medido = atan((y_L-y_B)./(x_L-x_B))
+		% phi_medido_1 = atan((y_L(1)-y_B)/(x_L(1)-x_B))
+		% phi_medido_2 = atan((y_L(2)-y_B)/(x_L(2)-x_B))
+		% phi_medido_3 = atan((y_L(3)-y_B)/(x_L(3)-x_B))
 
-	deltas = (inv(Jacobiano * Jacobiano') * Jacobiano)' * A;
+		phi_estimado = atan2((y_L-P_b_estimado(2)),(x_L-P_b_estimado(1)));
+		% phi_estimado = atan((y_L-P_b_estimado(2))./(x_L-P_b_estimado(1)))
+		% phi_estimado_1 = atan((y_L(1)-P_b_estimado(2))/(x_L(1)-P_b_estimado(1)))
+		% phi_estimado_2 = atan((y_L(2)-P_b_estimado(2))/(x_L(2)-P_b_estimado(1)))
+		% phi_estimado_3 = atan((y_L(3)-P_b_estimado(2))/(x_L(3)-P_b_estimado(1)))
 
-	P_b_estimado(1) = P_b_estimado(1) + deltas(1);
-	P_b_estimado(2) = P_b_estimado(2) + deltas(2);
+		A = (phi_medido - phi_estimado);
+		% A_1 = phi_medido_1 - phi_estimado_1
+		% A_2 = phi_medido_2 - phi_estimado_2
+		% A_3 = phi_medido_3 - phi_estimado_3
 
-	choose_angle = angle(P_b_estimado(1) + i * P_b_estimado(2))
+		function res = phi_dxB(x_L, x_B, y_L, y_B)
+			res = (y_L - y_B)./(-2 .* x_L .* x_B + x_B.^2 + (y_L - y_B).^2 + x_L.^2);
+		end % function
 
-	ang_w
+		function res = phi_dyB(x_L, x_B, y_L, y_B)
+			res = (x_B - x_L)./(-2 .* x_L .* x_B + x_B.^2 + (y_L - y_B).^2 + x_L.^2);
+		end % function
 
-	rad2deg(choose_angle)
+		% arrayfun(@(a,b) dephase_A_to_B(a, b), Z_phase_matrix(:,1), Z_phase_matrix(:,2));
+		Jacobiano = [ phi_dxB(x_L, P_b_estimado(1), y_L, P_b_estimado(2)) ...
+			phi_dyB(x_L, P_b_estimado(1), y_L, P_b_estimado(2)) ];
+
+		deltas = (inv(Jacobiano * Jacobiano') * Jacobiano)' * A;
+
+		P_b_estimado(1) = P_b_estimado(1) + deltas(1);
+		P_b_estimado(2) = P_b_estimado(2) + deltas(2);
+
+		choose_angle = angle(P_b_estimado(1) + i * P_b_estimado(2));
+
+	end % for
 
 	return_struct = { ...
-		choose_angle ...
+		choose_angle, ...
+		P_b_estimado ...
 		% Rho ...
 		% ant_array ...
 		% Z_phase_array ...

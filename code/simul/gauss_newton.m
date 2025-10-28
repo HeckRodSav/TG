@@ -23,7 +23,7 @@ function return_struct = gauss_newton( ...
 	% Posicao Locators
 	locator_pair = [ -(d/2) (d/2) ];
 
-	x_L = [0 Rho -Rho]';
+	x_L = [0 Rho*1 -Rho*1]';
 	y_L = zeros(size(x_L));
 	aux_ones = ones(size(x_L));
 	aux_ant_array = x_L + (aux_ones * locator_pair);

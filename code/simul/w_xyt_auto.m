@@ -12,7 +12,7 @@ S_DAT = false;
 
 range_step = 5;
 
-N_antenas = 7;
+N_antenas = 3;
 
 % w_xyt(NOISE, ATT, CHG_PHI, CHG_R, CHG_THETA, S_GIF, S_DAT, SNR, range_step, N_antenas);
 

@@ -1,0 +1,49 @@
+\begin{tikzpicture}[node distance=1.75cm]
+    \node (s) [startstop] {Início};
+    \node (a1) [below of=s, io] {Aferir fase nas antenas};
+    \node (a2) [below of=a1, process] {Calcular defasagem};
+    \node (a3) [below of=a2, process] {Ajustar ângulos por pares};
+    \node (a4) [below of=a3, process] {Quantizar valores};
+    \node (a5) [right of=s, process, node distance=6cm] {Calcular moda};
+    \node (a6) [below of=a5, process] {Filtrar valores plausíveis};
+    \node (a7) [below of=a6, process] {Calcular mediana};
+    \node (a8) [below of=a7, process] {Retornar resultado};
+    \node (f)  [below of=a8, startstop] {Fim};
+
+    % \node [anchor=south west, font = {\scriptsize\bfseries}, Red] at (a4.east) {N};
+    % \node [anchor=south east, font = {\scriptsize\bfseries}, Green] at (a4.west) {S};
+
+	\node (x1) [below of = s, ghost] {};
+
+    \node [fit=(x1)] (fita1) {}; \draw [niceBrace] ([yshift=2.5pt]fita1.south west) -- ([yshift=-2.5pt]fita1.north west);
+    \node [fit=(a2)] (fita2) {}; \draw [niceBrace] ([yshift=2.5pt]fita2.south west) -- ([yshift=-2.5pt]fita2.north west);
+    \node [fit=(a3)] (fita3) {}; \draw [niceBrace] ([yshift=2.5pt]fita3.south west) -- ([yshift=-2.5pt]fita3.north west);
+    \node [fit=(a4)] (fita4) {}; \draw [niceBrace] ([yshift=2.5pt]fita4.south west) -- ([yshift=-2.5pt]fita4.north west);
+
+    \node [fit=(a5)] (fita5) {}; \draw [niceBrace] ([yshift=-2.5pt]fita5.north east) -- ([yshift=2.5pt]fita5.south east);
+    \node [fit=(a6)] (fita6) {}; \draw [niceBrace] ([yshift=-2.5pt]fita6.north east) -- ([yshift=2.5pt]fita6.south east);
+    \node [fit=(a7)] (fita7) {}; \draw [niceBrace] ([yshift=-2.5pt]fita7.north east) -- ([yshift=2.5pt]fita7.south east);
+    \node [fit=(a8)] (fita8) {}; \draw [niceBrace] ([yshift=-2.5pt]fita8.north east) -- ([yshift=2.5pt]fita8.south east);
+
+	\node [left of=x1, auxBlock, anchor=east] {\ac{Zk}};
+	\node [left of=a2, auxBlock, anchor=east] {\ac{DeltaPhi}};
+	\node [left of=a3, auxBlock, anchor=east] {\ac{Theta}};
+	\node [left of=a4, auxBlock, anchor=east] {\ac{ThetaQuanti}};
+
+    \node [right of=a5, auxBlock] {\ac{thetaMo}};
+    \node [right of=a6, auxBlock] {\ac{ThetaFiltro}};
+    \node [right of=a7, auxBlock] {$\widetilde{\ac{ThetaFiltro}}$};
+    \node [right of=a8, auxBlock] {\ac{thetaAoA}};
+
+    \draw [arrow] (s) -- (a1);
+    \draw [arrow] (a1) -- (a2);
+    \draw [arrow] (a2) -- (a3);
+    \draw [arrow] (a3) -- (a4);
+    % \draw [arrow] (a4) -- (a5);
+    \draw [arrow] (a4) -| ($(a4)!0.5!(a5)$) |- (a5);
+    % \draw [arrow] (a4) -- ([xshift=-.5cm]a4.west) |- (a2);
+    \draw [arrow] (a5) -- (a6);
+    \draw [arrow] (a6) -- (a7);
+    \draw [arrow] (a7) -- (a8);
+    \draw [arrow] (a8) -- (f);
+\end{tikzpicture}

@@ -22,7 +22,7 @@
         % 	legend columns=6,
         % 	transpose legend,
         % 	draw=none,
-        % 	/tikz/every even column/.append style={column sep=0.5cm}
+        % 	/tikz/every even column/.append style={column sep=0.4cm}
     	% }, % onde exibir
         % axis x line=center,
         % axis y line=center,
@@ -339,7 +339,7 @@
         	legend columns=2,
         	transpose legend,
         	draw=none,
-        	/tikz/every even column/.append style={column sep=0.5cm}
+        	/tikz/every even column/.append style={column sep=0.4cm}
     	}, % onde exibir
         samples=505,
         domain=0:100,
@@ -462,6 +462,18 @@
     \addlegendimage{/pgfplots/refstyle=\fileName.1.9}\addlegendentry{$\theta_{+5}$}
 	\addlegendimage{/pgfplots/refstyle=\fileName.1.10}\addlegendentry{$\theta_{-5}$}
 
+    \addplot[
+        Black!30,
+        mark=o,
+		mark size=1.25pt,
+        only marks,
+        % smooth
+    ] table [
+        % col sep=comma,
+        x=percent, % cabeçalho da coluna de dados X no arquivo
+        y=choose_angle_GN, % cabeçalho da coluna de dados Y no arquivo
+	]
+	{\fileAddress};	\addlegendentry{$\theta_{GN}$}
 
     \end{axis}
 
@@ -478,7 +490,7 @@
     %     	legend columns=3,
     %     % 	transpose legend,
     %     	draw=none,
-    %     	/tikz/every even column/.append style={column sep=0.5cm}
+    %     	/tikz/every even column/.append style={column sep=0.4cm}
     % 	}, % onde exibir
     %     % axis x line=center,
     %     % axis y line=center,

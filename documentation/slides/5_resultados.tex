@@ -11,25 +11,58 @@
     \end{frame}
 
 \subsection{Três antenas}
-	\begin{frame}{R\textsuperscript{2} para três antenas}
+\begin{frame}{R\textsuperscript{2} para três antenas}
+	% \scalebox{0.9}{
 		\begin{table}
 			\centering
+			\resizebox{\linewidth}{!}{%
 			\begin{tabular}{@{}
 				S[table-format = 3.1]
 				S[table-format = 3.2, table-model-setup = \bfseries]
 				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
 				@{}}
+				% \toprule
+				% {SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
+				% \\\midrule
+				% \infinity & \bfseries 100.00 & 100.00\\
+				% 20 & 88.06 & 90.45\\
+				% 17 & 88.18 & 87.98\\
+				% 14 & 99.99 & 84.49\\
+				% 7 & 90.12 & 83.50\\
+				% 0 & \bfseries 76.32 & \bfseries 78.73\\
+				% \bottomrule
 				\toprule
-				{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
-				\\\midrule
-				\infinity & \bfseries 100.00 & 100.00\\
-				20 & 88.06 & 90.45\\
-				17 & 88.18 & 87.98\\
-				14 & 99.99 & 84.49\\
-				7 & 90.12 & 83.50\\
-				0 & \bfseries 76.32 & \bfseries 78.73\\
+				{
+					\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}} SNR \\ (\unit{\deci\bel})\end{tabular}}
+				} & \multicolumn{3}{c}{Sem ATT} & \multicolumn{3}{c}{Com ATT} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+				{
+					% \acs{SNR} (\unit{\deci\bel})
+				} & {
+					\begin{tabular}[c]{@{}c@{}} \phantom{\textsuperscript{2}}R\textsuperscript{2} \\ (\unit{\percent}) \end{tabular}
+				} & {
+					\begin{tabular}[c]{@{}c@{}} G-N \\ R\textsuperscript{2} (\unit{\percent}) \end{tabular}
+				} & {\usebeamercolor[fg]{palette sidebar tertiary}
+					\begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+				} & {
+					\begin{tabular}[c]{@{}c@{}} \phantom{\textsuperscript{2}}R\textsuperscript{2} \\ (\unit{\percent}) \end{tabular}
+				} & {
+					\begin{tabular}[c]{@{}c@{}} G-N \\ R\textsuperscript{2} (\unit{\percent}) \end{tabular}
+				} & {\usebeamercolor[fg]{palette sidebar tertiary}
+					\begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+				}\\\midrule
+				\infinity & \bfseries 100.00 & \bfseries 100.00 & {\usebeamercolor[fg]{palette sidebar tertiary} 98.62} & 100.00 & 100.00 & {\usebeamercolor[fg]{palette sidebar tertiary} 100.00}\\
+				20 & 88.78 & 0.23 & {\usebeamercolor[fg]{palette sidebar tertiary} 84.14} & 95.85 & 2.25 & {\usebeamercolor[fg]{palette sidebar tertiary} 86.90}\\
+				17 & 82.09 & 0.26 & {\usebeamercolor[fg]{palette sidebar tertiary} 86.90} & 89.95 & 3.44 & {\usebeamercolor[fg]{palette sidebar tertiary} 86.90}\\
+				14 & 96.10 & 0.13 & {\usebeamercolor[fg]{palette sidebar tertiary} 88.28} & 97.83 & 0.03 & {\usebeamercolor[fg]{palette sidebar tertiary} 83.45}\\
+				7 & 78.56 & 1.61 & {\usebeamercolor[fg]{palette sidebar tertiary} 88.28} & 92.02 & 1.39 & {\usebeamercolor[fg]{palette sidebar tertiary} 88.97}\\
+				0 & \bfseries 82.35 & \bfseries 3.40 & {\usebeamercolor[fg]{palette sidebar tertiary} 86.90} & \bfseries 77.93 & \bfseries 0.10 & {\usebeamercolor[fg]{palette sidebar tertiary} 85.52}\\
 				\bottomrule
 			\end{tabular}
+			}
 			\caption*{\usebeamercolor[fg]{palette sidebar tertiary} \tiny Fonte: Autor, saídas das simulações disponíveis em \href{https://github.com/HeckRodSav/TG/tree/main/documentation/data/POLY_3}{\underline{GitHub}}.}
 		\end{table}
 	\end{frame}
@@ -66,22 +99,54 @@
 	\begin{frame}{R\textsuperscript{2} para cinco antenas}
 		\begin{table}
 			\centering
+			\resizebox{\linewidth}{!}{%
 			\begin{tabular}{@{}
 				S[table-format = 3.1]
 				S[table-format = 3.2, table-model-setup = \bfseries]
 				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
+				S[table-format = 3.2, table-model-setup = \bfseries]
 				@{}}
+				% \toprule
+				% {SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
+				% \\\midrule
+				% \infinity & \bfseries 100.00 & 100.00\\
+				% 20 & 100.00 & 100.00\\
+				% 17 & 91.90 & 91.89\\
+				% 14 & 91.91 & 91.90\\
+				% 7 & 84.27 & 91.93\\
+				% 0 & \bfseries 80.73 & \bfseries 96.28\\
+				% \bottomrule
 				\toprule
-				{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
-				\\\midrule
-				\infinity & \bfseries 100.00 & 100.00\\
-				20 & 100.00 & 100.00\\
-				17 & 91.90 & 91.89\\
-				14 & 91.91 & 91.90\\
-				7 & 84.27 & 91.93\\
-				0 & \bfseries 80.73 & \bfseries 96.28\\
+				{
+					\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}} SNR \\ (\unit{\deci\bel})\end{tabular}}
+				} & \multicolumn{3}{c}{Sem ATT} & \multicolumn{3}{c}{Com ATT} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+				{
+					% \acs{SNR} (\unit{\deci\bel})
+				} & {
+					\begin{tabular}[c]{@{}c@{}} \phantom{\textsuperscript{2}}R\textsuperscript{2} \\ (\unit{\percent}) \end{tabular}
+				} & {
+					\begin{tabular}[c]{@{}c@{}} G-N \\ R\textsuperscript{2} (\unit{\percent}) \end{tabular}
+				} & {\usebeamercolor[fg]{palette sidebar tertiary}
+					\begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+				} & {
+					\begin{tabular}[c]{@{}c@{}} \phantom{\textsuperscript{2}}R\textsuperscript{2} \\ (\unit{\percent}) \end{tabular}
+				} & {
+					\begin{tabular}[c]{@{}c@{}} G-N \\ R\textsuperscript{2} (\unit{\percent}) \end{tabular}
+				} & {\usebeamercolor[fg]{palette sidebar tertiary}
+					\begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+				}\\\midrule
+				\infinity & \bfseries 100.00 & \bfseries 100.00 & {\usebeamercolor[fg]{palette sidebar tertiary} 67.59} & 100.00 & 100.00 & {\usebeamercolor[fg]{palette sidebar tertiary} 70.34} \\
+				20 & 100.00 & 19.79 & {\usebeamercolor[fg]{palette sidebar tertiary} 24.83} & 100.00 & 13.56 & {\usebeamercolor[fg]{palette sidebar tertiary} 22.76}\\
+				17 & 100.00 & 7.50 & {\usebeamercolor[fg]{palette sidebar tertiary} 20.69} & 91.90 & 0.04 & {\usebeamercolor[fg]{palette sidebar tertiary} 20.69}\\
+				14 & 84.26 & 0.75 & {\usebeamercolor[fg]{palette sidebar tertiary} 23.45} & 84.24 & 0.03 & {\usebeamercolor[fg]{palette sidebar tertiary} 24.14}\\
+				7 & 99.99 & 0.93 & {\usebeamercolor[fg]{palette sidebar tertiary} 21.38} & 99.99 & 0.06 & {\usebeamercolor[fg]{palette sidebar tertiary} 15.86}\\
+				0 & \bfseries 76.30 & \bfseries 0.87 & {\usebeamercolor[fg]{palette sidebar tertiary} 22.07} & \bfseries 82.43 & \bfseries 7.77 & {\usebeamercolor[fg]{palette sidebar tertiary} 16.55}\\
 				\bottomrule
 			\end{tabular}
+			}
 			\caption*{\usebeamercolor[fg]{palette sidebar tertiary} \tiny Fonte: Autor, saídas das simulações disponíveis em \href{https://github.com/HeckRodSav/TG/tree/main/documentation/data/POLY_5}{\underline{GitHub}}.}
 		\end{table}
 	\end{frame}
@@ -118,22 +183,54 @@
 	\begin{frame}{R\textsuperscript{2} para sete antenas}
 		\begin{table}
 			\centering
+			\resizebox{\linewidth}{!}{%
 			\begin{tabular}{@{}
 			S[table-format = 3.1]
 			S[table-format = 3.2, table-model-setup = \bfseries]
 			S[table-format = 3.2, table-model-setup = \bfseries]
+			S[table-format = 3.2, table-model-setup = \bfseries]
+			S[table-format = 3.2, table-model-setup = \bfseries]
+			S[table-format = 3.2, table-model-setup = \bfseries]
+			S[table-format = 3.2, table-model-setup = \bfseries]
 			@{}}
+			% \toprule
+			% {SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
+			% \\\midrule
+			% \infinity & \bfseries 100.00 & 100.00\\
+			% 20 & 84.25 & 100.00\\
+			% 17 & 100.00 & 84.24\\
+			% 14 & 91.90 & 100.00\\
+			% 7 & 99.99 & 84.28\\
+			% 0 & \bfseries 80.15 & \bfseries 99.98\\
+			% \bottomrule
 			\toprule
-			{SNR (\unit{\deci\bel})} & {R\textsuperscript{2} sem ATT (\unit{\percent})} & {R\textsuperscript{2} com ATT (\unit{\percent})}
-			\\\midrule
-			\infinity & \bfseries 100.00 & 100.00\\
-			20 & 84.25 & 100.00\\
-			17 & 100.00 & 84.24\\
-			14 & 91.90 & 100.00\\
-			7 & 99.99 & 84.28\\
-			0 & \bfseries 80.15 & \bfseries 99.98\\
+			{
+				\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}} SNR \\ (\unit{\deci\bel})\end{tabular}}
+			} & \multicolumn{3}{c}{Sem ATT} & \multicolumn{3}{c}{Com ATT} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+			{
+				% \acs{SNR} (\unit{\deci\bel})
+			} & {
+				\begin{tabular}[c]{@{}c@{}} \phantom{\textsuperscript{2}}R\textsuperscript{2} \\ (\unit{\percent}) \end{tabular}
+			} & {
+				\begin{tabular}[c]{@{}c@{}} G-N \\ R\textsuperscript{2} (\unit{\percent}) \end{tabular}
+			} & {\usebeamercolor[fg]{palette sidebar tertiary}
+				\begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+			} & {
+				\begin{tabular}[c]{@{}c@{}} \phantom{\textsuperscript{2}}R\textsuperscript{2} \\ (\unit{\percent}) \end{tabular}
+			} & {
+				\begin{tabular}[c]{@{}c@{}} G-N \\ R\textsuperscript{2} (\unit{\percent}) \end{tabular}
+			} & {\usebeamercolor[fg]{palette sidebar tertiary}
+				\begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+			}\\\midrule
+			\infinity & \bfseries 100.00 & \bfseries 82.53 & {\usebeamercolor[fg]{palette sidebar tertiary} 82.07} & 100.00 & 100.00 & {\usebeamercolor[fg]{palette sidebar tertiary} 75.86}\\
+			20 & 100.00 & 9.97 & {\usebeamercolor[fg]{palette sidebar tertiary} 26.21} & 100.00 & 2.59 & {\usebeamercolor[fg]{palette sidebar tertiary} 31.03}\\
+			17 & 100.00 & 9.14 & {\usebeamercolor[fg]{palette sidebar tertiary} 14.48} & 84.25 & 15.84 & {\usebeamercolor[fg]{palette sidebar tertiary} 21.38}\\
+			14 & 91.90 & 1.41 & {\usebeamercolor[fg]{palette sidebar tertiary} 24.83} & 84.24 & 6.51 & {\usebeamercolor[fg]{palette sidebar tertiary} 27.59}\\
+			7 & 84.23 & 9.35 & {\usebeamercolor[fg]{palette sidebar tertiary} 22.07} & 91.90 & 4.84 & {\usebeamercolor[fg]{palette sidebar tertiary} 20.00}\\
+			0 & \bfseries 91.86 & \bfseries 7.95 & {\usebeamercolor[fg]{palette sidebar tertiary} 22.07} & \bfseries 84.20 & \bfseries 0.14 & {\usebeamercolor[fg]{palette sidebar tertiary} 23.45}\\
 			\bottomrule
 		\end{tabular}
+		}
 		\caption*{\usebeamercolor[fg]{palette sidebar tertiary} \tiny Fonte: Autor, saídas das simulações disponíveis em \href{https://github.com/HeckRodSav/TG/tree/main/documentation/data/POLY_7}{\underline{GitHub}}.}
 	\end{table}
 	\end{frame}

@@ -6,10 +6,18 @@ Também são apontados problemas encontrados ao longo do desenvolvimento do trab
 \section{Performance da simulação}
 
 Foram analisadas diferentes quantidades de antenas, contando ou não com ruído e atenuação no sinal.
-Para todas as quantidades de antenas analisadas, são sumarizadas simulações com e sem \ac{ATT}, diferentes valores de \ac{SNR}, partindo do caso de ruído ideal (sem qualquer ruído, $\text{\acs{SNR}} \rightarrow \qty{\infty}{\deci\bel}$) ao caso de potência de ruído igual à potência de sinal ($\text{\acs{SNR}} = \qty{0}{\deci\bel}$), com o emissor do sinal circular orbitando a uma distância fixa de $ 50 \lambda $ do centro do sistema de antenas.
+Para todas as quantidades de antenas analisadas, são sumarizadas simulações com e sem \ac{ATT}, diferentes valores de \ac{SNR}, partindo do caso de ruído ideal (sem qualquer ruído, $\text{\acs{SNR}} \rightarrow \qty{\infty}{\deci\bel}$) ao caso de potência de ruído igual à potência de sinal ($\text{\acs{SNR}} = \qty{0}{\deci\bel}$), com o emissor do sinal circular orbitando a uma distância fixa de $ 50\,\lambda $ do centro do sistema de antenas.
 
 Para garantir a robustez do sistema, foram realizadas outras simulações, considerando casos onde o emissor está se aproximando do sistema de antenas e também casos onde o emissor está estático no espaço.
 Estas simulações não foram sumarizadas.
+
+Para cada simulação realizada, foi também realizada outra nas mesmas condições para o algoritmo de Gauss-Newton, adaptado da proposta de \citeauthor{Horst2025BTLEAoA} \cite{Horst2025BTLEAoA}, referida na \autoref{sec:trabalhos_relacionados}.
+Em muitos casos, este método teve problema em convergir para um valor, apontando o erro de \ac{NaN}, nestes casos, nenhum resultado de ângulo foi obtido.
+Nos resultados aqui sumarizados, são indicadas as porcentagens associadas a quantidade de valores válidos obtidos por este método, ou seja, que não retornaram \ac{NaN}.
+No gráficos apresentados, pontos de $\theta_{GN}$ ausentes são referentes a estes erros.
+
+Este método assume que a fonte do sinal estará a frente do plano de receptores, portanto apontará somente valores ``positivos'', de $0$ a $\pi$, proporcionalmente espelhados caso a fonte esteja na direção contrária.
+Para medida de análise, estes valores foram considerados corretos, dado que consistem apenas numa mudança de referecial.
 
 \subsection{Três antenas}
 
@@ -26,15 +34,45 @@ Simulações realizadas na configurações de três antenas têm os valores de R
         S[table-format = 2.0]
         S[table-format = 3.2, table-model-setup = \bfseries]
         S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
         @{}}
+        % \toprule
+        % {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
+        % \infinity & \bfseries 100.00 & 100.00\\
+        % 20 & 88.06 & 90.45\\
+        % 17 & 88.18 & 87.98\\
+        % 14 & 99.99 & 84.49\\
+        % 7 & 90.12 & 83.50\\
+        % 0 & \bfseries 76.32 & \bfseries 78.73\\
+        % \bottomrule
         \toprule
-        {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
-        \infinity & \bfseries 100.00 & 100.00\\
-        20 & 88.06 & 90.45\\
-        17 & 88.18 & 87.98\\
-        14 & 99.99 & 84.49\\
-        7 & 90.12 & 83.50\\
-        0 & \bfseries 76.32 & \bfseries 78.73\\
+        {
+            \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}} \acs{SNR} \\ (\unit{\deci\bel})\end{tabular}}
+        } & \multicolumn{3}{c}{Sem \acs{ATT}} & \multicolumn{3}{c}{Com \acs{ATT}} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+        {
+            % \acs{SNR} (\unit{\deci\bel})
+        } & {
+            \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+        }\\\midrule
+        \infinity & \bfseries 100.00 & \bfseries 100.00 & 98.62 & 100.00 & 100.00 & 100.00\\
+        20 & 88.78 & 0.23 & 84.14 & 95.85 & 2.25 & 86.90\\
+        17 & 82.09 & 0.26 & 86.90 & 89.95 & 3.44 & 86.90\\
+        14 & 96.10 & 0.13 & 88.28 & 97.83 & 0.03 & 83.45\\
+        7 & 78.56 & 1.61 & 88.28 & 92.02 & 1.39 & 88.97\\
+        0 & \bfseries 82.35 & \bfseries 3.40 & 86.90 & \bfseries 77.93 & \bfseries 0.10 & 85.52\\
         \bottomrule
     \end{tabular}
     \medskip
@@ -73,7 +111,7 @@ Simulações realizadas na configurações de três antenas têm os valores de R
 
 
 As simulações com cinco antenas apresentaram valores intermediários de R².
-Todos os valores foram acima de \qty{80}{\percent}.
+Todos os valores foram acima de \qty{75}{\percent}, e em média, acima de \qty{80}{\percent}.
 
 Simulações realizadas na configurações de cinco antenas têm os valores de R² apresentados na \autoref{tab:POLY_5}, e os resultados dos valores destacados são apresentados nas Figuras \ref{fig:simul_POLY_5_R_50}, \ref{fig:simul_POLY_5_R_50_SNR_1} e \ref{fig:simul_POLY_5_R_50_SNR_1_ATT}.
 
@@ -85,15 +123,45 @@ Simulações realizadas na configurações de cinco antenas têm os valores de R
         S[table-format = 2.0]
         S[table-format = 3.2, table-model-setup = \bfseries]
         S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
         @{}}
+        % \toprule
+        % {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
+        % \infinity & \bfseries 100.00 & 100.00\\
+        % 20 & 100.00 & 100.00\\
+        % 17 & 91.90 & 91.89\\
+        % 14 & 91.91 & 91.90\\
+        % 7 & 84.27 & 91.93\\
+        % 0 & \bfseries 80.73 & \bfseries 96.28\\
+        % \bottomrule
         \toprule
-        {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
-        \infinity & \bfseries 100.00 & 100.00\\
-        20 & 100.00 & 100.00\\
-        17 & 91.90 & 91.89\\
-        14 & 91.91 & 91.90\\
-        7 & 84.27 & 91.93\\
-        0 & \bfseries 80.73 & \bfseries 96.28\\
+        {
+            \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}} \acs{SNR} \\ (\unit{\deci\bel})\end{tabular}}
+        } & \multicolumn{3}{c}{Sem \acs{ATT}} & \multicolumn{3}{c}{Com \acs{ATT}} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+        {
+            % \acs{SNR} (\unit{\deci\bel})
+        } & {
+            \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+        }\\\midrule
+        \infinity & \bfseries 100.00 & \bfseries 100.00 & 67.59 & 100.00 & 100.00 & 70.34\\
+        20 & 100.00 & 19.79 & 24.83 & 100.00 & 13.56 & 22.76\\
+        17 & 100.00 & 7.50 & 20.69 & 91.90 & 0.04 & 20.69\\
+        14 & 84.26 & 0.75 & 23.45 & 84.24 & 0.03 & 24.14\\
+        7 & 99.99 & 0.93 & 21.38 & 99.99 & 0.06 & 15.86\\
+        0 & \bfseries 76.30 & \bfseries 0.87 & 22.07 & \bfseries 82.43 & \bfseries 7.77 & 16.55\\
         \bottomrule
     \end{tabular}
     \medskip
@@ -143,15 +211,45 @@ Simulações realizadas na configurações de sete antenas têm os valores de R�
         S[table-format = 2.0]
         S[table-format = 3.2, table-model-setup = \bfseries]
         S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
         @{}}
+        % \toprule
+        % {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
+        % \infinity & \bfseries 100.00 & 100.00\\
+        % 20 & 84.25 & 100.00\\
+        % 17 & 100.00 & 84.24\\
+        % 14 & 91.90 & 100.00\\
+        % 7 & 99.99 & 84.28\\
+        % 0 & \bfseries 80.15 & \bfseries 99.98\\
+        % \bottomrule
         \toprule
-        {\acs{SNR} (\unit{\deci\bel})} & {R² sem \acs{ATT} (\unit{\percent})} & {R² com \acs{ATT} (\unit{\percent})}\\\midrule
-        \infinity & \bfseries 100.00 & 100.00\\
-        20 & 84.25 & 100.00\\
-        17 & 100.00 & 84.24\\
-        14 & 91.90 & 100.00\\
-        7 & 99.99 & 84.28\\
-        0 & \bfseries 80.15 & \bfseries 99.98\\
+        {
+            \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}} \acs{SNR} \\ (\unit{\deci\bel})\end{tabular}}
+        } & \multicolumn{3}{c}{Sem \acs{ATT}} & \multicolumn{3}{c}{Com \acs{ATT}} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+        {
+            % \acs{SNR} (\unit{\deci\bel})
+        } & {
+            \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+        } & {
+            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+        }\\\midrule
+        \infinity & \bfseries 100.00 & \bfseries 82.53 & 82.07 & 100.00 & 100.00 & 75.86\\
+        20 & 100.00 & 9.97 & 26.21 & 100.00 & 2.59 & 31.03\\
+        17 & 100.00 & 9.14 & 14.48 & 84.25 & 15.84 & 21.38\\
+        14 & 91.90 & 1.41 & 24.83 & 84.24 & 6.51 & 27.59\\
+        7 & 84.23 & 9.35 & 22.07 & 91.90 & 4.84 & 20.00\\
+        0 & \bfseries 91.86 & \bfseries 7.95 & 22.07 & \bfseries 84.20 & \bfseries 0.14 & 23.45\\
         \bottomrule
     \end{tabular}
     \medskip
@@ -201,3 +299,6 @@ Partindo disso, foram necessárias várias alterações em partes do código, qu
 Por se tratar de um \textit{software} proprietário, o MATLAB não disponibiliza o código fonte de todas as suas ferramentas internas e, assim, nem todas as funcionalidades estão implementadas no GNU Octave.
 A falta de algumas dessas funções moldou o decorrer do desenvolvimento do projeto, optando por operações viáveis à versão de uso livre.
 
+\subsection{Convergência de valores}
+
+Em múltiplos casos, o algoritmo de Gauss-Newton não foi capaz de convergir para um valor, apontando problema de precisão numérica e retornando o erro \ac{NaN}.

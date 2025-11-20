@@ -61,56 +61,6 @@ Os parâmetros de matrizes numéricas são:
 \end{itemize}
 
 
-
-
-
-
-
-% Estes parâmetros são:
-% \begin{itemize}
-% 	\item \lstinline|amp_w|, valor numérico, amplitude desejada para o sinal;
-% 	\item \lstinline|ang_w|, valor numérico, direção do emissor do sinal, equivalente ao ângulo \ac{thetaAoA} de chegada do sinal em relacao à malha de antenas;
-% 	\item \lstinline|angle_Z_A_x_B|, valor numérico, ângulo relativo \ac{betak} para par de antenas;
-% 	\item \lstinline|ant_array|, matriz de valores numéricos, coordenadas das antenas da malha;
-% 	\item \lstinline|d|, valor numérico, distância \ac{d} entre par de antenas da malha;
-% 	\item \lstinline|delta_A_x_B_array|, matriz de valores numéricos, contendo o ângulo \ac{thetak} calculado por $\ac{alphak} + \ac{betak}$ aferido para cada par de antenas da malha;
-% 	\item \lstinline|delta_B_x_A_array|, matriz de valores numéricos, contendo o ângulo \ac{thetak} calculado por $\ac{alphak} - \ac{betak}$ aferido para cada par de antenas da malha;
-% 	\item \lstinline|choose_angle|, valor numérico, ângulo \ac{thetaAoA} calculado pelo sistema;
-% 	\item \lstinline|interval|, valor numérico, indica os limites para a geração de imagem da simulação;
-% 	\item \lstinline|lambda_w|, valor numérico, comprimento de onda \ac{lambda};
-% 	\item \lstinline|omega_w|, valor numérico, frêquencia angular \ac{omega};
-% 	\item \lstinline|phase_w|, valor numérico, fase $\phi$ do sinal no emissor;
-% 	\item \lstinline|r_w|, valor numérico, distância que o emissor de sinal está da coordenada $(0, 0)$ do sistema;
-% 	\item \lstinline|range_step|, valor numérico, largura em graus do passo na simulação.
-% 	\item \lstinline|resolution|, valor numérico, relativo à quantidade de pontos utilizados na aproximação numérica do cálculo de correlação;
-% 	\item \lstinline|t_w|, valor numérico, tempo $t$ associado ao instante de aferição do sinal;
-% 	\item \lstinline|x_w| ou \lstinline|y_w|, valor numérico, coordenada \ac{xk} ou \ac{yk} da antena \ac{Ak} em relação ao sistema;
-% 	% \item \lstinline|x_w|, valor numérico, coordenada \ac{xk} da antena em questão em relação ao sistema;
-% 	% \item \lstinline|y_w|, valor numérico, coordenada \ac{yk} da antena em questão em relação ao sistema;
-% 	\item \lstinline|z_plot|, matriz de valores numéricos, estado corrente do sinal no espaço, utilizado na geração de imagem da simulação;
-
-% 	\item \lstinline|ATT|, valor binário, indica se o sinal contará com atenuação por distância;
-% 	\item \lstinline|CHG_PHI|, valor binário, indica se a fase geral do sinal deve mudar ao longo da simulação;
-% 	\item \lstinline|CHG_R|, valor binário, indica se a distância do emissor do sinal deverá mudar ao longo da simulação;
-% 	\item \lstinline|CHG_THETA|, valor binário, indica se o ângulo de origem do sinal deverá mudar ao longo da simulação;
-% 	\item \lstinline|C|, valor binário, indica a utilização de componente cossenoidal na construção do sinal;
-% 	\item \lstinline|N_antenas|, valor numérico, quantidade \ac{Nant} de antenas da malha;
-% 	\item \lstinline|NOISE|, valor binário, indica se o sinal contará com ruído;
-% 	\item \lstinline|Rho|, valor numérico, raio \ac{rho} do polígono que dispõe as antenas na malha;
-% 	\item \lstinline|S_GIF|, valor binário, indica se a imagem gerada pela simulação deverá ser salva;
-% 	\item \lstinline|S_DAT|, valor binário, indica se os pontos gerados pela simulação deverão ser salvos;
-% 	\item \lstinline|S|, valor binário, indica a utilização de componente senoidal na construção do sinal;
-% 	\item \lstinline|SNR_dB|, valor numérico, valor da \ac{SNR} em \si{\decibel};
-% 	\item \lstinline|SNR|, valor numérico, valor da \ac{SNR} linear;
-% 	\item \lstinline|Z_antenna|, \lstinline|Z_antenna_A| ou \lstinline|Z_antenna_B|, valor numérico complexo, coordenada de antena;
-% 	% \item \lstinline|Z_antenna_A|, valor numérico complexo, coordenada de antena \ac{Ak};
-% 	% \item \lstinline|Z_antenna_B|, valor numérico complexo, coordenada de antena \ac{Ak};
-% 	\item \lstinline|Z_phase_array|, matriz de valores numéricos complexos, contendo o sinal complexo aferido para cada antena da malha;
-% 	\item \lstinline|Z_phase_A| ou \lstinline|Z_phase_B|, valor numérico complexo, fase \ac{Phik} de antena;
-% 	% \item \lstinline|Z_phase_B|, valor numérico complexo, fase \ac{Phik} de antena \ac{Ak};
-% 	\item \lstinline|Z_x_array|, matriz de valores numéricos complexos, contendo a defasagem \ac{DeltaPhi} aferido para cada par de antenas na malha;
-% \end{itemize}
-
 \subsection{Funções auxiliares}
 
 % argument_r
@@ -177,40 +127,8 @@ O \autoref{cod:signal_r} apresenta uma versão simplificada da função \lstinli
 	\caption*{Fonte: Autor.}
 \end{lstfloat}
 
-
-A última função auxiliar desenvolvida foi \lstinline|isoctave|, que confere se a corrente simulação está sendo executada no GNU Octave, retornando um valor binário e não recebe qualquer parâmetro.
-O \autoref{cod:isoctave} apresenta uma versão simplificada da função \lstinline|isoctave| desenvolvida.
-
-\begin{lstfloat}[htbp]
-	\centering
-	\lstinputlisting[
-			basicstyle=\ttfamily\small\setstretch{1},
-			label=cod:isoctave,
-			caption={Função \lstinline|isoctave|, simplificada.}
-		]{../code/isoctave_alt.m}
-	\caption*{Fonte: Autor.}
-\end{lstfloat}
-
-\subsection{Função de cálculo para \acs{AoA}}
-
-% calc_AoA_polygon
-A primeira grande função desenvolvida foi \lstinline|calc_AoA|, que é responsável pelo cálculo geral da simulação.
-Inicialmente são calculadas as coordenadas das \ac{Nant} antenas e, em sequência, os valores de fase do sinal incidente \ac{w} em cada antena \ac{Ak}, então as defasagens entre os pares de antenas e finalmente a seleção do valor mais provável para \ac{thetaAoA}.
-Seus argumentos são, respectivamente, \lstinline|amp_w|, \lstinline|ang_w|, \lstinline|r_w|, \lstinline|phase_w|, \lstinline|lambda_w|, \lstinline|omega_w|, \lstinline|S|, \lstinline|C|, \lstinline|NOISE|, \lstinline|SNR_dB|, \lstinline|ATT|, \lstinline|resolution|, \lstinline|d| e \lstinline|N_antenas|.
-Nessa função também são definidas três subfunções auxiliares \lstinline|phase_z|, \lstinline|dephase_A_to_B| e \lstinline|deltas_A_B|.
-O \autoref{cod:calc_AoA} apresenta uma versão simplificada da função \lstinline|calc_AoA| desenvolvida.
-
-\begin{lstfloat}[htbp]
-	\centering
-	\lstinputlisting[
-			basicstyle=\ttfamily\small\setstretch{1},
-			label=cod:calc_AoA,
-			caption={Função \lstinline|calc_AoA|, simplificada.}
-		]{../code/calc_AoA_alt.m}
-	\caption*{Fonte: Autor.}
-\end{lstfloat}
-
-A subfunção \lstinline|phase_z| calcula o valor complexo de fase \ac{Zk} para a antena \ac{Ak} através da correlação pelos sinais de seno e cosseno.
+% phase_z
+A função \lstinline|phase_z| calcula o valor complexo de fase \ac{Zk} para a antena \ac{Ak} através da correlação pelos sinais de seno e cosseno.
 Seus argumentos são, respectivamente, \lstinline|t|, \lstinline|Z_antenna|, \lstinline|amp_w|, \lstinline|ang_w|, \lstinline|r_w|, \lstinline|phase_w|, \lstinline|lambda_w|, \lstinline|omega_w|, \lstinline|S|, \lstinline|C|, \lstinline|NOISE|, \lstinline|SNR_dB| e \lstinline|ATT|.
 O \autoref{cod:phase_z} apresenta uma versão simplificada da função \lstinline|phase_z| desenvolvida.
 
@@ -224,7 +142,8 @@ O \autoref{cod:phase_z} apresenta uma versão simplificada da função \lstinlin
 	\caption*{Fonte: Autor.}
 \end{lstfloat}
 
-A subfunção \lstinline|dephase_A_to_B| calcula o valor complexo de defasagem \ac{DeltaPhi}, o ângulo relativo \ac{betak} e o ângulo \ac{alphak} entre um par de antenas.
+% dephase_A_to_B
+O cálculo do valor complexo de defasagem \ac{DeltaPhi}, o ângulo relativo \ac{betak} e o ângulo \ac{alphak} entre um par de antenas é realizado pela função \lstinline|dephase_A_to_B|.
 Seus argumentos são, respectivamente, \lstinline|Z_phase_A| e \lstinline|Z_phase_B|.
 O \autoref{cod:dephase_A_to_B} apresenta uma versão simplificada da função \lstinline|dephase_A_to_B| desenvolvida.
 
@@ -238,7 +157,8 @@ O \autoref{cod:dephase_A_to_B} apresenta uma versão simplificada da função \l
 	\caption*{Fonte: Autor.}
 \end{lstfloat}
 
-E a subfunção \lstinline|deltas_A_B| calcula os ângulos \ac{thetak} para um par de antenas.
+% deltas_A_B
+Os ângulos \ac{thetak} para um par de antenas são calculados pela função \lstinline|deltas_A_B|.
 Seus argumentos são, respectivamente, \lstinline|angle_Z_A_x_B|, \lstinline|Z_antenna_A| e \lstinline|Z_antenna_B|.
 O \autoref{cod:deltas_A_B} apresenta uma versão simplificada da função \lstinline|deltas_A_B| desenvolvida.
 
@@ -251,6 +171,52 @@ O \autoref{cod:deltas_A_B} apresenta uma versão simplificada da função \lstin
 		]{../code/deltas_A_B_alt.m}
 	\caption*{Fonte: Autor.}
 \end{lstfloat}
+
+
+% isoctave
+A última função auxiliar desenvolvida foi \lstinline|isoctave|, que confere se a corrente simulação está sendo executada no GNU Octave, retornando um valor binário e não recebe qualquer parâmetro.
+O \autoref{cod:isoctave} apresenta uma versão simplificada da função \lstinline|isoctave| desenvolvida.
+
+\begin{lstfloat}[htbp]
+	\centering
+	\lstinputlisting[
+			basicstyle=\ttfamily\small\setstretch{1},
+			label=cod:isoctave,
+			caption={Função \lstinline|isoctave|, simplificada.}
+		]{../code/isoctave_alt.m}
+	\caption*{Fonte: Autor.}
+\end{lstfloat}
+
+
+
+\subsection{Função de cálculo para \acs{AoA}}
+
+% calc_AoA_polygon
+A primeira grande função desenvolvida foi \lstinline|calc_AoA|, que é responsável pelo cálculo geral da simulação.
+Inicialmente são calculadas as coordenadas das \ac{Nant} antenas e, em sequência, os valores de fase do sinal incidente \ac{w} em cada antena \ac{Ak}, então as defasagens entre os pares de antenas e finalmente a seleção do valor mais provável para \ac{thetaAoA}.
+Seus argumentos são, respectivamente, \lstinline|amp_w|, \lstinline|ang_w|, \lstinline|r_w|, \lstinline|phase_w|, \lstinline|lambda_w|, \lstinline|omega_w|, \lstinline|S|, \lstinline|C|, \lstinline|NOISE|, \lstinline|SNR_dB|, \lstinline|ATT|, \lstinline|resolution|, \lstinline|d| e \lstinline|N_antenas|.
+Nessa função também são definidas três subfunções auxiliares \lstinline|phase_z|, \lstinline|dephase_A_to_B| e \lstinline|deltas_A_B|.
+O \autoref{cod:calc_AoA} apresenta uma versão simplificada da função \lstinline|calc_AoA| desenvolvida.
+A \autoref{fig:AoA:fluxograma} apresenta a sequências de operações realizadas pela função.
+
+\begin{lstfloat}[htbp]
+	\centering
+	\lstinputlisting[
+			basicstyle=\ttfamily\small\setstretch{1},
+			label=cod:calc_AoA,
+			caption={Função \lstinline|calc_AoA|, simplificada.}
+		]{../code/calc_AoA_alt.m}
+	\caption*{Fonte: Autor.}
+\end{lstfloat}
+
+
+\begin{figure}[htbp]
+    \centering
+    \caption{Fluxograma de operações da função \lstinline|calc_AoA|.}
+    \input{../pictures/fluxograma}
+    \label{fig:AoA:fluxograma}
+    \caption*{Fonte: Autor.}
+\end{figure}
 
 \subsection{Função de geração saída visual}
 
@@ -277,6 +243,14 @@ A \autoref{fig:example:simul_POLY_3_R_50} ilustra os gráficos gerados pela fun�
 
 Finalmente a função responsável por juntar todas as partes é \lstinline|w_xyt|, a base para a simulação, ela invoca as funções \lstinline|calc_AoA| e \lstinline|generate_fig| com os devidos parâmetros, além de garantir que os arquivos gerados sejam salvos corretamente.
 Seus argumentos são, respectivamente, \lstinline|NOISE|, \lstinline|ATT|, \lstinline|CHG_PHI|, \lstinline|CHG_R|, \lstinline|CHG_THETA|, \lstinline|S_GIF|, \lstinline|S_DAT|, \lstinline|SNR|, \lstinline|range_step| e \lstinline|N_antenas|.
+Essa função também invoca a simulação do algoritmo de Gauss-Newton para as mesmas condições.
 
+\section{Simulação do Algoritmo de Gauss-Newton}
 
+Para análise comparatória, também foi desenvolvida uma simulação para o método de \ac{AoA} utilizando o algoritmo de Gauss-Newton, adaptando a proposta de \citeauthor{Horst2025BTLEAoA} \cite{Horst2025BTLEAoA}, referida na \autoref{sec:trabalhos_relacionados}.
+Nesta adaptação, cada receptor é formado por um par de antenas, separados pela mesma distância \ac{d} utilizada na presente proposta, e o sistema como um todo utiliza \ac{Nant} receptores dispostos de maneira linear.
+Considerando que a presente análise é planar, a componente de terceira dimensão foi desconsiderada.
+O método realiza 5 iterações para convergir os resultados em cada ponto de análise.
+
+O código desenvolvido está nos anexos, na \autoref{apdx:codigo:gn}.
 

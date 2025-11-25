@@ -1,0 +1,48 @@
+\section{Trabalhos relacionados} \label{sec:trabalhos_relacionados}
+
+Em seu trabalho, \citeauthor{horst2021localization} \cite{horst2021localization} analisa dois algoritmos de detecção de \ac{AoA}, realizando as análises em ambientes internos e utilizando arranjos de antenas.
+O primeiro método analisado consiste em uma aproximação do ângulo, feita utilizando um \textit{software} fornecido pela Texas Instruments, fabricante do \textit{hardware} utilizado.
+Já o segundo método, baseia-se na construção matemática do \ac{AoA} calculado pela diferença de fase instantânea do sinal entre as antenas do sistema, uma abordagem semelhante à proposta neste trabalho.
+Os resultados obtidos indicam que o método de aproximação teve melhor acurácia nos valores de ângulo.
+
+A proposta de \citeauthor{zeaiter:hal-03693641} \cite{zeaiter:hal-03693641} busca validar a performance da detecção de \ac{AoA} em ambiente fechado, realizando a análise em diferentes modulações, larguras de canal e fatores de espalhamento.
+Também propõe que, ao combinar de seu algoritmo de localização de \ac{AoA} com a função de autocorrelação, é possível analisar os dados de dois sinais recebidos simultaneamente.
+
+Outro trabalho de \citeauthor{zeaiter:hal-03932846} \cite{zeaiter:hal-03932846} consiste em uma aproximação do \ac{AoA} utilizando um método de autocorrelação em um sinal \ac{LoRa} de baixa potência.
+Seu objetivo consiste em detectar o sinal \ac{LoRa} operando em transmissão de baixa potência, caso onde a vida útil da bateria do sistema transmissor é estendida.
+O algoritmo apresentado busca picos de autocorrelação no sinal recebido, além de utilizar \ac{FFT} para denotá-los e melhorar a \ac{SNR}.
+Quando um pico é detectado, o algoritmo é capaz de encontrar o \ac{AoA}.
+
+% O trabalho de \citeauthor{aernouts2020combining} \cite{aernouts2020combining} combina o método de filtro de partículas às medidas TDoA e \ac{AoA} obtidas em ambiente urbano denso.
+% A performance é analisada de maneira comparativa à estimativa de TDoA e a um trabalho anterior baseado em combinação de matrizes.
+% Seus resultados indicam um erro médio estimado de \SI{199}{\metre} sem o \ac{AoA}.
+
+\citeauthor{bnilam20172d} \cite{bnilam20172d} propõe uma técnica que, sem qualquer informação prévia de largura de banda, consegue estimar \ac{AoA} do sinal recebido.
+O sistema proposto consiste em uma \ac{UCA} seguida de um filtro transversal, também utiliza de vetores especiais de largura de banda variável junto com um estimador de relação sinal-ruído térmico para determinar simultaneamente \ac{AoA} e largura de banda do sinal recebido.
+
+Em outro trabalho, \citeauthor{bnilam2017adaptive} \cite{bnilam2017adaptive} estudam a possibilidade de estimar \ac{AoA} para transceptores de \ac{IoT} em ambiente interno.
+Também propõe um modelo probabilístico adaptativo que opera no modelo de estimativa de \ac{AoA}, incrementando sua performance.
+Seus resultados indicam que estes métodos superam a performance de modelos probabilísticos estáticos tradicionais, tanto em acurácia de localização quanto em estabilidade no valor obtido.
+
+Neste trabalho, \citeauthor{bnilam2019low} \cite{bnilam2019low} propõe um dispositivo de baixo custo capaz de estimar o \ac{AoA}, de forma que seja viável sua utilização em dispositivos de \ac{IoT}.
+O dispositivo consiste em uma conversão de vários \ac{SDR} individuais de baixo custo num único \ac{SDR} com múltiplos canais de \ac{RF}.
+Seus resultados experimentais indicam que o dispositivo é capaz de estimar valores de \ac{AoA} de forma estável e acurada.
+
+A proposta de \citeauthor{bnilam2020angle} \cite{bnilam2020angle} neste trabalho consiste em um novo algoritmo para determinação de \ac{AoA} chamado ANGLE (\textit{ANGular Location Estimation}), baseado em modelos probabilísticos para a resposta do sinal recebido.
+Sua proposta ainda sugere duas versões do método, para o caso de amostragem única e de decomposição de subespaço, como utilizado no algoritmo MUSIC (\textit{MUltiple SIgnal Classification}).
+
+\citeauthor{bnilam2020lora} \cite{bnilam2020lora} apresenta, neste trabalho, uma abordagem mais amigável para estimativa de \ac{AoA} em redes \ac{LoRa}.
+O sistema proposto, denominado LoRay (\ac{LoRa} \textit{array}) é composto por \textit{hardware} e \textit{software} preparados para fazer a estimativa de \ac{AoA} em ambiente urbano, onde o sistema foi validado.
+O hardware utilizado foi descrito em um trabalho anterior \cite{bnilam2019low}.
+Este sistema apresentou resultados estáveis e acurados para estimativa de \ac{AoA} tanto nos casos \ac{LoS} quanto nos \ac{NLoS}.
+
+% \citeauthor{steckel2018low} \cite{steckel2018low}
+
+% \citeauthor{du2018long} \cite{du2018long}
+
+Em seu trabalho, \citeauthor{niculescu2003ad} \cite{niculescu2003ad} propõe métodos para detecção de posição e orientação em cada nó de uma rede \textit{ad hoc}.
+A proposta parte de possíveis problemas relacionados à utilização de \ac{GPS} em ambiente fechado
+
+O trabalho de \citeauthor{Horst2025BTLEAoA} \cite{Horst2025BTLEAoA} é o mais recente dentre os levantados, e propõe estimar o \ac{AoA} utilizando do algoritmo de \acf{GN}.
+O sistema proposto é baseado na tecnologia de \ac{BLE}, presente em alguns dispositivos \ac{IoT}, para a localização em ambiente fechado.
+Essa proposta será adaptada para comparação com os resultados do presente trabalho.

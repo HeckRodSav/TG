@@ -11,7 +11,7 @@ Para todas as quantidades de antenas analisadas, são sumarizadas simulações c
 Para garantir a robustez do sistema, foram realizadas outras simulações, considerando casos onde o emissor está se aproximando do sistema de antenas e também casos onde o emissor está estático no espaço.
 Estas simulações não foram sumarizadas.
 
-Para cada simulação realizada, foi também realizada outra nas mesmas condições para o algoritmo de Gauss-Newton, adaptado da proposta de \citeauthor{Horst2025BTLEAoA} \cite{Horst2025BTLEAoA}, referida na \autoref{sec:trabalhos_relacionados}.
+Para cada simulação realizada, foi também realizada outra nas mesmas condições para o algoritmo de \ac{GN}, adaptado da proposta de \citeauthor{Horst2025BTLEAoA} \cite{Horst2025BTLEAoA}, referida na \autoref{sec:trabalhos_relacionados}.
 Em muitos casos, este método teve problema em convergir para um valor, apontando o erro de \ac{NaN}, nestes casos, nenhum resultado de ângulo foi obtido.
 Nos resultados aqui sumarizados, são indicadas as porcentagens associadas a quantidade de valores válidos obtidos por este método, ou seja, que não retornaram \ac{NaN}.
 No gráficos apresentados, pontos de $\theta_{GN}$ ausentes são referentes a estes erros.
@@ -57,15 +57,15 @@ Simulações realizadas na configurações de três antenas têm os valores de R
         } & {
             \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ R² (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ válidos (\unit{\percent}) \end{tabular}
         } & {
             \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ R² (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ válidos (\unit{\percent}) \end{tabular}
         }\\\midrule
         \infinity & \bfseries 100.00 & \bfseries 100.00 & 98.62 & 100.00 & 100.00 & 100.00\\
         20 & 88.78 & 0.23 & 84.14 & 95.85 & 2.25 & 86.90\\
@@ -146,15 +146,15 @@ Simulações realizadas na configurações de cinco antenas têm os valores de R
         } & {
             \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ R² (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ válidos (\unit{\percent}) \end{tabular}
         } & {
             \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ R² (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ válidos (\unit{\percent}) \end{tabular}
         }\\\midrule
         \infinity & \bfseries 100.00 & \bfseries 100.00 & 67.59 & 100.00 & 100.00 & 70.34\\
         20 & 100.00 & 19.79 & 24.83 & 100.00 & 13.56 & 22.76\\
@@ -234,15 +234,15 @@ Simulações realizadas na configurações de sete antenas têm os valores de R�
         } & {
             \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ R² (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ válidos (\unit{\percent}) \end{tabular}
         } & {
             \begin{tabular}[c]{@{}c@{}} \phantom{²}R² \\ (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ R² (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ R² (\unit{\percent}) \end{tabular}
         } & {
-            \begin{tabular}[c]{@{}c@{}} G-N \\ válidos (\unit{\percent}) \end{tabular}
+            \begin{tabular}[c]{@{}c@{}} \acs{GN} \\ válidos (\unit{\percent}) \end{tabular}
         }\\\midrule
         \infinity & \bfseries 100.00 & \bfseries 82.53 & 82.07 & 100.00 & 100.00 & 75.86\\
         20 & 100.00 & 9.97 & 26.21 & 100.00 & 2.59 & 31.03\\
@@ -301,4 +301,4 @@ A falta de algumas dessas funções moldou o decorrer do desenvolvimento do proj
 
 \subsection{Convergência de valores}
 
-Em múltiplos casos, o algoritmo de Gauss-Newton não foi capaz de convergir para um valor, apontando problema de precisão numérica e retornando o erro \ac{NaN}.
+Em múltiplos casos, o algoritmo de \ac{GN} não foi capaz de convergir para um valor, apontando problema de precisão numérica e retornando o erro \ac{NaN}.

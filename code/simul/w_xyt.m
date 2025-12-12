@@ -25,6 +25,10 @@ function w_xyt( ...
 
 	DEBUG = false;
 
+	USE_GEOMETRIC = false;
+	USE_MSC = true;
+	USE_GN = false;
+
 	SNR_dB = 10*log10(SNR);
 
 	phase = 0;
@@ -111,14 +115,23 @@ function w_xyt( ...
 		fprintf(dat_file, '\t%s', 'ang_W');
 		fprintf(dat_file, '\t%s', 'r');
 		fprintf(dat_file, '\t%s', 'phase');
-		fprintf(dat_file, '\t%s', 'choose_angle');
-		fprintf(dat_file, '\t%s', 'choose_angle_GN');
-		for i = ant_idx_list
-			fprintf(dat_file, '\t%s%d_x_%d', 'delta_', i, ant_idx_list_shift(i));
-		end % for
-		for i = ant_idx_list
-			fprintf(dat_file, '\t%s%d_x_%d', 'delta_', ant_idx_list_shift(i), i);
-		end % for
+		if USE_GEOMETRIC
+			fprintf(dat_file, '\t%s', 'choose_angle');
+		end % if
+		if USE_MSC
+			fprintf(dat_file, '\t%s', 'choose_angle_MSC');
+		end % if
+		if USE_GN
+			% fprintf(dat_file, '\t%s', 'choose_angle_GN');
+		end % if
+		if USE_GEOMETRIC
+			for i = ant_idx_list
+				fprintf(dat_file, '\t%s%d_x_%d', 'delta_', i, ant_idx_list_shift(i));
+			end % for
+			for i = ant_idx_list
+				fprintf(dat_file, '\t%s%d_x_%d', 'delta_', ant_idx_list_shift(i), i);
+			end % for
+		end % if
 		fprintf(dat_file, '\n');
 		if isoctave()
 			fflush(dat_file);
@@ -154,90 +167,115 @@ function w_xyt( ...
 			ang_W = pi*5/12;
 		end %if
 
-		return_struct = calc_AoA(amp_0, ang_W, r, phase, lambda, ...
-			omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
+		if USE_GEOMETRIC
+			return_struct = calc_AoA(amp_0, ang_W, r, phase, lambda, ...
+				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
 
-		[ ...
-			choose_angle, ...
-			Rho, ...
-			ant_array, ...
-			Z_phase_array, ...
-			Z_x_array, ...
-			delta_A_x_B, ...
-			delta_B_x_A, ...
-		] = return_struct{:};
+			[ ...
+				choose_angle, ...
+				Rho, ...
+				ant_array, ...
+				Z_phase_array, ...
+				Z_x_array, ...
+				delta_A_x_B, ...
+				delta_B_x_A, ...
+			] = return_struct{:};
+		end % if
 
-		return_struct = gauss_newton(amp_0, ang_W, r, phase, lambda, ...
-			omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas, it, P_b_estimado);
+		if USE_GN
+			return_struct = gauss_newton(amp_0, ang_W, r, phase, lambda, ...
+				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas, P_b_estimado);
 
-		[ ...
-			choose_angle_GN, ...
-			P_b_estimado ...
-		] = return_struct{:};
+			[ ...
+				choose_angle_GN, ...
+				P_b_estimado ...
+			] = return_struct{:};
+		end % if
 
-		% Calcular a figura de fundo para visualizacao em imagem
-		z_plot = signal_r(x, y, t_0, amp_0, ang_W, r, phase, ...
-			lambda, omega, S, C, NOISE, SNR_dB, ATT);
+		if USE_MSC
+			return_struct = music(amp_0, ang_W, r, phase, lambda, ...
+				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
 
-		generate_fig( ...
-			z_plot, ...
-			x, ...
-			y, ...
-			ang_W, ...
-			lambda, ...
-			interval, ...
-			Rho, ...
-			choose_angle, ...
-			ant_array, ...
-			Z_phase_array, ...
-			Z_x_array, ...
-			delta_A_x_B, ...
-			delta_B_x_A ...
-		)
+			[ ...
+				choose_angle_MSC, ...
+			] = return_struct{:};
+		end % if
 
-		drawnow;
 
-		if true
-		elseif S_GIF
-			frame = getframe(f);
-			im = frame2im(frame);
+		if USE_GEOMETRIC
+			% Calcular a figura de fundo para visualizacao em imagem
+			z_plot = signal_r(x, y, t_0, amp_0, ang_W, r, phase, ...
+				lambda, omega, S, C, NOISE, SNR_dB, ATT);
 
-			[imind, cm] = rgb2ind(im);
-			% [imind, cm] = rgb2ind(RGB, im); % MATLAB
-			if it == 1
-				% Create GIF file
-				if isoctave()
-					imwrite(imind, cm, gif_filename,'gif','DelayTime', DelayTime , 'Compression' , 'lzw');
-				else % MATLAB
-					imwrite(imind, cm, gif_filename,'gif','DelayTime', DelayTime);
-				end % if
-			else
-				% Add each new plot to GIF
-				if isoctave()
-					imwrite(imind, cm, gif_filename,'gif','WriteMode','append','DelayTime', DelayTime , 'Compression' , 'lzw');
+			generate_fig( ...
+				z_plot, ...
+				x, ...
+				y, ...
+				ang_W, ...
+				lambda, ...
+				interval, ...
+				Rho, ...
+				choose_angle, ...
+				ant_array, ...
+				Z_phase_array, ...
+				Z_x_array, ...
+				delta_A_x_B, ...
+				delta_B_x_A ...
+			)
+
+			drawnow;
+
+			if S_GIF
+				frame = getframe(f);
+				im = frame2im(frame);
+
+				[imind, cm] = rgb2ind(im);
+				% [imind, cm] = rgb2ind(RGB, im); % MATLAB
+				if it == 1
+					% Create GIF file
+					if isoctave()
+						imwrite(imind, cm, gif_filename,'gif','DelayTime', DelayTime , 'Compression' , 'lzw');
+					else % MATLAB
+						imwrite(imind, cm, gif_filename,'gif','DelayTime', DelayTime);
+					end % if
 				else
-					imwrite(imind, cm, gif_filename,'gif','WriteMode','append','DelayTime', DelayTime); % MATLAB
-				end % if
+					% Add each new plot to GIF
+					if isoctave()
+						imwrite(imind, cm, gif_filename,'gif','WriteMode','append','DelayTime', DelayTime , 'Compression' , 'lzw');
+					else
+						imwrite(imind, cm, gif_filename,'gif','WriteMode','append','DelayTime', DelayTime); % MATLAB
+					end % if
+				end %if
+			else
+				% pause(1/30)
+				pause(0.0001)
 			end %if
-		else
-			% pause(1/30)
-			pause(0.0001)
-		end %if
+
+		end % if
 
 		if S_DAT
 			fprintf(dat_file, '%.2f', percent*100);
 			fprintf(dat_file, '\t%.3f', normalize_angle(ang_W));
 			fprintf(dat_file, '\t%.3f', r);
 			fprintf(dat_file, '\t%.3f', normalize_angle(phase));
-			fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle));
-			fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_GN));
+			if USE_GEOMETRIC
+				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle));
+			end % if
+			if USE_MSC
+				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_MSC));
+			end % if
+			if USE_GN
+				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_GN));
+			end % if
 
-			for i = ant_idx_list
-				fprintf(dat_file, '\t%.3f', normalize_angle(delta_A_x_B(i)));
-			end % for
-			for i = ant_idx_list
-				fprintf(dat_file, '\t%.3f', normalize_angle(delta_B_x_A(i)));
-			end % for
+			if USE_GEOMETRIC
+				for i = ant_idx_list
+					fprintf(dat_file, '\t%.3f', normalize_angle(delta_A_x_B(i)));
+				end % for
+				for i = ant_idx_list
+					fprintf(dat_file, '\t%.3f', normalize_angle(delta_B_x_A(i)));
+				end % for
+			end % if
 
 			fprintf(dat_file, '\n');
 			if isoctave()

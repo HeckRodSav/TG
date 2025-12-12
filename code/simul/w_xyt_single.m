@@ -10,10 +10,10 @@ end %if
 w_xyt( ...
 	false, ... % NOISE
 	false, ... % ATT
-	true, ... % CHG_PHI
+	false, ... % CHG_PHI
 	false, ... % CHG_R
-	false, ... % CHG_THETA
-	true, ... % S_GIF
+	true, ... % CHG_THETA
+	false, ... % S_GIF
 	true, ... % S_DAT
 	1/1, ... % SNR
 	5, ... % range_step

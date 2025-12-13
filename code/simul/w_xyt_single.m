@@ -8,14 +8,14 @@ if isoctave()
 end %if
 
 w_xyt( ...
-	false, ... % NOISE
+	true, ... % NOISE
 	false, ... % ATT
 	false, ... % CHG_PHI
 	false, ... % CHG_R
 	true, ... % CHG_THETA
 	false, ... % S_GIF
 	true, ... % S_DAT
-	1/1, ... % SNR
+	50/1, ... % SNR
 	5, ... % range_step
 	9 ... % N_antenas
 	);

@@ -30,6 +30,8 @@ function return_struct = music ( ...
 	% Coordenadas das antenas
 	ant_array = Rho * exp(i * deg2rad(ant_angles));
 
+	ant_array = complex(0,d.*(0:N_antenas-1)')';
+
 	t = linspace(0,(2 * pi / omega_w), resolution); % Intervalo de integração
 
 	Z_phase_matrix = [];
@@ -48,7 +50,7 @@ function return_struct = music ( ...
 	% Algorithm function
 	function doa_estimates = music_algorithm(x, M, K, d, wavelength)
 		% Compute the MUSIC spectrum
-		theta = -pi:0.01:pi;
+		theta = (-pi/2):0.05:(pi/2);
 		[Vn, Pmusic] = compute_music_spectrum(x, M, K, d, wavelength, theta);
 		% Find the initial estimates of DoAs
 		[~, doa_indices] = sort(Pmusic, 'descend');
@@ -80,25 +82,26 @@ function return_struct = music ( ...
 		% Pmusic = arrayfun(@(angle) 1 / abs((a(angle, d, M, wavelength)' * Vn) * (Vn' * a(angle, d, M, wavelength))), theta);
 
 
-		N_antenas = M;
+		% N_antenas = M;
 
-		Rho = d/(2*sin(pi / N_antenas));
-		ant_angles_shift = -90;
-		ant_angles = (0 + ant_angles_shift):(360/N_antenas):(359 + ant_angles_shift);
+		% Rho = d/(2*sin(pi / N_antenas));
+		% ant_angles_shift = -90;
+		% ant_angles = (0 + ant_angles_shift):(360/N_antenas):(359 + ant_angles_shift);
 
-		Pmusic = arrayfun(@(angle) 1 / abs((b(angle, Rho, ant_angles, wavelength)' * Vn) * (Vn' * b(angle, Rho, ant_angles, wavelength))), theta);
+    	Pmusic = arrayfun(@(angle) 1 / abs((a(angle, d, M, wavelength)' * Vn) * (Vn' * a(angle, d, M, wavelength))), theta);
+		% Pmusic = arrayfun(@(angle) 1 / abs((b(angle, Rho, ant_angles, wavelength)' * Vn) * (Vn' * b(angle, Rho, ant_angles, wavelength))), theta);
 	end
 
 	% Function to compute steering vector
 	function a_vec = a(angle, d, M, wavelength)
 		% Frank Gross - Smart Antennas for Wireless Communications, pg. 69 [87]
-		a_vec = exp(-1i*2*pi*d*(0:M-1)'*sin(angle)/wavelength);
+		a_vec = exp(-1i*d*(0:M-1)'*sin(angle)*2*pi/wavelength);
 	end
 	% Function to compute steering vector
 	function b_vec = b(angle, rho, ant_angles, wavelength)
 		% Frank Gross - Smart Antennas for Wireless Communications, pg. 90 [108]
 		ant_angles_red = deg2rad(ant_angles)';
-		b_vec = exp(-1i*2*pi*rho*cos(angle-ant_angles_red)/wavelength);
+		b_vec = exp(-1i*rho*cos(angle-ant_angles_red)*2*pi/wavelength);
 	end
 
 	% Apply the algorithm

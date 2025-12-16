@@ -17,12 +17,12 @@ function return_struct = music_ULA ( ...
 
 	choose_angle = nan;
 	K = 1;
-	% M = N_antenas;
 	% wavelength = lambda_w;
 	% x = Z_phase_matrix;
 	N = 100;  % Number of samples
 
-	ant_array = complex(0,d.*(0:N_antenas-1)')';
+	% ant_array = complex(0, d.*(0:N_antenas-1)')';
+	ant_array = complex(d.*(0:N_antenas-1)', 0)';
 
 	t = linspace(0,(2 * pi / omega_w), resolution); % Intervalo de integração
 
@@ -40,10 +40,11 @@ function return_struct = music_ULA ( ...
 
 
 	% Algorithm function
-	function doa_estimates = music_algorithm(x, M, K, d, wavelength)
+	function doa_estimates = music_algorithm(x, N_antenas, K, d, wavelength)
 		% Compute the MUSIC spectrum
-		theta = (-pi/2):0.05:(pi/2);
-		[Vn, Pmusic] = compute_music_spectrum(x, M, K, d, wavelength, theta);
+		% theta = (-pi/2):0.05:(pi/2);
+		theta = 0:0.001:pi;
+		[Vn, Pmusic] = compute_music_spectrum(x, N_antenas, K, d, wavelength, theta);
 		% Find the initial estimates of DoAs
 		[~, doa_indices] = sort(Pmusic, 'descend');
 		% If more than K peaks are found, select the K largest ones
@@ -54,7 +55,7 @@ function return_struct = music_ULA ( ...
 		% Refine the DoAs using fminsearch
 		doa_estimates = zeros(1, K);
 		for i = 1:length(initial_DoAs)
-			error_function = @(x) abs(1 / abs((a(x, d, M, wavelength)' * Vn) * (Vn' * a(x, d, M, wavelength))) - Pmusic(doa_indices(i)));
+			error_function = @(x) abs(1 / abs((a(x, d, N_antenas, wavelength)' * Vn) * (Vn' * a(x, d, N_antenas, wavelength))) - Pmusic(doa_indices(i)));
 			doa_estimates(i) = fminsearch(error_function, initial_DoAs(i));
 		end
 		% If less than K estimates were found, fill the remaining ones with NaN
@@ -64,27 +65,28 @@ function return_struct = music_ULA ( ...
 	end
 
 	% Function to compute the MUSIC spectrum
-	function [Vn, Pmusic] = compute_music_spectrum(x, M, K, d, wavelength, theta)
+	function [Vn, Pmusic] = compute_music_spectrum(x, N_antenas, K, d, wavelength, theta)
 		Rxx = (x * x') / size(x, 2);
 		[V, D] = eig(Rxx);
 		[~, idx] = sort(diag(D), 'descend');
 		V = V(:, idx);
 		Vn = V(:, K+1:end);
 		% Calculate the MUSIC spectrum
-		% Pmusic = arrayfun(@(angle) 1 / abs((a(angle, d, M, wavelength)' * Vn) * (Vn' * a(angle, d, M, wavelength))), theta);
+		% Pmusic = arrayfun(@(angle) 1 / abs((a(angle, d, N_antenas, wavelength)' * Vn) * (Vn' * a(angle, d, N_antenas, wavelength))), theta);
 
-    	Pmusic = arrayfun(@(angle) 1 / abs((a(angle, d, M, wavelength)' * Vn) * (Vn' * a(angle, d, M, wavelength))), theta);
+    	Pmusic = arrayfun(@(angle) 1 / abs((a(angle, d, N_antenas, wavelength)' * Vn) * (Vn' * a(angle, d, N_antenas, wavelength))), theta);
 
 	end
 
 	% Function to compute steering vector (linear)
-	function a_vec = a(angle, d, M, wavelength)
+	function a_vec = a(angle, d, N_antenas, wavelength)
 		% Frank Gross - Smart Antennas for Wireless Communications, pg. 69 [87]
-		a_vec = exp(-1i*d*(0:M-1)'*sin(angle)*2*pi/wavelength);
+		a_vec = exp(1i*d*(0:N_antenas-1)'*cos(angle)*2*pi/wavelength);
+		% a_vec = exp(-1i*d*(0:N_antenas-1)'*sin(angle)*2*pi/wavelength);
 	end
 
 	% Apply the algorithm
-	choose_angle = music_algorithm(Z_phase_matrix, N_antenas, K, d, lambda_w)
+	choose_angle = music_algorithm(Z_phase_matrix, N_antenas, K, d, lambda_w);
 
 	return_struct = { ...
 		choose_angle, ...

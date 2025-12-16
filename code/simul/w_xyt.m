@@ -26,7 +26,8 @@ function w_xyt( ...
 	DEBUG = false;
 
 	USE_GEOMETRIC = false;
-	USE_MSC = true;
+	USE_MSC_ULA = true;
+	USE_MSC_UCA = true;
 	USE_GN = false;
 
 	SNR_dB = 10*log10(SNR);
@@ -98,15 +99,17 @@ function w_xyt( ...
 		end %if
 	end %if
 
-	if S_GIF
-		if isoctave()
-			f = figure(1, 'name', name, 'visible', 'off', 'Position', [1 1 1000 500]);
-		else % MATLAB
-			f = figure('name', name, 'visible', 'off', 'Position', [1 1 1000 500]);
-		end % if
+	if USE_GEOMETRIC
+		if S_GIF
+			if isoctave()
+				f = figure(1, 'name', name, 'visible', 'off', 'Position', [1 1 1000 500]);
+			else % MATLAB
+				f = figure('name', name, 'visible', 'off', 'Position', [1 1 1000 500]);
+			end % if
 
-	else
-		f = figure('name', name);
+		else
+			f = figure('name', name);
+		end %if
 	end %if
 
 	if S_DAT
@@ -118,8 +121,11 @@ function w_xyt( ...
 		if USE_GEOMETRIC
 			fprintf(dat_file, '\t%s', 'choose_angle');
 		end % if
-		if USE_MSC
-			fprintf(dat_file, '\t%s', 'choose_angle_MSC');
+		if USE_MSC_ULA
+			fprintf(dat_file, '\t%s', 'choose_angle_MSC_ULA');
+		end % if
+		if USE_MSC_UCA
+			fprintf(dat_file, '\t%s', 'choose_angle_MSC_UCA');
 		end % if
 		if USE_GN
 			% fprintf(dat_file, '\t%s', 'choose_angle_GN');
@@ -167,6 +173,8 @@ function w_xyt( ...
 			ang_W = pi*5/12;
 		end %if
 
+		ang = normalize_angle(ang_W)
+
 		if USE_GEOMETRIC
 			return_struct = calc_AoA(amp_0, ang_W, r, phase, lambda, ...
 				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
@@ -192,13 +200,22 @@ function w_xyt( ...
 			] = return_struct{:};
 		end % if
 
-		if USE_MSC
+		if USE_MSC_ULA
 			return_struct = music_ULA(amp_0, ang_W, r, phase, lambda, ...
 				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
 
 			[ ...
-				choose_angle_MSC, ...
-			] = return_struct{:};
+				choose_angle_MSC_ULA, ...
+			] = return_struct{:}
+		end % if
+
+		if USE_MSC_UCA
+			return_struct = music_UCA(amp_0, ang_W, r, phase, lambda, ...
+				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
+
+			[ ...
+				choose_angle_MSC_UCA, ...
+			] = return_struct{:}
 		end % if
 
 
@@ -255,14 +272,17 @@ function w_xyt( ...
 
 		if S_DAT
 			fprintf(dat_file, '%.2f', percent*100);
-			fprintf(dat_file, '\t%.3f', normalize_angle(ang_W));
+			fprintf(dat_file, '\t%.3f', rad2deg(normalize_angle(ang_W)));
 			fprintf(dat_file, '\t%.3f', r);
 			fprintf(dat_file, '\t%.3f', normalize_angle(phase));
 			if USE_GEOMETRIC
 				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle));
 			end % if
-			if USE_MSC
-				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_MSC));
+			if USE_MSC_ULA
+				fprintf(dat_file, '\t%.3f', rad2deg(normalize_angle(choose_angle_MSC_ULA)));
+			end % if
+			if USE_MSC_ULA
+				fprintf(dat_file, '\t%.3f', rad2deg(normalize_angle(choose_angle_MSC_UCA)));
 			end % if
 			if USE_GN
 				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_GN));

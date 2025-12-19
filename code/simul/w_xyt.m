@@ -348,7 +348,7 @@ function w_xyt( ...
 			r2_GEOMETRIC = (corr(angles_DOA, angles_GEOMETRIC))^2;
 		end % if
 		if USE_MSC_ULA
-			r2_MSC_ULA = (corr(angles_DOA, angles_MSC_ULA))^2;
+			r2_MSC_ULA = (corr(abs(angles_DOA), angles_MSC_ULA))^2;
 		end % if
 		if USE_MSC_UCA
 			r2_MSC_UCA = (corr(angles_DOA, angles_MSC_UCA))^2;

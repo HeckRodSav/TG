@@ -25,10 +25,12 @@ function w_xyt( ...
 
 	DEBUG = false;
 
-	USE_GEOMETRIC = false;
+	USE_GEOMETRIC = true;
 	USE_MSC_ULA = true;
 	USE_MSC_UCA = true;
 	USE_GN = false;
+
+	CALC_R2 = true;
 
 	SNR_dB = 10*log10(SNR);
 
@@ -97,6 +99,9 @@ function w_xyt( ...
 		if S_DAT
 			dat_filename = fullfile(foldername, [name '.dat']);
 		end %if
+		if (S_DAT && CALC_R2)
+			dat_r2_filename = fullfile(foldername, [name '.r2.dat']);
+		end %if
 	end %if
 
 	if USE_GEOMETRIC
@@ -128,7 +133,7 @@ function w_xyt( ...
 			fprintf(dat_file, '\t%s', 'choose_angle_MSC_UCA');
 		end % if
 		if USE_GN
-			% fprintf(dat_file, '\t%s', 'choose_angle_GN');
+			fprintf(dat_file, '\t%s', 'choose_angle_GN');
 		end % if
 		if USE_GEOMETRIC
 			for i = ant_idx_list
@@ -142,6 +147,22 @@ function w_xyt( ...
 		if isoctave()
 			fflush(dat_file);
 		end %if
+	end % if
+
+	if (S_DAT && CALC_R2)
+		angles_DOA = [];
+		if USE_GEOMETRIC
+			angles_GEOMETRIC = [];
+		end % if
+		if USE_MSC_ULA
+			angles_MSC_ULA = [];
+		end % if
+		if USE_MSC_UCA
+			angles_MSC_UCA = [];
+		end % if
+		if USE_GN
+			angles_GN = [];
+		end % if
 	end % if
 
 	DoA_loop_range = [DoA_range DoA_range 360]; % Duas voltas
@@ -173,7 +194,10 @@ function w_xyt( ...
 			ang_W = pi*5/12;
 		end %if
 
-		ang = normalize_angle(ang_W)
+		% ang = normalize_angle(ang_W)
+		if (S_DAT && CALC_R2)
+			angles_DOA = [angles_DOA; ang_W];
+		end % if
 
 		if USE_GEOMETRIC
 			return_struct = calc_AoA(amp_0, ang_W, r, phase, lambda, ...
@@ -188,6 +212,33 @@ function w_xyt( ...
 				delta_A_x_B, ...
 				delta_B_x_A, ...
 			] = return_struct{:};
+			if (S_DAT && CALC_R2)
+				angles_GEOMETRIC = [angles_GEOMETRIC; choose_angle];
+			end % if
+		end % if
+
+		if USE_MSC_ULA
+			return_struct = music_ULA(amp_0, ang_W, r, phase, lambda, ...
+				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
+
+			[ ...
+				choose_angle_MSC_ULA, ...
+			] = return_struct{:};
+			if (S_DAT && CALC_R2)
+				angles_MSC_ULA = [angles_MSC_ULA; choose_angle_MSC_ULA];
+			end % if
+		end % if
+
+		if USE_MSC_UCA
+			return_struct = music_UCA(amp_0, ang_W, r, phase, lambda, ...
+				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
+
+			[ ...
+				choose_angle_MSC_UCA, ...
+			] = return_struct{:};
+			if (S_DAT && CALC_R2)
+				angles_MSC_UCA = [angles_MSC_UCA; choose_angle_MSC_UCA];
+			end % if
 		end % if
 
 		if USE_GN
@@ -198,26 +249,10 @@ function w_xyt( ...
 				choose_angle_GN, ...
 				P_b_estimado ...
 			] = return_struct{:};
+			if (S_DAT && CALC_R2)
+				angles_GN = [angles_GN; choose_angle_GN];
+			end % if
 		end % if
-
-		if USE_MSC_ULA
-			return_struct = music_ULA(amp_0, ang_W, r, phase, lambda, ...
-				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
-
-			[ ...
-				choose_angle_MSC_ULA, ...
-			] = return_struct{:}
-		end % if
-
-		if USE_MSC_UCA
-			return_struct = music_UCA(amp_0, ang_W, r, phase, lambda, ...
-				omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
-
-			[ ...
-				choose_angle_MSC_UCA, ...
-			] = return_struct{:}
-		end % if
-
 
 		if USE_GEOMETRIC
 			% Calcular a figura de fundo para visualizacao em imagem
@@ -238,7 +273,7 @@ function w_xyt( ...
 				Z_x_array, ...
 				delta_A_x_B, ...
 				delta_B_x_A ...
-			)
+			);
 
 			drawnow;
 
@@ -272,17 +307,17 @@ function w_xyt( ...
 
 		if S_DAT
 			fprintf(dat_file, '%.2f', percent*100);
-			fprintf(dat_file, '\t%.3f', rad2deg(normalize_angle(ang_W)));
+			fprintf(dat_file, '\t%.3f', normalize_angle(ang_W));
 			fprintf(dat_file, '\t%.3f', r);
 			fprintf(dat_file, '\t%.3f', normalize_angle(phase));
 			if USE_GEOMETRIC
 				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle));
 			end % if
 			if USE_MSC_ULA
-				fprintf(dat_file, '\t%.3f', rad2deg(normalize_angle(choose_angle_MSC_ULA)));
+				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_MSC_ULA));
 			end % if
 			if USE_MSC_ULA
-				fprintf(dat_file, '\t%.3f', rad2deg(normalize_angle(choose_angle_MSC_UCA)));
+				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_MSC_UCA));
 			end % if
 			if USE_GN
 				fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_GN));
@@ -307,6 +342,22 @@ function w_xyt( ...
 
 	end %for
 
+	if (S_DAT && CALC_R2)
+		% Coefficient of determination
+		if USE_GEOMETRIC
+			r2_GEOMETRIC = (corr(angles_DOA, angles_GEOMETRIC))^2;
+		end % if
+		if USE_MSC_ULA
+			r2_MSC_ULA = (corr(angles_DOA, angles_MSC_ULA))^2;
+		end % if
+		if USE_MSC_UCA
+			r2_MSC_UCA = (corr(angles_DOA, angles_MSC_UCA))^2;
+		end % if
+		if USE_GN
+			r2_GN = (corr(angles_DOA, angles_GN))^2;
+		end % if
+	end % if
+
 	if S_GIF
 		fprintf('Check: %s\a\n', gif_filename);
 	end %if
@@ -314,6 +365,40 @@ function w_xyt( ...
 	if S_DAT
 		fclose(dat_file);
 		fprintf('Check: %s\a\n', dat_filename);
+	end %if
+
+	if (S_DAT && CALC_R2)
+		dat_r2_file = fopen(dat_r2_filename, 'w');
+		if USE_GEOMETRIC
+			fprintf(dat_r2_file, '%s\t', 'choose_angle');
+		end % if
+		if USE_MSC_ULA
+			fprintf(dat_r2_file, '%s\t', 'choose_angle_MSC_ULA');
+		end % if
+		if USE_MSC_UCA
+			fprintf(dat_r2_file, '%s\t', 'choose_angle_MSC_UCA');
+		end % if
+		if USE_GN
+			fprintf(dat_r2_file, '%s\t', 'choose_angle_GN');
+		end % if
+		fprintf(dat_r2_file, '\n');
+
+		if USE_GEOMETRIC
+			fprintf(dat_r2_file, '%.3f\t', r2_GEOMETRIC);
+		end % if
+		if USE_MSC_ULA
+			fprintf(dat_r2_file, '%.3f\t', r2_MSC_ULA);
+		end % if
+		if USE_MSC_UCA
+			fprintf(dat_r2_file, '%.3f\t', r2_MSC_UCA);
+		end % if
+		if USE_GN
+			fprintf(dat_r2_file, '%.3f\t', r2_GN);
+		end % if
+		fprintf(dat_r2_file, '\n');
+
+		fclose(dat_r2_file);
+		fprintf('Check: %s\a\n', dat_r2_filename);
 	end %if
 
 end %function

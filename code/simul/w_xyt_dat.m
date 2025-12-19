@@ -10,9 +10,11 @@ end %if
 S_GIF = true;
 S_DAT = true;
 
-range_step = 5;
-
-N_antenas = 3;
+settings_struct = settings();
+[ ...
+	range_step, ...
+	N_antenas, ...
+] = settings_struct{:};
 
 % w_xyt(NOISE, ATT, CHG_PHI, CHG_R, CHG_THETA, S_GIF, S_DAT, SNR, range_step, N_antenas);
 

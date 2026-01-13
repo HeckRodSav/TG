@@ -19,6 +19,7 @@ Os parâmetros numéricos são:
 	\item \lstinline|ang_w|, direção do emissor do sinal, equivalente ao ângulo \ac{thetaAoA} de chegada do sinal em relação à malha de antenas;
 	\item \lstinline|angle_Z_A_x_B|, ângulo relativo \ac{betak} para par de antenas;
 	\item \lstinline|d|, distância \ac{d} entre par de antenas do arranjo;
+	\item \lstinline|D_signals|, ?? ;
 	\item \lstinline|choose_angle|, ângulo \ac{thetaAoA} final calculado pelo sistema;
 	\item \lstinline|interval|, indica os limites para a geração de imagem da simulação;
 	\item \lstinline|lambda_w|, comprimento de onda \ac{lambda};
@@ -52,14 +53,21 @@ Os parâmetros booleanos são:
 
 Os parâmetros de matrizes numéricas são:
 \begin{itemize}
+	\item \lstinline|AoA_range|, ?? ;
 	\item \lstinline|ant_array|, coordenadas das antenas do arranjo;
 	\item \lstinline|delta_A_x_B_array|, contendo o ângulo \ac{thetak} calculado por $\ac{alphak} + \ac{betak}$ aferido para cada par de antenas do arranjo;
 	\item \lstinline|delta_B_x_A_array|, contendo o ângulo \ac{thetak} calculado por $\ac{alphak} - \ac{betak}$ aferido para cada par de antenas do arranjo;
 	\item \lstinline|Z_phase_array|, matriz de valores numéricos complexos, contendo o sinal complexo aferido para cada antena do arranjo;
+	\item \lstinline|Z_phase_matrix|, ?? ;
 	\item \lstinline|z_plot|, estado corrente do sinal no espaço, utilizado na geração de imagem da simulação;
 	\item \lstinline|Z_x_array|, valores complexos, contendo a defasagem \ac{DeltaPhi} aferido para cada par de antenas no arranjo;
 \end{itemize}
 
+Parâmetros de outros tipos:
+\begin{itemize}
+	\item \lstinline|steering_function|, ?? ;
+	\item \lstinline|steering_arguments|, ?? ;
+\end{itemize}
 
 \subsection{Funções auxiliares}
 
@@ -192,27 +200,27 @@ O \autoref{cod:isoctave} apresenta uma versão simplificada da função \lstinli
 \subsection{Função de cálculo para \acs{AoA}}
 
 % calc_AoA_polygon
-A primeira grande função desenvolvida foi \lstinline|calc_AoA|, que é responsável pelo cálculo geral da simulação.
+A primeira grande função desenvolvida foi \lstinline|calc_AoA_geometric|, que é responsável pelo cálculo geral da simulação.
 Inicialmente são calculadas as coordenadas das \ac{Nant} antenas e, em sequência, os valores de fase do sinal incidente \ac{w} em cada antena \ac{Ak}, então as defasagens entre os pares de antenas e finalmente a seleção do valor mais provável para \ac{thetaAoA}.
 Seus argumentos são, respectivamente, \lstinline|amp_w|, \lstinline|ang_w|, \lstinline|r_w|, \lstinline|phase_w|, \lstinline|lambda_w|, \lstinline|omega_w|, \lstinline|S|, \lstinline|C|, \lstinline|NOISE|, \lstinline|SNR_dB|, \lstinline|ATT|, \lstinline|resolution|, \lstinline|d| e \lstinline|N_antenas|.
 Nessa função também são definidas três subfunções auxiliares \lstinline|phase_z|, \lstinline|dephase_A_to_B| e \lstinline|deltas_A_B|.
-O \autoref{cod:calc_AoA} apresenta uma versão simplificada da função \lstinline|calc_AoA| desenvolvida.
+O \autoref{cod:calc_AoA_geometric} apresenta uma versão simplificada da função \lstinline|calc_AoA_geometric| desenvolvida.
 A \autoref{fig:AoA:fluxograma} apresenta a sequências de operações realizadas pela função.
 
 \begin{lstfloat}[htbp]
 	\centering
 	\lstinputlisting[
 			basicstyle=\ttfamily\small\setstretch{1},
-			label=cod:calc_AoA,
-			caption={Função \lstinline|calc_AoA|, simplificada.}
-		]{../code/calc_AoA_alt.m}
+			label=cod:calc_AoA_geometric,
+			caption={Função \lstinline|calc_AoA_geometric|, simplificada.}
+		]{../code/calc_AoA_geometric_alt.m}
 	\caption*{Fonte: Autor.}
 \end{lstfloat}
 
 
 \begin{figure}[htbp]
     \centering
-    \caption{Fluxograma de operações da função \lstinline|calc_AoA|.}
+    \caption{Fluxograma de operações da função \lstinline|calc_AoA_geometric|.}
     \input{../pictures/fluxograma}
     \label{fig:AoA:fluxograma}
     \caption*{Fonte: Autor.}
@@ -225,7 +233,7 @@ A \autoref{fig:AoA:fluxograma} apresenta a sequências de operações realizadas
 A segunda grande função desenvolvida foi \lstinline|generate_fig|, que constrói a animação de saída da simulação, formada por dois gráficos.
 O primeiro gráfico, à esquerda nas animações geradas, apresenta a disposição das antenas, os valores de fase para cada uma delas, os valores de defasagem entre os pares de antenas, todos os possíveis valores de \ac{thetak}, e finalmente o valor real e o escolhido para \ac{thetaAoA}.
 O segundo gráfico, à direita nas animações geradas, apresenta a disposição das antenas e uma representação do sinal \ac{w} no espaço exibido.
-Os valores exibidos são calculados pela função \lstinline|calc_AoA|.
+Os valores exibidos são calculados pela função \lstinline|calc_AoA_geometric|.
 Seus argumentos são, respectivamente, \lstinline|z_plot|, \lstinline|x_w|, \lstinline|y_w|, \lstinline|ang_w|, \lstinline|lambda_w|, \lstinline|interval|, \lstinline|Rho|, \lstinline|choose_angle|, \lstinline|ant_array|, \lstinline|Z_phase_array|, \lstinline|Z_x_array|, \lstinline|delta_A_x_B_array| e \lstinline|delta_B_x_A_array|.
 A \autoref{fig:example:simul_POLY_3_R_50} ilustra os gráficos gerados pela função \lstinline|generate_fig|.
 
@@ -241,16 +249,16 @@ A \autoref{fig:example:simul_POLY_3_R_50} ilustra os gráficos gerados pela fun�
 
 % Definir função base xyt e variáveis
 
-Finalmente a função responsável por juntar todas as partes é \lstinline|w_xyt|, a base para a simulação, ela invoca as funções \lstinline|calc_AoA| e \lstinline|generate_fig| com os devidos parâmetros, além de garantir que os arquivos gerados sejam salvos corretamente.
+Finalmente a função responsável por juntar todas as partes é \lstinline|w_xyt|, a base para a simulação, ela invoca as funções \lstinline|calc_AoA_geometric| e \lstinline|generate_fig| com os devidos parâmetros, além de garantir que os arquivos gerados sejam salvos corretamente.
 Seus argumentos são, respectivamente, \lstinline|NOISE|, \lstinline|ATT|, \lstinline|CHG_PHI|, \lstinline|CHG_R|, \lstinline|CHG_THETA|, \lstinline|S_GIF|, \lstinline|S_DAT|, \lstinline|SNR|, \lstinline|range_step| e \lstinline|N_antenas|.
-Essa função também invoca a simulação do algoritmo de \ac{GN} para as mesmas condições.
+% Essa função também invoca a simulação do algoritmo de \ac{GN} para as mesmas condições.
 
-\section{Simulação do Algoritmo de \acs{GN}}
+% \section{Simulação do Algoritmo de \acs{GN}}
 
-Para análise comparatória, também foi desenvolvida uma simulação para o método de \ac{AoA} utilizando o algoritmo de \ac{GN}, adaptando a proposta de \citeauthor{Horst2025BTLEAoA} \cite{Horst2025BTLEAoA}, referida na \autoref{sec:trabalhos_relacionados}.
-Nesta adaptação, cada receptor é formado por um par de antenas, separados pela mesma distância \ac{d} utilizada na presente proposta, e o sistema como um todo utiliza \ac{Nant} receptores dispostos de maneira linear.
-Considerando que a presente análise é planar, a componente de terceira dimensão foi desconsiderada.
-O método realiza 5 iterações para convergir os resultados em cada ponto de análise.
+% Para análise comparatória, também foi desenvolvida uma simulação para o método de \ac{AoA} utilizando o algoritmo de \ac{GN}, adaptando a proposta de \citeauthor{Horst2025BTLEAoA} \cite{Horst2025BTLEAoA}, referida na \autoref{sec:trabalhos_relacionados}.
+% Nesta adaptação, cada receptor é formado por um par de antenas, separados pela mesma distância \ac{d} utilizada na presente proposta, e o sistema como um todo utiliza \ac{Nant} receptores dispostos de maneira linear.
+% Considerando que a presente análise é planar, a componente de terceira dimensão foi desconsiderada.
+% O método realiza 5 iterações para convergir os resultados em cada ponto de análise.
 
-O código desenvolvido está nos anexos, na \autoref{apdx:codigo:gn}.
+% O código desenvolvido está nos anexos, na \autoref{apdx:codigo:gn}.
 

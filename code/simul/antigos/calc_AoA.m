@@ -1,4 +1,4 @@
-function return_struct = calc_AoA(
+function return_struct = calc_AoA_geometric(
 	amp_w,
 	ang_w,
 	r_w,

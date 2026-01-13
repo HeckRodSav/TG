@@ -31,7 +31,7 @@
         scale only axis, %
         minor grid style={densely dotted}, % estilo da grade secundária
         major grid style={densely dashed}, % estilo da grade principal
-        grid style={lightgray, thin}, % cor das grades
+        grid style={Black!15, thin}, % cor das grades
         % axis on top, % forçar grade para ficar por cima do gráfico
         %
         %
@@ -296,7 +296,7 @@
         scale only axis, %
         minor grid style={densely dotted}, % estilo da grade secundária
         major grid style={densely dashed}, % estilo da grade principal
-        grid style={lightgray, thin}, % cor das grades
+        grid style={Black!15, thin}, % cor das grades
         % axis on top, % forçar grade para ficar por cima do gráfico
         %
         %
@@ -358,12 +358,13 @@
         Black,
         mark=*,
 		mark size=0.5pt,
+        % mark options={line width=0.25pt},
         only marks,
         % smooth
     ] table [
         % col sep=comma,
         x=percent, % cabeçalho da coluna de dados X no arquivo
-        y=choose_angle, % cabeçalho da coluna de dados Y no arquivo
+        y=choose_angle_GEOMETRIC, % cabeçalho da coluna de dados Y no arquivo
 	]
 	{\fileAddress};	\addlegendentry{$\theta_{AoA}$}
 
@@ -381,16 +382,18 @@
 	% 	y=ang_W, % cabeçalho da coluna de dados Y no arquivo
 	% ]
 	% {\fileAddress};
-    \addplot [
-        Black,
-        opacity=0.5,
+    \addplot[
+        Black!50,
+        % opacity=0.5,
         mark=none,
-        mark size=5pt,
+        % mark size=5pt,
         very thick,
+        % line width=1pt,
         % only marks,
-        % smooth
-    ] {((x==25)||(x==75)?nan:pi*(mod(x+25,50)-25)/25)};
-    \addlegendentry{$\theta_{DoA}$}
+        % smooth,
+        % line join=round,
+        % forget plot
+    ] {((x==25)||(x==75)?nan:pi*(mod(x+25,50)-25)/25)}; \addlegendentry{$\theta_{DoA}$}
 
 
 	\addlegendimage{/pgfplots/refstyle=\fileName.1.1}\addlegendentry{$\theta_{+1}$}
@@ -401,19 +404,24 @@
 
     \addlegendimage{/pgfplots/refstyle=\fileName.1.5}\addlegendentry{$\theta_{+3}$}
 	\addlegendimage{/pgfplots/refstyle=\fileName.1.6}\addlegendentry{$\theta_{-3}$}
-
     \addplot[
-        Black!30,
+        Black,
+        opacity=0.30,
         mark=o,
-		mark size=1.25pt,
+        mark size=1.25pt,
+        % mark options={line width=0.5pt,rotate=60},
+        mark options={line width=0.5pt},
         only marks,
-        % smooth
+        % smooth,
+        % forget plot
     ] table [
         % col sep=comma,
         x=percent, % cabeçalho da coluna de dados X no arquivo
-        y=choose_angle_GN, % cabeçalho da coluna de dados Y no arquivo
-	]
-	{\fileAddress};	\addlegendentry{$\theta_{GN}$}
+        y=choose_angle_MSC_UCA, % cabeçalho da coluna de dados Y no arquivo
+    ]
+    {\fileAddress};
+    \addlegendentry{$\theta_{MSC_\bigcirc}$}
+
 
     \end{axis}
 
@@ -439,7 +447,7 @@
     %     scale only axis, %
     %     minor grid style={densely dotted}, % estilo da grade secundária
     %     major grid style={densely dashed}, % estilo da grade principal
-    %     grid style={lightgray, thin}, % cor das grades
+    %     grid style={Black!15, thin}, % cor das grades
     %     % axis on top, % forçar grade para ficar por cima do gráfico
     %     %
     %     %

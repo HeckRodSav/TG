@@ -8,7 +8,7 @@ if isoctave()
 end %if
 
 w_xyt( ...
-	true, ... % NOISE
+	false, ... % NOISE
 	false, ... % ATT
 	false, ... % CHG_PHI
 	false, ... % CHG_R
@@ -16,6 +16,6 @@ w_xyt( ...
 	true, ... % S_GIF
 	true, ... % S_DAT
 	1/1, ... % SNR
-	36/2, ... % range_step
+	36*2, ... % range_step
 	9 ... % N_antenas
-	);
+);

@@ -26,14 +26,162 @@
 
 \lstset{
     language=matlab,
-    morekeywords=[1]{deg2rad, rad2deg, mod},
-    morekeywords=[2]{ref_sin, ref_cos, isoctave, generate_fig, signal_r, argument_r, calc_AoA, w_xyt, phase_z, dephase_A_to_B, deltas_A_B},
+    morekeywords=[1]{deg2rad, rad2deg, mod, polarplot, fullfile, isfolder, mkdir, arrayfun, awgn, copyfile, corr, complex, pkg, fflushframe2im, rgb2ind, imwrite},
+    morekeywords=[2]{ref_sin, ref_cos, isoctave, generate_fig, signal_r, argument_r, calc_AoA_geometric, w_xyt, phase_z, dephase_A_to_B, deltas_A_B, bearing, copy_to_documentation, calc_AoA_music_ULA, calc_AoA_music_UCA, music_algorithm, music_spectrum, steering_linear, steering_circular, w_xyt_single, w_xyt_dat, w_xyt_auto, w_xyt_full_auto, settings},
 }
 
 
 % \newcommand{\x}{$\bullet$}
 
 
+\newcommand{\coeficientesDedeterminacao}[1]{
+    % \csvloop{separator=tab, respect percent=true, file={../data/POLY_3/simul_POLY_3_R_50_SNR_100.r2.dat}, command=\xdef\primeirinho{\csvcoli}\xdef\segundinho{\csvcoliii}}
+
+    \edef\arquivo{#1}
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50.r2.dat}{}{
+        \edef\cdGEOMETRICO{\csvcoli}
+        \edef\cdMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_ATT.r2.dat}{}{
+        \edef\cdAttGEOMETRICO{\csvcoli}
+        \edef\cdAttMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_100.r2.dat}{}{
+        \edef\cdCemGEOMETRICO{\csvcoli}
+        \edef\cdCemMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_100_ATT.r2.dat}{}{
+        \edef\cdCemAttGEOMETRICO{\csvcoli}
+        \edef\cdCemAttMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_100.r2.dat}{}{
+        \edef\cdCemGEOMETRICO{\csvcoli}
+        \edef\cdCemMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_100_ATT.r2.dat}{}{
+        \edef\cdCemAttGEOMETRICO{\csvcoli}
+        \edef\cdCemAttMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_50.r2.dat}{}{
+        \edef\cdCinquentaGEOMETRICO{\csvcoli}
+        \edef\cdCinquentaMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_50_ATT.r2.dat}{}{
+        \edef\cdCinquentaAttGEOMETRICO{\csvcoli}
+        \edef\cdCinquentaAttMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_25.r2.dat}{}{
+        \edef\cdVinteCincoGEOMETRICO{\csvcoli}
+        \edef\cdVinteCincoMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_25_ATT.r2.dat}{}{
+        \edef\cdVinteCincoAttGEOMETRICO{\csvcoli}
+        \edef\cdVinteCincoAttMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_5.r2.dat}{}{
+        \edef\cdCincoGEOMETRICO{\csvcoli}
+        \edef\cdCincoMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_5_ATT.r2.dat}{}{
+        \edef\cdCincoAttGEOMETRICO{\csvcoli}
+        \edef\cdCincoAttMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_1.r2.dat}{}{
+        \edef\cdUmGEOMETRICO{\csvcoli}
+        \edef\cdUmMSC{\csvcoliii}
+    }
+
+    \csvreader[
+        separator=tab,
+        respect percent=true,
+    ]{../data/\arquivo/simul_\arquivo_R_50_SNR_1_ATT.r2.dat}{}{
+        \edef\cdUmAttGEOMETRICO{\csvcoli}
+        \edef\cdUmAttMSC{\csvcoliii}
+    }
+
+    \begin{tabular}{@{}
+        S[table-format = 2.0]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        S[table-format = 3.2, table-model-setup = \bfseries]
+        @{}}
+        \toprule
+        {
+            \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}} \acs{SNR} \\ (\unit{\deci\bel})\end{tabular}}
+        } & \multicolumn{4}{c}{R² (\unit{\percent}) } \\ \cmidrule(lr){2-5}
+        { } &
+            \multicolumn{2}{c}{Sem \acs{ATT}} & \multicolumn{2}{c}{Com \acs{ATT}} \\ \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+        { } & {
+            Geométrico
+        } & {
+            \acs{MUSIC}\textsubscript{\acs{UCA}}
+        } & {
+            Geométrico
+        } & {
+            \acs{MUSIC}\textsubscript{\acs{UCA}}
+        }\\\midrule
+        \infinity & \bfseries \cdGEOMETRICO   & \bfseries \cdMSC   & \cdAttGEOMETRICO             & \cdAttMSC \\ % ∞
+        20        & \cdCemGEOMETRICO          & \cdCemMSC          & \cdCemAttGEOMETRICO          & \cdCemAttMSC \\ % 100
+        17        & \cdCinquentaGEOMETRICO    & \cdCinquentaMSC    & \cdCinquentaAttGEOMETRICO    & \cdCinquentaAttMSC \\ % 50
+        14        & \cdVinteCincoGEOMETRICO   & \cdVinteCincoMSC   & \cdVinteCincoAttGEOMETRICO   & \cdVinteCincoAttMSC \\ % 25
+        7         & \cdCincoGEOMETRICO        & \cdCincoMSC        & \cdCincoAttGEOMETRICO        & \cdCincoAttMSC \\ % 5
+        0         & \bfseries \cdUmGEOMETRICO & \bfseries \cdUmMSC & \bfseries \cdUmAttGEOMETRICO & \bfseries \cdUmAttMSC \\ % 1
+        \bottomrule
+    \end{tabular}
+}
 
 
 

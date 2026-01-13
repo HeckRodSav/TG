@@ -107,18 +107,18 @@ function w_xyt( ...
 
 	if S_DAT
 		dat_file = fopen(dat_filename, 'w');
-		fprintf(dat_file, "%s", "percent");
-		fprintf(dat_file, "\t%s", "ang_W");
-		fprintf(dat_file, "\t%s", "r");
-		fprintf(dat_file, "\t%s", "phase");
-		fprintf(dat_file, "\t%s", "choose_angle");
+		fprintf(dat_file, '%s', 'percent');
+		fprintf(dat_file, '\t%s', 'ang_W');
+		fprintf(dat_file, '\t%s', 'r');
+		fprintf(dat_file, '\t%s', 'phase');
+		fprintf(dat_file, '\t%s', 'choose_angle_GEOMETRIC');
 		for i = ant_idx_list
-			fprintf(dat_file, "\t%s%d_x_%d", "delta_", i, ant_idx_list_shift(i));
+			fprintf(dat_file, '\t%s%d_x_%d', 'delta_', i, ant_idx_list_shift(i));
 		end % for
 		for i = ant_idx_list
-			fprintf(dat_file, "\t%s%d_x_%d", "delta_", ant_idx_list_shift(i), i);
+			fprintf(dat_file, '\t%s%d_x_%d', 'delta_', ant_idx_list_shift(i), i);
 		end % for
-		fprintf(dat_file, "\n");
+		fprintf(dat_file, '\n');
 		if isoctave()
 			fflush(dat_file);
 		end %if
@@ -152,11 +152,11 @@ function w_xyt( ...
 			ang_W = pi*5/12;
 		end %if
 
-		return_struct = calc_AoA(amp_0, ang_W, r, phase, lambda, ...
+		return_struct = calc_AoA_geometric(amp_0, ang_W, r, phase, lambda, ...
 			omega, S, C, NOISE, SNR_dB, ATT, resolution, d , N_antenas);
 
 		[ ...
-			choose_angle, ...
+			choose_angle_GEOMETRIC, ...
 			Rho, ...
 			ant_array, ...
 			Z_phase_array, ...
@@ -177,7 +177,7 @@ function w_xyt( ...
 			lambda, ...
 			interval, ...
 			Rho, ...
-			choose_angle, ...
+			choose_angle_GEOMETRIC, ...
 			ant_array, ...
 			Z_phase_array, ...
 			Z_x_array, ...
@@ -205,20 +205,20 @@ function w_xyt( ...
 		end %if
 
 		if S_DAT
-			fprintf(dat_file, "%.2f", percent*100);
-			fprintf(dat_file, "\t%.3f", normalize_angle(ang_W));
-			fprintf(dat_file, "\t%.3f", r);
-			fprintf(dat_file, "\t%.3f", normalize_angle(phase));
-			fprintf(dat_file, "\t%.3f", normalize_angle(choose_angle));
+			fprintf(dat_file, '%.2f', percent*100);
+			fprintf(dat_file, '\t%.3f', normalize_angle(ang_W));
+			fprintf(dat_file, '\t%.3f', r);
+			fprintf(dat_file, '\t%.3f', normalize_angle(phase));
+			fprintf(dat_file, '\t%.3f', normalize_angle(choose_angle_GEOMETRIC));
 
 			for i = ant_idx_list
-				fprintf(dat_file, "\t%.3f", normalize_angle(delta_A_x_B(i)));
+				fprintf(dat_file, '\t%.3f', normalize_angle(delta_A_x_B(i)));
 			end % for
 			for i = ant_idx_list
-				fprintf(dat_file, "\t%.3f", normalize_angle(delta_B_x_A(i)));
+				fprintf(dat_file, '\t%.3f', normalize_angle(delta_B_x_A(i)));
 			end % for
 
-			fprintf(dat_file, "\n");
+			fprintf(dat_file, '\n');
 			if isoctave()
 				fflush(dat_file);
 			end %if
